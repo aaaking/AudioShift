@@ -1,6 +1,7 @@
 package com.example.zhouzhihui.audioshift
 
 import android.app.AlertDialog
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.text.SpannableString
@@ -15,8 +16,13 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar.*
 import android.text.Html
 import android.text.Spanned
-
-
+import android.view.Gravity
+import android.view.ViewGroup
+import android.widget.FrameLayout
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.TextView
+import com.example.zhouzhihui.audioshift.util.ScreenUtil
 
 
 class MainActivity : BaseActivity() {
@@ -52,10 +58,22 @@ class MainActivity : BaseActivity() {
                 msg.append(author).appendln().append(email).appendln().append(icons_by).appendln().append(icon_from)
                 val myMessage = Html.fromHtml("app制作人：黑山<br>邮箱: <a href=\"mailto:1059084407@qq.com\">1059084407@qq.com</a><br>简书: <a href=\"https://www.jianshu.com/u/0b651536da90\">宛丘之上兮</a>")
 //                val myMessage = Html.fromHtml(resources.getString(R.string.about_msg))
-                CoolDialog.getCoolDialogInstance(this)
-                        ?.withIcon(R.mipmap.ic_launcher_round)
+                var extraStr = TextView(this)
+                var padding = ScreenUtil.dp2px(this, 20f)
+                extraStr.setText(R.string.about_app_public_wx)
+                extraStr.setTextColor(Color.WHITE)
+                extraStr.setPadding(0, padding, 0, padding / 3)
+                var extraImg = ImageView(this)
+                extraImg.setImageResource(R.mipmap.wx_public)
+                var lp = FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+                lp.gravity = Gravity.CENTER
+
+                var dialog = CoolDialog(this)
+                dialog?.withIcon(R.mipmap.ic_launcher_round)
                         ?.withTitle(resources.getString(R.string.about_app))
                         ?.withMsg(myMessage)
+                        ?.withContentCustom(extraStr)
+                        ?.withContentCustom(extraImg)
                         ?.show()
             }
         }
