@@ -44,7 +44,6 @@ class CoolDialog : Dialog, DialogInterface {
     //middle
     var tv_msg_main: TextView? = null
     var tv_msg_sub: TextView? = null
-    var content_custom_stub: ViewStub? = null
     var content_custom_view: View? = null
     constructor(context: Context?) : super(context, R.style.cool_dialog_dim) {
     }
@@ -121,9 +120,6 @@ class CoolDialog : Dialog, DialogInterface {
                 initViewStub(layoutId = layoutId)
                 content_custom_view?.run {
                     (this@run as? ViewGroup)?.apply {
-                        var wegahwoi = TextView(context)
-                        wegahwoi.text = "ereagaergogro"
-                        addView(wegahwoi)
                     }
                 }
             }
@@ -136,13 +132,13 @@ class CoolDialog : Dialog, DialogInterface {
                     }
                 }
             }
-    fun initViewStub(layoutId: Int) {
-        if (content_custom_view == null) {
-            content_custom_stub = mRootView?.findViewById<ViewStub>(R.id.content_custom_stub)
-            content_custom_stub?.layoutResource = layoutId
-            content_custom_view = content_custom_stub?.inflate()
+    private fun initViewStub(layoutId: Int) =
+        takeIf { content_custom_view == null }?.apply {
+            mRootView?.findViewById<ViewStub>(R.id.content_custom_stub)?.apply {
+                layoutResource = layoutId
+                content_custom_view = inflate()
+            }
         }
-    }
 
     override fun show() {
         //Here's the magic..
