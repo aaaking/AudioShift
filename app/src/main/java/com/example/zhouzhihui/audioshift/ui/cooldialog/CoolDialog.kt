@@ -1,23 +1,22 @@
 package com.example.zhouzhihui.audioshift.ui.cooldialog
 
-import android.app.Activity
 import android.app.Dialog
 import android.content.Context
 import android.content.DialogInterface
 import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.support.v7.widget.AppCompatImageView
 import android.text.TextUtils
 import android.text.method.LinkMovementMethod
-import android.util.Log
-import android.view.*
+import android.view.View
+import android.view.ViewGroup
+import android.view.ViewStub
 import android.widget.Button
 import android.widget.FrameLayout
-import android.widget.ImageView
 import android.widget.TextView
 import com.example.zhouzhihui.audioshift.R
-import com.example.zhouzhihui.audioshift.TAG
 import com.example.zhouzhihui.audioshift.util.ScreenUtil
 
 /**
@@ -49,6 +48,8 @@ class CoolDialog : Dialog, DialogInterface {
     //bottom
     var btn_no: Button? = null
     var btn_yes: Button? = null
+    var btnNegativeBg: GradientDrawable
+    var btnPositiveBg: GradientDrawable
     constructor(context: Context?) : super(context, R.style.cool_dialog_dim) {
     }
 
@@ -57,12 +58,13 @@ class CoolDialog : Dialog, DialogInterface {
 
     init {
         var radius = ScreenUtil.dp2px(context, 4f).toFloat()
+        var colorDark = context.resources.getColor(R.color.colorPrimaryDark)
         val bg = GradientDrawable()
         bg.cornerRadius = radius
-        bg.setColor(context.resources.getColor(R.color.colorPrimaryLight))
+        bg.setColor(context.resources.getColor(R.color.colorPrimaryLightLight))
         val bgTop = GradientDrawable()
         bgTop.cornerRadii = floatArrayOf(radius, radius, radius, radius, 0f, 0f, 0f, 0f)
-        bgTop.setColor(context.resources.getColor(R.color.colorPrimaryDark))
+        bgTop.setColor(colorDark)
         mRootView = View.inflate(context, R.layout.layout_cool_dialog, null)
         mRootView?.apply {
             background = bg
@@ -75,6 +77,13 @@ class CoolDialog : Dialog, DialogInterface {
             btn_yes = findViewById(R.id.btn_yes)
             setContentView(this)
         }
+        btnNegativeBg = GradientDrawable()
+        btnNegativeBg.cornerRadius = radius
+        btnNegativeBg.setStroke(ScreenUtil.dp2px(context, 1f), colorDark)
+        btnNegativeBg.setColor(context.resources.getColor(android.R.color.transparent))
+        btnPositiveBg = GradientDrawable()
+        btnPositiveBg.cornerRadius = radius
+        btnPositiveBg.setColor(colorDark)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -142,6 +151,21 @@ class CoolDialog : Dialog, DialogInterface {
                 content_custom_view = inflate()
             }
         }
+
+    fun withNegativeBtn(str: CharSequence, bg: Drawable = btnNegativeBg, clickListener: View.OnClickListener = View.OnClickListener { dismiss() }, color: Int = context.resources.getColor(R.color.colorPrimaryDark)): CoolDialog =
+            apply { btn_no?.setStyle(str, clickListener, bg, color) }
+
+    fun withPositiveBtn(str: CharSequence, bg: Drawable = btnPositiveBg, clickListener: View.OnClickListener = View.OnClickListener { dismiss() }, color: Int = Color.WHITE): CoolDialog =
+            apply { btn_yes?.setStyle(str, clickListener, bg, color) }
+
+    fun Button.setStyle(str: CharSequence, clickListener: View.OnClickListener, bg: Drawable, color: Int) =
+            apply {
+                text = str
+                background = bg
+                setTextColor(color)
+                visibility = if (TextUtils.isEmpty(str)) View.GONE else View.VISIBLE
+                setOnClickListener(clickListener)
+            }
 
     override fun show() {
         //Here's the magic..

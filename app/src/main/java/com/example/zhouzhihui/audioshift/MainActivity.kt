@@ -16,6 +16,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar.*
 import android.text.Html
 import android.text.Spanned
+import android.util.TypedValue
 import android.view.Gravity
 import android.view.ViewGroup
 import android.widget.FrameLayout
@@ -75,6 +76,7 @@ class MainActivity : BaseActivity() {
                         ?.withContentCustom(null, R.layout.layout_dialog_content_custom)
                         ?.withContentCustom(extraStr)
                         ?.withContentCustom(extraImg)
+                        ?.withPositiveBtn(resources.getString(android.R.string.yes))
                         ?.show()
             }
         }
