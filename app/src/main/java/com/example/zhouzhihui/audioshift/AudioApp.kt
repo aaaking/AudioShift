@@ -2,6 +2,7 @@ package com.example.zhouzhihui.audioshift
 
 import android.app.Application
 import android.content.Context
+import com.example.zhouzhihui.audioshift.util.ScreenUtil
 
 /**
  * Created by 周智慧 on 02/02/2018.
@@ -14,5 +15,6 @@ class AudioApp : Application() {
     override fun onCreate() {
         super.onCreate()
         sAppContext = applicationContext
+        ScreenUtil.init(sAppContext)
     }
 }
