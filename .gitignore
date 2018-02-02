@@ -3,6 +3,7 @@
 /local.properties
 /.idea./*
 /.idea.
+.idea/
 /.idea/libraries
 .DS_Store
 /build

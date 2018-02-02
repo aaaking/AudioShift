@@ -1,3 +1,6 @@
 <resources>
-    <string name="app_name">AudioShift</string>
+    <string name="app_name">爱音频</string>
+    <string name="about">关于</string>
+    <string name="about_app">关于“爱音频”</string>
+    <string name="about_msg">app制作人：黑山\n邮箱: 1059084407@qq.com\n图标制作人<a href="http://www.flaticon.com/authors/freepik">Freepik</a>\n来自<a href="http://www.flaticon.com">www.flaticon.com</a></string>
 </resources>
