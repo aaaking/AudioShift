@@ -75,6 +75,12 @@ class CoolDialog : Dialog, DialogInterface {
         window?.decorView?.setPadding(padding, padding, padding, padding)
     }
 
+    fun withCancelable(cancelable: Boolean): CoolDialog =
+            apply { setCancelable(cancelable) }
+
+    fun withCanceledOnTouchOutside(cancelable: Boolean): CoolDialog =
+            apply { setCanceledOnTouchOutside(cancelable) }
+
     fun withIcon(imgId: Int): CoolDialog =
             apply { iv_top?.apply {
                 setImageResource(imgId)
