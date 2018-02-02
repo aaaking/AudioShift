@@ -52,13 +52,18 @@ class CoolDialog : Dialog, DialogInterface {
     }
 
     init {
+        var radius = ScreenUtil.dp2px(context, 4f).toFloat()
         val bg = GradientDrawable()
-        bg.cornerRadius = ScreenUtil.dp2px(context, 3f).toFloat()
+        bg.cornerRadius = radius
         bg.setColor(context.resources.getColor(R.color.colorPrimaryLight))
+        val bgTop = GradientDrawable()
+        bgTop.cornerRadii = floatArrayOf(radius, radius, radius, radius, 0f, 0f, 0f, 0f)
+        bgTop.setColor(context.resources.getColor(R.color.colorPrimaryDark))
         mRootView = View.inflate(context, R.layout.layout_cool_dialog, null)
         mRootView?.apply {
             background = bg
             iv_top = findViewById(R.id.iv_top)
+            (findViewById<View>(R.id.top) as? FrameLayout)?.background = bgTop
             tv_title = findViewById(R.id.tv_title)
             tv_msg_main = findViewById(R.id.tv_msg_main)
             tv_msg_sub = findViewById(R.id.tv_msg_sub)

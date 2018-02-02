@@ -13,7 +13,7 @@
         android:id="@+id/top"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dialog_top_height"
-        android:background="@color/colorPrimary">
+        tools:background="@color/colorPrimary">
         <android.support.v7.widget.AppCompatImageView
             android:id="@+id/iv_top"
             android:layout_width="@dimen/dialog_icon_width"
@@ -46,7 +46,7 @@
         android:paddingTop="@dimen/dialog_padding_top"
         android:paddingBottom="@dimen/dialog_padding_top"
         android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@+id/top">
+        app:layout_constraintTop_toBottomOf="@id/top">
         <TextView
             android:id="@+id/tv_msg_main"
             android:textSize="16dp"
@@ -71,5 +71,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>
+
+    <!--bottom button-->
 
 </android.support.constraint.ConstraintLayout>
