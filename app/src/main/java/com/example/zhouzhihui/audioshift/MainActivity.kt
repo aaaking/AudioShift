@@ -72,7 +72,7 @@ class MainActivity : BaseActivity() {
                 dialog?.withIcon(R.mipmap.ic_launcher_round)
                         ?.withTitle(resources.getString(R.string.about_app))
                         ?.withMsg(myMessage)
-                        ?.withContentCustom(R.layout.layout_dialog_content_custom)
+                        ?.withContentCustom(null, R.layout.layout_dialog_content_custom)
                         ?.withContentCustom(extraStr)
                         ?.withContentCustom(extraImg)
                         ?.show()

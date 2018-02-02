@@ -12,6 +12,7 @@ import android.text.TextUtils
 import android.text.method.LinkMovementMethod
 import android.util.Log
 import android.view.*
+import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
@@ -45,6 +46,9 @@ class CoolDialog : Dialog, DialogInterface {
     var tv_msg_main: TextView? = null
     var tv_msg_sub: TextView? = null
     var content_custom_view: View? = null
+    //bottom
+    var btn_no: Button? = null
+    var btn_yes: Button? = null
     constructor(context: Context?) : super(context, R.style.cool_dialog_dim) {
     }
 
@@ -67,6 +71,8 @@ class CoolDialog : Dialog, DialogInterface {
             tv_title = findViewById(R.id.tv_title)
             tv_msg_main = findViewById(R.id.tv_msg_main)
             tv_msg_sub = findViewById(R.id.tv_msg_sub)
+            btn_no = findViewById(R.id.btn_no)
+            btn_yes = findViewById(R.id.btn_yes)
             setContentView(this)
         }
     }
@@ -92,9 +98,7 @@ class CoolDialog : Dialog, DialogInterface {
                 visibility = View.VISIBLE
             } }
 
-    fun withTitle(str: String): CoolDialog =
-            withTitle(str, Color.WHITE)
-    fun withTitle(str: String, color: Int): CoolDialog =
+    fun withTitle(str: String, color: Int = Color.WHITE): CoolDialog =
             apply {
                 tv_title?.apply {
                     text = str
@@ -103,9 +107,7 @@ class CoolDialog : Dialog, DialogInterface {
                 }
             }
 
-    fun withMsg(str: CharSequence): CoolDialog =
-            withMsg(str, Color.WHITE)
-    fun withMsg(str: CharSequence, color: Int): CoolDialog =
+    fun withMsg(str: CharSequence, color: Int = Color.WHITE): CoolDialog =
             apply {
                 tv_msg_main?.apply {
                     text = str
@@ -115,9 +117,7 @@ class CoolDialog : Dialog, DialogInterface {
                 }
             }
 
-    fun withMsgSub(str: CharSequence): CoolDialog =
-            withMsgSub(str, Color.WHITE)
-    fun withMsgSub(str: CharSequence, color: Int): CoolDialog =
+    fun withMsgSub(str: CharSequence, color: Int = Color.WHITE): CoolDialog =
             apply {
                 tv_msg_sub?.apply {
                     text = str
@@ -126,20 +126,12 @@ class CoolDialog : Dialog, DialogInterface {
                 }
             }
 
-    fun withContentCustom(layoutId: Int): CoolDialog =
+    fun withContentCustom(childView: View? = null, layoutId: Int = R.layout.layout_dialog_content_custom): CoolDialog =
             apply {
                 initViewStub(layoutId = layoutId)
                 content_custom_view?.run {
-                    (this@run as? ViewGroup)?.apply {
-                    }
-                }
-            }
-    fun withContentCustom(view: View): CoolDialog =
-            apply {
-                initViewStub(layoutId = R.layout.layout_dialog_content_custom)
-                content_custom_view?.run {
-                    (this@run as? ViewGroup)?.apply {
-                        addView(view)
+                    (this@run as? ViewGroup)?.takeUnless { childView == null }?.apply {
+                        addView(childView)
                     }
                 }
             }
