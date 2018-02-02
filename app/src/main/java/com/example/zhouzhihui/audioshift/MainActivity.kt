@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import com.example.zhouzhihui.audioshift.ui.BaseActivity
+import com.example.zhouzhihui.audioshift.ui.cooldialog.CoolDialog
 import kotlinx.android.synthetic.main.toolbar.*
 
 
@@ -25,7 +26,7 @@ class MainActivity : BaseActivity() {
         val id = item?.itemId
         when (id) {
             R.id.menu_about -> {
-                showAboutDialog()
+                CoolDialog.getCoolDialogInstance(this)?.show()
             }
         }
         return super.onOptionsItemSelected(item)
@@ -42,8 +43,6 @@ class MainActivity : BaseActivity() {
                 .setMessage(R.string.about_msg)
                 .setPositiveButton(android.R.string.yes) { dialog, which ->
                 }
-//                .setNegativeButton(android.R.string.no) { dialog, which ->
-//                }
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show()
     }
