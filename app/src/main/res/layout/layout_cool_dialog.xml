@@ -99,7 +99,8 @@
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:textColor="@color/colorPrimaryDark"
-            android:layout_height="wrap_content"
+            android:background="@drawable/bg_negative_btn"
+            android:layout_height="@dimen/btn_height"
             android:text="@android:string/cancel"/>
 
         <Button
@@ -111,7 +112,8 @@
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:textColor="@android:color/white"
-            android:layout_height="wrap_content"
+            android:background="@drawable/bg_positive_btn"
+            android:layout_height="@dimen/btn_height"
             android:text="@android:string/ok"/>
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

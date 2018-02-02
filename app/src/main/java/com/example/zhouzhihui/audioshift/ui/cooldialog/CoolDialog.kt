@@ -48,8 +48,8 @@ class CoolDialog : Dialog, DialogInterface {
     //bottom
     var btn_no: Button? = null
     var btn_yes: Button? = null
-    var btnNegativeBg: GradientDrawable
-    var btnPositiveBg: GradientDrawable
+    var btnNegativeBg: Drawable
+    var btnPositiveBg: Drawable
     constructor(context: Context?) : super(context, R.style.cool_dialog_dim) {
     }
 
@@ -77,13 +77,8 @@ class CoolDialog : Dialog, DialogInterface {
             btn_yes = findViewById(R.id.btn_yes)
             setContentView(this)
         }
-        btnNegativeBg = GradientDrawable()
-        btnNegativeBg.cornerRadius = radius
-        btnNegativeBg.setStroke(ScreenUtil.dp2px(context, 1f), colorDark)
-        btnNegativeBg.setColor(context.resources.getColor(android.R.color.transparent))
-        btnPositiveBg = GradientDrawable()
-        btnPositiveBg.cornerRadius = radius
-        btnPositiveBg.setColor(colorDark)
+        btnNegativeBg = context.resources.getDrawable(R.drawable.bg_negative_btn)
+        btnPositiveBg = context.resources.getDrawable(R.drawable.bg_positive_btn)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

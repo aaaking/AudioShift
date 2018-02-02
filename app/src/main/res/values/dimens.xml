@@ -3,6 +3,8 @@
     <dimen name="toppadding_to_fit_statusbar">0dp</dimen>
     <dimen name="toolbar_height">56dp</dimen>
 
+    <dimen name="btn_common_radius">4dp</dimen>
+    <dimen name="btn_height">45dp</dimen>
     <!--cooldialog-->
     <dimen name="dialog_min_height">150dp</dimen>
     <dimen name="dialog_margin">38dp</dimen>

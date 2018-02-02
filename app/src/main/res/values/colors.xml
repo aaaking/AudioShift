@@ -4,5 +4,12 @@
     <color name="colorPrimaryLight">#FF4081</color>
     <color name="colorPrimaryLightLight">#FF5891</color>
     <color name="colorPrimaryDark">#E71B64</color>
+    <color name="colorPrimaryDarkDark">#CC0000</color>
     <color name="colorAccent">#E71B64</color>
+
+    <color name="list_item_bg_ripple">#80000000</color>
+    <color name="list_item_bg_press">#33000000</color>
+    <color name="list_item_bg_normal">#4c000000</color>
+
+    <color name="btn_login_bg_disable_color">#b4b4b4</color>
 </resources>
