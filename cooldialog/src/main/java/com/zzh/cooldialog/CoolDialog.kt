@@ -1,4 +1,4 @@
-package com.example.zhouzhihui.audioshift.ui.cooldialog
+package com.zzh.cooldialog
 
 import android.app.Dialog
 import android.content.Context
@@ -16,8 +16,6 @@ import android.view.ViewStub
 import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.TextView
-import com.example.zhouzhihui.audioshift.R
-import com.example.zhouzhihui.audioshift.util.ScreenUtil
 
 /**
  * Created by 周智慧 on 02/02/2018.
@@ -59,7 +57,7 @@ class CoolDialog : Dialog, DialogInterface {
     }
 
     init {
-        var radius = ScreenUtil.dp2px(context, 4f).toFloat()
+        var radius = context.resources.getDimension(R.dimen.btn_common_radius)
         var colorDark = context.resources.getColor(R.color.colorPrimaryDark)
         val bg = GradientDrawable()
         bg.cornerRadius = radius
@@ -69,9 +67,9 @@ class CoolDialog : Dialog, DialogInterface {
         bgTop.setColor(colorDark)
         mRootView = View.inflate(context, R.layout.layout_cool_dialog, null)
         mRootView?.apply {
-            background = bg
+            setBackgroundDrawable(bg)
             iv_top = findViewById(R.id.iv_top)
-            (findViewById<View>(R.id.top) as? FrameLayout)?.background = bgTop
+            (findViewById<View>(R.id.top) as? FrameLayout)?.setBackgroundDrawable(bgTop)
             tv_title = findViewById(R.id.tv_title)
             tv_msg_main = findViewById(R.id.tv_msg_main)
             tv_msg_sub = findViewById(R.id.tv_msg_sub)
@@ -161,7 +159,7 @@ class CoolDialog : Dialog, DialogInterface {
 
     fun Button.setStyle(str: CharSequence, clickListener: View.OnClickListener, bg: Drawable, color: Int) = apply {
         text = str
-        background = bg
+        setBackgroundDrawable(bg)
         setTextColor(color)
         visibility = if (TextUtils.isEmpty(str)) View.GONE else View.VISIBLE
         setOnClickListener(clickListener)

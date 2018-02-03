@@ -1,4 +1,4 @@
-package com.example.zhouzhihui.audioshift.ui.cooldialog
+package com.zzh.cooldialog
 
 import android.animation.Animator
 import android.animation.AnimatorSet

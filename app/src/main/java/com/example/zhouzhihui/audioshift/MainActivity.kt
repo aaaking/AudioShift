@@ -12,8 +12,9 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import com.example.zhouzhihui.audioshift.ui.BaseActivity
-import com.example.zhouzhihui.audioshift.ui.cooldialog.*
 import com.example.zhouzhihui.audioshift.util.ScreenUtil
+import com.zzh.cooldialog.CoolDialog
+import com.zzh.cooldialog.CoolStyle
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar.*
 
