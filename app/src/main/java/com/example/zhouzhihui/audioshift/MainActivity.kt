@@ -20,6 +20,7 @@ import kotlinx.android.synthetic.main.toolbar.*
 
 
 class MainActivity : BaseActivity() {
+    var mAboutDialog: CoolDialog? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -36,6 +37,7 @@ class MainActivity : BaseActivity() {
         val id = item?.itemId
         when (id) {
             R.id.menu_about -> {
+                showAboutDialog()
 //                var author = SpannableString(resources.getString(R.string.about_app_author))
 //                Linkify.addLinks(author, Linkify.WEB_URLS)
 //
@@ -50,6 +52,13 @@ class MainActivity : BaseActivity() {
 //
 //                var msg = SpannableStringBuilder()
 //                msg.append(author).appendln().append(email).appendln().append(icons_by).appendln().append(icon_from)
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun showAboutDialog() =
+            if (mAboutDialog == null) {
                 val myMessage = Html.fromHtml("app制作人：黑山<br>邮箱: <a href=\"mailto:1059084407@qq.com\">1059084407@qq.com</a><br>简书: <a href=\"https://www.jianshu.com/u/0b651536da90\">宛丘之上兮</a>")
 //                val myMessage = Html.fromHtml(resources.getString(R.string.about_msg))
                 var extraStr = TextView(this)
@@ -62,8 +71,8 @@ class MainActivity : BaseActivity() {
                 var lp = FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
                 lp.gravity = Gravity.CENTER
 
-                var dialog = CoolDialog(this)
-                dialog?.withIcon(R.drawable.icon)
+                mAboutDialog = CoolDialog(this)
+                mAboutDialog?.withIcon(R.drawable.icon)
                         ?.withTitle(resources.getString(R.string.about_app))
                         ?.withMsg(myMessage)
                         ?.withContentCustom(null, R.layout.layout_dialog_content_custom)
@@ -71,10 +80,9 @@ class MainActivity : BaseActivity() {
                         ?.withContentCustom(extraImg)
                         ?.withPositiveBtn(resources.getString(android.R.string.yes))
                         ?.withDuration(500)
-                        ?.withCoolStyle(CoolStyle(dialog?.mRootView))
+                        ?.withCoolStyle(CoolStyle(mAboutDialog?.mRootView))
                         ?.show()
+            } else {
+                mAboutDialog?.show()
             }
-        }
-        return super.onOptionsItemSelected(item)
-    }
 }
