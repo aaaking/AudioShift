@@ -4,10 +4,7 @@ import android.graphics.Color
 import android.os.Bundle
 import android.text.Html
 import android.text.method.LinkMovementMethod
-import android.view.Gravity
-import android.view.Menu
-import android.view.MenuItem
-import android.view.ViewGroup
+import android.view.*
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
@@ -25,6 +22,7 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
+        setAudioTakeButton()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -84,6 +82,16 @@ class MainActivity : BaseActivity() {
             } else {
                 mAboutDialog?.show()
             }
+
+    private fun setAudioTakeButton() {
+        audio_take.setOnTouchListener(View.OnTouchListener { v, event ->
+            if (event.action == MotionEvent.ACTION_DOWN) {
+            } else if (event.action == MotionEvent.ACTION_CANCEL || event.action == MotionEvent.ACTION_UP) {
+            } else if (event.action == MotionEvent.ACTION_MOVE) {
+            }
+            true
+        })
+    }
 
     override fun onSaveInstanceState(outState: Bundle?) {
         super.onSaveInstanceState(outState)
