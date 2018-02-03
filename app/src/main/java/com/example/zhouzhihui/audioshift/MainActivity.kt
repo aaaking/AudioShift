@@ -69,6 +69,7 @@ class MainActivity : BaseActivity() {
                         ?.withContentCustom(extraStr)
                         ?.withContentCustom(extraImg)
                         ?.withPositiveBtn(resources.getString(android.R.string.yes))
+                        ?.withDuration(1000)
                         ?.show()
             }
         }

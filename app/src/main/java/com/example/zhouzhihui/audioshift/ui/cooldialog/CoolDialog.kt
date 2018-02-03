@@ -38,6 +38,7 @@ class CoolDialog : Dialog, DialogInterface {
         }
     }
     private var mRootView: View? = null
+    private var mDuration = -1L
     //top
     var iv_top: AppCompatImageView? = null
     var tv_title: TextView? = null
@@ -89,6 +90,8 @@ class CoolDialog : Dialog, DialogInterface {
         val padding = context.resources.getDimensionPixelOffset(R.dimen.dialog_margin)//setPadding(padding, 0, padding, 0)
         window?.decorView?.setPadding(padding, padding, padding, padding)
     }
+
+    fun withDuration(duration: Long): CoolDialog = apply { mDuration = duration }
 
     fun withCancelable(cancelable: Boolean): CoolDialog =
             apply { setCancelable(cancelable) }
