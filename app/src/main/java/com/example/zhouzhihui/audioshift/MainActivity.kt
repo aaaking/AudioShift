@@ -85,4 +85,14 @@ class MainActivity : BaseActivity() {
             } else {
                 mAboutDialog?.show()
             }
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        super.onSaveInstanceState(outState)
+        outState?.putBoolean("aboutDialog", mAboutDialog?.isShowing ?: false)
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+        super.onRestoreInstanceState(savedInstanceState)
+        takeIf { savedInstanceState?.getBoolean("aboutDialog") ?: false }?.run { showAboutDialog() }
+    }
 }
