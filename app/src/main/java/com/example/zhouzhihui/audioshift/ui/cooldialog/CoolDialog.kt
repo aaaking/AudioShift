@@ -93,77 +93,68 @@ class CoolDialog : Dialog, DialogInterface {
 
     fun withDuration(duration: Long): CoolDialog = apply { mDuration = duration }
 
-    fun withCancelable(cancelable: Boolean): CoolDialog =
-            apply { setCancelable(cancelable) }
+    fun withCancelable(cancelable: Boolean): CoolDialog = apply { setCancelable(cancelable) }
 
-    fun withCanceledOnTouchOutside(cancelable: Boolean): CoolDialog =
-            apply { setCanceledOnTouchOutside(cancelable) }
+    fun withCanceledOnTouchOutside(cancelable: Boolean): CoolDialog = apply { setCanceledOnTouchOutside(cancelable) }
 
-    fun withIcon(imgId: Int): CoolDialog =
-            apply { iv_top?.apply {
-                setImageResource(imgId)
-                visibility = View.VISIBLE
-            } }
+    fun withIcon(imgId: Int): CoolDialog = apply {
+        iv_top?.apply {
+            setImageResource(imgId)
+            visibility = View.VISIBLE
+        }
+    }
 
-    fun withTitle(str: String, color: Int = Color.WHITE): CoolDialog =
-            apply {
-                tv_title?.apply {
-                    text = str
-                    setTextColor(color)
-                    visibility = if (TextUtils.isEmpty(str)) View.GONE else View.VISIBLE
-                }
-            }
+    fun withTitle(str: String, color: Int = Color.WHITE): CoolDialog = apply {
+        tv_title?.apply {
+            text = str
+            setTextColor(color)
+            visibility = if (TextUtils.isEmpty(str)) View.GONE else View.VISIBLE
+        }
+    }
 
-    fun withMsg(str: CharSequence, color: Int = Color.WHITE): CoolDialog =
-            apply {
-                tv_msg_main?.apply {
-                    text = str
-                    movementMethod = LinkMovementMethod.getInstance()
-                    setTextColor(color)
-                    visibility = if (TextUtils.isEmpty(str)) View.GONE else View.VISIBLE
-                }
-            }
+    fun withMsg(str: CharSequence, color: Int = Color.WHITE): CoolDialog = apply {
+        tv_msg_main?.apply {
+            text = str
+            movementMethod = LinkMovementMethod.getInstance()
+            setTextColor(color)
+            visibility = if (TextUtils.isEmpty(str)) View.GONE else View.VISIBLE
+        }
+    }
 
-    fun withMsgSub(str: CharSequence, color: Int = Color.WHITE): CoolDialog =
-            apply {
-                tv_msg_sub?.apply {
-                    text = str
-                    setTextColor(color)
-                    visibility = if (TextUtils.isEmpty(str)) View.GONE else View.VISIBLE
-                }
-            }
+    fun withMsgSub(str: CharSequence, color: Int = Color.WHITE): CoolDialog = apply {
+        tv_msg_sub?.apply {
+            text = str
+            setTextColor(color)
+            visibility = if (TextUtils.isEmpty(str)) View.GONE else View.VISIBLE
+        }
+    }
 
-    fun withContentCustom(childView: View? = null, layoutId: Int = R.layout.layout_dialog_content_custom): CoolDialog =
-            apply {
-                initViewStub(layoutId = layoutId)
-                content_custom_view?.run {
-                    (this@run as? ViewGroup)?.takeUnless { childView == null }?.apply {
-                        addView(childView)
-                    }
-                }
-            }
-    private fun initViewStub(layoutId: Int) =
-        takeIf { content_custom_view == null }?.apply {
-            mRootView?.findViewById<ViewStub>(R.id.content_custom_stub)?.apply {
-                layoutResource = layoutId
-                content_custom_view = inflate()
+    fun withContentCustom(childView: View? = null, layoutId: Int = R.layout.layout_dialog_content_custom): CoolDialog = apply {
+        initViewStub(layoutId = layoutId)
+        content_custom_view?.run {
+            (this@run as? ViewGroup)?.takeUnless { childView == null }?.apply {
+                addView(childView)
             }
         }
+    }
+    private fun initViewStub(layoutId: Int) = takeIf { content_custom_view == null }?.apply {
+        mRootView?.findViewById<ViewStub>(R.id.content_custom_stub)?.apply {
+            layoutResource = layoutId
+            content_custom_view = inflate()
+        }
+    }
 
-    fun withNegativeBtn(str: CharSequence, bg: Drawable = btnNegativeBg, clickListener: View.OnClickListener = View.OnClickListener { dismiss() }, color: Int = context.resources.getColor(R.color.colorPrimaryDark)): CoolDialog =
-            apply { btn_no?.setStyle(str, clickListener, bg, color) }
+    fun withNegativeBtn(str: CharSequence, bg: Drawable = btnNegativeBg, clickListener: View.OnClickListener = View.OnClickListener { dismiss() }, color: Int = context.resources.getColor(R.color.colorPrimaryDark)): CoolDialog = apply { btn_no?.setStyle(str, clickListener, bg, color) }
 
-    fun withPositiveBtn(str: CharSequence, bg: Drawable = btnPositiveBg, clickListener: View.OnClickListener = View.OnClickListener { dismiss() }, color: Int = Color.WHITE): CoolDialog =
-            apply { btn_yes?.setStyle(str, clickListener, bg, color) }
+    fun withPositiveBtn(str: CharSequence, bg: Drawable = btnPositiveBg, clickListener: View.OnClickListener = View.OnClickListener { dismiss() }, color: Int = Color.WHITE): CoolDialog = apply { btn_yes?.setStyle(str, clickListener, bg, color) }
 
-    fun Button.setStyle(str: CharSequence, clickListener: View.OnClickListener, bg: Drawable, color: Int) =
-            apply {
-                text = str
-                background = bg
-                setTextColor(color)
-                visibility = if (TextUtils.isEmpty(str)) View.GONE else View.VISIBLE
-                setOnClickListener(clickListener)
-            }
+    fun Button.setStyle(str: CharSequence, clickListener: View.OnClickListener, bg: Drawable, color: Int) = apply {
+        text = str
+        background = bg
+        setTextColor(color)
+        visibility = if (TextUtils.isEmpty(str)) View.GONE else View.VISIBLE
+        setOnClickListener(clickListener)
+    }
 
     override fun show() {
         //Here's the magic..
