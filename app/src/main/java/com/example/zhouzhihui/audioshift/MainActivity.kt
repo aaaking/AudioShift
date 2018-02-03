@@ -12,7 +12,9 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import com.example.zhouzhihui.audioshift.ui.BaseActivity
+import com.example.zhouzhihui.audioshift.ui.cooldialog.COOL_STYLE_ROTATE
 import com.example.zhouzhihui.audioshift.ui.cooldialog.CoolDialog
+import com.example.zhouzhihui.audioshift.ui.cooldialog.CoolStyle
 import com.example.zhouzhihui.audioshift.util.ScreenUtil
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar.*
@@ -70,6 +72,7 @@ class MainActivity : BaseActivity() {
                         ?.withContentCustom(extraImg)
                         ?.withPositiveBtn(resources.getString(android.R.string.yes))
                         ?.withDuration(1000)
+                        ?.withCoolStyle(CoolStyle(COOL_STYLE_ROTATE))
                         ?.show()
             }
         }

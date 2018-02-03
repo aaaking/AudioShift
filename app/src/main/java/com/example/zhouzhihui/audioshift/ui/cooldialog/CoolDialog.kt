@@ -39,6 +39,7 @@ class CoolDialog : Dialog, DialogInterface {
     }
     private var mRootView: View? = null
     private var mDuration = -1L
+    private var mCoolStyle: CoolStyle? = null
     //top
     var iv_top: AppCompatImageView? = null
     var tv_title: TextView? = null
@@ -80,6 +81,8 @@ class CoolDialog : Dialog, DialogInterface {
         }
         btnNegativeBg = context.resources.getDrawable(R.drawable.bg_negative_btn)
         btnPositiveBg = context.resources.getDrawable(R.drawable.bg_positive_btn)
+        setOnShowListener { mCoolStyle?.startPlayStyle() }
+        setOnDismissListener { mCoolStyle?.stopPlayStyle() }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -91,7 +94,15 @@ class CoolDialog : Dialog, DialogInterface {
         window?.decorView?.setPadding(padding, padding, padding, padding)
     }
 
-    fun withDuration(duration: Long): CoolDialog = apply { mDuration = duration }
+    fun withDuration(duration: Long): CoolDialog = apply {
+        mDuration = duration
+        mCoolStyle?.mDuration = duration
+    }
+
+    fun withCoolStyle(style: CoolStyle): CoolDialog = apply {
+        mCoolStyle = style
+        mCoolStyle?.mDuration = mDuration
+    }
 
     fun withCancelable(cancelable: Boolean): CoolDialog = apply { setCancelable(cancelable) }
 
