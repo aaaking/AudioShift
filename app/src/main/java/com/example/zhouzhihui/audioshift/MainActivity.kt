@@ -62,8 +62,7 @@ class MainActivity : BaseActivity() {
                 lp.gravity = Gravity.CENTER
 
                 var dialog = CoolDialog(this)
-                dialog?.withIcon(R.mipmap.ic_launcher_round)
-                        ?.withIcon(R.drawable.icon)
+                dialog?.withIcon(R.drawable.icon)
                         ?.withTitle(resources.getString(R.string.about_app))
                         ?.withMsg(myMessage)
                         ?.withContentCustom(null, R.layout.layout_dialog_content_custom)
