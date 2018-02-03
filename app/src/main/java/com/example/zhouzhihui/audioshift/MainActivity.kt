@@ -71,8 +71,8 @@ class MainActivity : BaseActivity() {
                         ?.withContentCustom(extraStr)
                         ?.withContentCustom(extraImg)
                         ?.withPositiveBtn(resources.getString(android.R.string.yes))
-                        ?.withDuration(1000)
-                        ?.withCoolStyle(CoolStyle(COOL_STYLE_ROTATE))
+                        ?.withDuration(500)
+                        ?.withCoolStyle(CoolStyle(dialog?.mRootView, COOL_STYLE_ROTATE))
                         ?.show()
             }
         }

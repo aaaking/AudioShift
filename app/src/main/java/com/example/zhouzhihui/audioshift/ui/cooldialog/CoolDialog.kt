@@ -37,7 +37,7 @@ class CoolDialog : Dialog, DialogInterface {
             return instance
         }
     }
-    private var mRootView: View? = null
+    var mRootView: View? = null
     private var mDuration = -1L
     private var mCoolStyle: CoolStyle? = null
     //top
