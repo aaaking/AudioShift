@@ -12,6 +12,7 @@ import android.widget.TextView
 import com.example.zhouzhihui.audioshift.ui.BaseActivity
 import com.example.zhouzhihui.audioshift.ui.bigger
 import com.example.zhouzhihui.audioshift.ui.smaller
+import com.example.zhouzhihui.audioshift.ui.startVoiceStateAnimation
 import com.example.zhouzhihui.audioshift.util.ScreenUtil
 import com.example.zhouzhihui.audioshift.util.isCancelled
 import com.zzh.cooldialog.CoolDialog
@@ -101,8 +102,7 @@ class MainActivity : BaseActivity() {
             }
             true
         })
-        audio_take.setOnClickListener {
-        }
+        audio_take.setOnClickListener { startVoiceStateAnimation(state_animation) }
     }
 
     override fun onSaveInstanceState(outState: Bundle?) {
