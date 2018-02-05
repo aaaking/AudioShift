@@ -67,6 +67,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/rl_match_voice_state"
         app:layout_constraintVertical_bias="1"
+        android:background="@drawable/audio_take"
         android:layout_marginBottom="40dp">
         <View
             android:id="@+id/autio_take_circle"
@@ -77,10 +78,10 @@
         <android.support.v7.widget.AppCompatImageView
             android:id="@+id/audio_take"
             android:layout_gravity="center"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:lineSpacingExtra="10dp"
-            app:srcCompat="@drawable/audio_take"/>
+            app:srcCompat="@drawable/audio_take_animate"/>
     </FrameLayout>
 
     <LinearLayout

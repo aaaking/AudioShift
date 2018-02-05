@@ -7,7 +7,7 @@
         <appt:attr name="android:animation">
             <set>
                 <objectAnimator
-                    android:duration="150"
+                    android:duration="@integer/audio_take_animate_duration"
                     android:propertyName="pathData"
                     android:valueType="pathType"
                     android:valueTo="M275,275
@@ -36,7 +36,7 @@
         <appt:attr name="android:animation">
             <set>
                 <objectAnimator
-                    android:duration="150"
+                    android:duration="@integer/audio_take_animate_duration"
                     android:propertyName="pathData"
                     android:valueType="pathType"
                     android:valueTo="M375.5,559.6
@@ -55,7 +55,7 @@
         <appt:attr name="android:animation">
             <set>
                 <objectAnimator
-                    android:duration="150"
+                    android:duration="@integer/audio_take_animate_duration"
                     android:propertyName="pathData"
                     android:valueType="pathType"
                     android:valueTo="M375.4,559.6 h0 v0 h0z"

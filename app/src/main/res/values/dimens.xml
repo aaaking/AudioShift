@@ -2,4 +2,5 @@
 <resources>
     <!--<integer name="fab_animation_duration">@android:integer/config_shortAnimTime</integer>-->
     <integer name="voice_state_duration">150</integer>
+    <integer name="audio_take_animate_duration">250</integer>
 </resources>
