@@ -4,11 +4,11 @@ import android.content.Context
 import android.support.design.widget.TextInputLayout
 import android.util.AttributeSet
 
+
 /**
  * Created by 周智慧 on 05/02/2018.
  */
 class CoolEditText : TextInputLayout {
-    lateinit var mEditText: MyEditText
     constructor(context: Context?) : super(context) {
         init(context, null, 0)
     }
@@ -20,10 +20,9 @@ class CoolEditText : TextInputLayout {
     }
 
     fun init(context: Context?, attributeSet: AttributeSet?, defStyleAttr: Int) {
-        mEditText = if (childCount > 0 && getChildAt(0) is MyEditText) {
-            getChildAt(0) as MyEditText
-        } else {
-            MyEditText(context, attributeSet, defStyleAttr)
-        }
+        val ta = context!!.obtainStyledAttributes(attributeSet, R.styleable.CoolEditText)
+        val res = context!!.resources
+//        cursorWidth = ta.getDimensionPixelOffset(R.styleable.CoolEditText_cet_cursor_width, res.getDimensionPixelOffset(R.dimen.cursor_width))
+//        cursorColor = ContextCompat.getColor(context, ta.getResourceId(R.styleable.CoolEditText_cet_cursor_color, R.color.colorCoolEditTextNormal))
     }
 }

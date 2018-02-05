@@ -10,4 +10,9 @@
         <!--<item name="colorControlActivated">@color/colorCoolEditTextActivated</item>-->
     </style>
 
+    <declare-styleable name="CoolEditText">
+        <attr name="cet_cursor_width" format="dimension|reference"/>
+        <attr name="cet_cursor_color" format="reference"/>
+    </declare-styleable>
+
 </resources>

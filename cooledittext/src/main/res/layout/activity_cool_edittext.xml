@@ -16,6 +16,7 @@
         android:layout_height="wrap_content">
 
         <com.zzh.ui.cooledittext.MyEditText
+            android:textCursorDrawable="@drawable/bg_cursor"
             android:id="@+id/account"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
