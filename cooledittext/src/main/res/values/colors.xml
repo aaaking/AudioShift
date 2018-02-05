@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="textColor">#796413</color>
+    <color name="hintColor">#80807c</color>
+    <color name="colorCoolEditTextAccent">#fe6224</color>
+    <color name="colorCoolEditTextNormal">#01D9AE</color>
+    <color name="colorCoolEditTextActivated">#FBBF40</color>
+</resources>
