@@ -59,9 +59,9 @@
     </LinearLayout>
 
     <FrameLayout
-        android:id="@+id/audio_take"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/audio_take_container"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -75,9 +75,10 @@
             android:layout_gravity="center"
             android:background="@drawable/circle"/>
         <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/audio_take"
             android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:lineSpacingExtra="10dp"
             app:srcCompat="@drawable/audio_take"/>
     </FrameLayout>
