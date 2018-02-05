@@ -1,7 +1,6 @@
 package com.example.zhouzhihui.audioshift.ui
 
 import android.graphics.drawable.Animatable
-import android.view.View
 import android.widget.ImageView
 
 /**
