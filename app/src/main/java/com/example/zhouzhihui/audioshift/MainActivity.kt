@@ -16,10 +16,12 @@ import android.view.*
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import com.example.zhouzhihui.audioshift.record.Recorder
 import com.example.zhouzhihui.audioshift.ui.*
 import com.example.zhouzhihui.audioshift.util.ScreenUtil
 import com.example.zhouzhihui.audioshift.util.isCancelled
+import com.zzh.cooldialog.COOL_STYLE_ROTATE
 import com.zzh.cooldialog.CoolDialog
 import com.zzh.cooldialog.CoolStyle
 import kotlinx.android.synthetic.main.activity_main.*
@@ -33,6 +35,7 @@ val PERMISSIONS = arrayOf(Manifest.permission.INTERNET, Manifest.permission.RECO
 val PERMISSIONS_CODE = 1
 class MainActivity : BaseActivity() {
     var mAboutDialog: CoolDialog? = null
+    var mSaveRecordFileDialog: CoolDialog? = null
     private fun hasRequiredPermissions(): Boolean = PERMISSIONS.none { ActivityCompat.checkSelfPermission(this, it) != PackageManager.PERMISSION_GRANTED }
     fun requestRequiredPermissions(view: View?) = ActivityCompat.requestPermissions(this, PERMISSIONS, PERMISSIONS_CODE)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -125,6 +128,27 @@ class MainActivity : BaseActivity() {
                 mAboutDialog?.show()
             }
 
+    private fun showSaveRecordFileDialog() =
+            if (mSaveRecordFileDialog == null) {
+                mSaveRecordFileDialog = CoolDialog(this)
+                mSaveRecordFileDialog?.withIcon(R.drawable.icon)
+                        ?.withTitle(resources.getString(R.string.save_record_file_title))
+                        ?.withMsg(resources.getString(R.string.save_record_file_msg))
+                        ?.withContentCustom(null, R.layout.layout_dialog_content_custom)
+                        ?.withNegativeBtn(resources.getString(android.R.string.no))
+                        ?.withPositiveBtn(resources.getString(R.string.save), mSaveRecordFileDialog?.btnPositiveBg, object : CoolDialog.CoolDialogClickListener(mSaveRecordFileDialog) {
+                            override fun onClick(v: View?) {
+                                super.onClick(v)
+                                saveRecordFile(null)
+                            }
+                        })
+                        ?.withDuration(300)
+                        ?.withCoolStyle(CoolStyle(mSaveRecordFileDialog?.mRootView, COOL_STYLE_ROTATE))
+                        ?.show()
+            } else {
+                mSaveRecordFileDialog?.show()
+            }
+
     private fun setAudioTakeButton() {
         autio_take_circle.setOnTouchListener(View.OnTouchListener { v, event ->
             if (event.action == MotionEvent.ACTION_DOWN) {
@@ -204,6 +228,7 @@ class MainActivity : BaseActivity() {
         tv_voice_timer?.stop()
         val sdf = SimpleDateFormat("mm:ss")
         tv_voice_timer?.text = sdf.format(clipLength)//"${clipLength / 1000}"
+        showSaveRecordFileDialog()
     }
 
     private val stopRecordingRunnable = Runnable {

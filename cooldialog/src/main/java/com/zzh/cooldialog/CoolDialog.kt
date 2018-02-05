@@ -153,16 +153,22 @@ class CoolDialog : Dialog, DialogInterface {
         }
     }
 
-    fun withNegativeBtn(str: CharSequence, bg: Drawable = btnNegativeBg, clickListener: View.OnClickListener = View.OnClickListener { dismiss() }, color: Int = context.resources.getColor(R.color.colorPrimaryDark)): CoolDialog = apply { btn_no?.setStyle(str, clickListener, bg, color) }
+    fun withNegativeBtn(str: CharSequence, bg: Drawable? = btnNegativeBg, clickListener: View.OnClickListener = CoolDialogClickListener(this), color: Int = context.resources.getColor(R.color.colorPrimaryDark)): CoolDialog = apply { btn_no?.setStyle(str, clickListener, bg, color) }
 
-    fun withPositiveBtn(str: CharSequence, bg: Drawable = btnPositiveBg, clickListener: View.OnClickListener = View.OnClickListener { dismiss() }, color: Int = Color.WHITE): CoolDialog = apply { btn_yes?.setStyle(str, clickListener, bg, color) }
+    fun withPositiveBtn(str: CharSequence, bg: Drawable? = btnPositiveBg, clickListener: View.OnClickListener = CoolDialogClickListener(this), color: Int = Color.WHITE): CoolDialog = apply { btn_yes?.setStyle(str, clickListener, bg, color) }
 
-    fun Button.setStyle(str: CharSequence, clickListener: View.OnClickListener, bg: Drawable, color: Int) = apply {
+    fun Button.setStyle(str: CharSequence, clickListener: View.OnClickListener, bg: Drawable?, color: Int) = apply {
         text = str
         setBackgroundDrawable(bg)
         setTextColor(color)
         visibility = if (TextUtils.isEmpty(str)) View.GONE else View.VISIBLE
         setOnClickListener(clickListener)
+    }
+
+    open class CoolDialogClickListener(var dialog: CoolDialog?): View.OnClickListener {
+        override fun onClick(v: View?) {
+            dialog?.dismiss()
+        }
     }
 
     override fun show() {
