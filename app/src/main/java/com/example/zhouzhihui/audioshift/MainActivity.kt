@@ -15,10 +15,7 @@ import android.view.*
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
-import com.example.zhouzhihui.audioshift.ui.BaseActivity
-import com.example.zhouzhihui.audioshift.ui.bigger
-import com.example.zhouzhihui.audioshift.ui.smaller
-import com.example.zhouzhihui.audioshift.ui.startVoiceStateAnimation
+import com.example.zhouzhihui.audioshift.ui.*
 import com.example.zhouzhihui.audioshift.util.ScreenUtil
 import com.example.zhouzhihui.audioshift.util.isCancelled
 import com.zzh.cooldialog.CoolDialog
@@ -142,8 +139,9 @@ class MainActivity : BaseActivity() {
 //            } else {
 ////                startRecording()
 //            }
-            startVoiceStateAnimation(state_animation)
-            startVoiceStateAnimation(audio_take)
+            isRecording = !isRecording
+            startVoiceStateAnimation(state_animation, isRecording)
+            startAnimation(audio_take, isRecording)
         }
     }
 
@@ -157,6 +155,7 @@ class MainActivity : BaseActivity() {
         takeIf { savedInstanceState?.getBoolean("aboutDialog") ?: false }?.run { showAboutDialog() }
     }
 
+    var isRecording = false
 //    @Inject var recorder: Recorder? = null
 //    private fun isRecording(): Boolean = recorder?.isRecording() ?: false
 //    private fun hasRecording(): Boolean = !isRecording() && recorder?.hasRecording() ?: false

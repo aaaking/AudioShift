@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+                 xmlns:appt="http://schemas.android.com/aapt"
+                 android:drawable="@drawable/icon">
+
+    <target android:name="top">
+        <appt:attr name="android:animation">
+            <set>
+                <objectAnimator
+                    android:duration="@integer/audio_take_animate_duration"
+                    android:propertyName="pathData"
+                    android:valueType="pathType"
+                    android:valueTo="M378.8,72.6
+                    A100,100 0,0 1,478.8 172.6
+                    l0 200
+                    A100,100 0,0 1,378.8 472.6
+                    l0 0
+                    A100,100 0,0 1,278.8 372.6
+                    l0 -200
+                    A100,100 0,0 1,378.8,72.6
+                    l0 0z"
+                    android:valueFrom="M275,275
+                    A0,0 0,0 1,275,275
+                    l200 0
+                    A0,0 0,0 1,475,275
+                    l0 200
+                    A0,0 0,0 1,475,475
+                    l-200 0
+                    A0,0 0,0 1,275,475
+                    l0 -200z"/>
+            </set>
+        </appt:attr>
+    </target>
+
+    <target android:name="middle">
+        <appt:attr name="android:animation">
+            <set>
+                <objectAnimator
+                    android:duration="@integer/audio_take_animate_duration"
+                    android:propertyName="pathData"
+                    android:valueType="pathType"
+                    android:valueTo="M200.5,384.6
+                    C200.5,481.2 278.9,559.6 375.5,559.6
+                    L375.5,559.6
+                    C472.1,559.6 550.4,481.2 550.4,384.6"
+                    android:valueFrom="M375.5,559.6
+                    C375.5,559.6 375.5,559.6 375.5,559.6
+                    L375.5,559.6
+                    C375.5,559.6 375.5,559.6 375.5,559.6"/>
+            </set>
+        </appt:attr>
+    </target>
+
+    <target android:name="bottom">
+        <appt:attr name="android:animation">
+            <set>
+                <objectAnimator
+                    android:duration="@integer/audio_take_animate_duration"
+                    android:propertyName="pathData"
+                    android:valueType="pathType"
+                    android:valueTo="M357.3,559.6 h36.3 v119.4 h-36.3z"
+                    android:valueFrom="M375.4,559.6 h0 v0 h0z"/>
+            </set>
+        </appt:attr>
+    </target>
+
+</animated-vector>
