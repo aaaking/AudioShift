@@ -2,13 +2,17 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.example.zhouzhihui.audioshift">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
+
     <application
+        android:name=".AudioApp"
         android:allowBackup="true"
         android:icon="@drawable/icon"
-        android:roundIcon="@drawable/icon"
         android:label="@string/app_name"
+        android:roundIcon="@drawable/icon"
         android:supportsRtl="true"
-        android:name=".AudioApp"
         android:theme="@style/AppTheme.NoActionBar">
         <activity android:name=".MainActivity">
             <intent-filter>

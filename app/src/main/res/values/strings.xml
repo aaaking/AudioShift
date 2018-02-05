@@ -4,6 +4,8 @@
     <string name="about_app">关于“爱音频”</string>
     <string name="about_msg">app制作人：黑山\n邮箱: <a href="mailto:1059084407@qq.com">1059084407@qq.com</a>\n图标制作人<a href="http://www.flaticon.com/authors/freepik">Freepik</a>\n来自<a href="http://www.flaticon.com">www.flaticon.com</a></string>
     <string name="about_app_public_wx">欢迎关注公众号：</string>
+    <string name="set_permission">申请权限</string>
+    <string name="permission_claim">这个应用程序是一个语音改变应用程序，它需要记录你的声音，因此需要“录制音频”许可。请允许这个许可，如果你被带到App信息页面，可以点击“设置权限”启用“Microphone”许可。</string>
 
     <string name="about_app_author">app制作人：黑山</string>
     <string name="about_app_email">邮箱: <a href="mailto:1059084407@qq.com">1059084407@qq.com</a></string>

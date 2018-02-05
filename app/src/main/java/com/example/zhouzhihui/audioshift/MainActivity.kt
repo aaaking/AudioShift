@@ -1,7 +1,13 @@
 package com.example.zhouzhihui.audioshift
 
+import android.Manifest
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
+import android.provider.Settings
+import android.support.v4.app.ActivityCompat
 import android.support.v7.widget.Toolbar
 import android.text.Html
 import android.util.Log
@@ -19,14 +25,41 @@ import com.zzh.cooldialog.CoolDialog
 import com.zzh.cooldialog.CoolStyle
 import kotlinx.android.synthetic.main.activity_main.*
 
-
+val PERMISSIONS = arrayOf(Manifest.permission.INTERNET, Manifest.permission.RECORD_AUDIO, Manifest.permission.MODIFY_AUDIO_SETTINGS)
+val PERMISSIONS_CODE = 1
 class MainActivity : BaseActivity() {
     var mAboutDialog: CoolDialog? = null
+    private fun hasRequiredPermissions(): Boolean = PERMISSIONS.none { ActivityCompat.checkSelfPermission(this, it) != PackageManager.PERMISSION_GRANTED }
+    fun requestRequiredPermissions(view: View?) = ActivityCompat.requestPermissions(this, PERMISSIONS, PERMISSIONS_CODE)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar as? Toolbar)
         setAudioTakeButton()
+        if (!hasRequiredPermissions()) {
+            requestRequiredPermissions(null)
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (hasRequiredPermissions()) { required_permission_layout?.visibility = View.GONE }
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (!hasRequiredPermissions()) {
+            with(Intent()) {
+                action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
+                addCategory(Intent.CATEGORY_DEFAULT)
+                data = Uri.parse("package:" + this@MainActivity.packageName)
+                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
+                addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS)
+                this@MainActivity.startActivity(this)
+            }
+        }
+        required_permission_layout?.visibility = if (!hasRequiredPermissions()) View.VISIBLE else View.GONE
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
