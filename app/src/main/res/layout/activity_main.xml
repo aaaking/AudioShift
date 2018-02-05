@@ -7,7 +7,43 @@
     android:layout_height="match_parent"
     tools:context="com.example.zhouzhihui.audioshift.MainActivity">
 
-    <include layout="@layout/toolbar"/>
+    <include layout="@layout/toolbar"
+        android:id="@+id/toolbar"/>
+
+    <LinearLayout
+        android:id="@+id/rl_match_voice_state"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/tv_match_voice_count"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:gravity="center"
+            android:text="0"
+            android:textColor="@color/colorPrimaryLight"
+            android:textSize="12sp" />
+        <ProgressBar
+            android:id="@+id/probar_voice_timer"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="8.0dip"
+            android:max="100"
+            tools:progress="50"
+            android:progressDrawable="@drawable/progress_match_voice" />
+
+        <Chronometer
+            android:id="@+id/tv_voice_timer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="00:00"
+            android:textColor="@color/colorPrimaryLight"
+            android:textSize="15sp" />
+    </LinearLayout>
 
     <FrameLayout
         android:id="@+id/audio_take"
@@ -16,25 +52,20 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintTop_toBottomOf="@id/rl_match_voice_state"
         app:layout_constraintVertical_bias="1"
         android:layout_marginBottom="40dp">
-
         <View
             android:id="@+id/autio_take_circle"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:background="@drawable/circle"/>
-
         <android.support.v7.widget.AppCompatImageView
             android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:lineSpacingExtra="10dp"
             app:srcCompat="@drawable/audio_take"/>
-
     </FrameLayout>
-
-
 </android.support.constraint.ConstraintLayout>
