@@ -9,7 +9,7 @@ import com.example.zhouzhihui.audioshift.R
  */
 fun startVoiceStateAnimation(imageView: ImageView?, startAnim: Boolean) = (imageView?.drawable as? Animatable)?.apply { if (startAnim) start() else stop() }
 
-fun startAnimation(imageView: ImageView, startAnim: Boolean) = imageView.apply {
+fun startBtnPlayAnimation(imageView: ImageView?, startAnim: Boolean) = imageView?.apply {
     setImageResource(if (startAnim) R.drawable.audio_take_animate2stop else R.drawable.audio_take_animate2start)
     (drawable as? Animatable)?.start()
 }

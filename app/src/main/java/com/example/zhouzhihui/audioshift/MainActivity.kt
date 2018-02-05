@@ -6,6 +6,7 @@ import android.content.pm.PackageManager
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
+import android.os.SystemClock
 import android.provider.Settings
 import android.support.v4.app.ActivityCompat
 import android.support.v7.widget.Toolbar
@@ -22,6 +23,9 @@ import com.example.zhouzhihui.audioshift.util.isCancelled
 import com.zzh.cooldialog.CoolDialog
 import com.zzh.cooldialog.CoolStyle
 import kotlinx.android.synthetic.main.activity_main.*
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.time.format.DateTimeFormatter
 import javax.inject.Inject
 
 val UPDATE_INTERVAL = 12L
@@ -145,6 +149,11 @@ class MainActivity : BaseActivity() {
         }
     }
 
+    fun audioAnim(startAnim: Boolean) {
+        startVoiceStateAnimation(state_animation, startAnim)
+        startBtnPlayAnimation(audio_take, startAnim)
+    }
+
     override fun onSaveInstanceState(outState: Bundle?) {
         super.onSaveInstanceState(outState)
         outState?.putBoolean("aboutDialog", mAboutDialog?.isShowing ?: false)
@@ -169,42 +178,45 @@ class MainActivity : BaseActivity() {
 //        recorder?.startRecording()
         isRecordingVar = true
         startTime = System.currentTimeMillis()
-        audio_take.postDelayed(stopRecordingRunnable, durationInMillis)
-        probar_voice_timer.max = durationInMillis.toInt()
-        probar_voice_timer.postDelayed(updateRecordStatusRunnable, UPDATE_INTERVAL)
-        startVoiceStateAnimation(state_animation, isRecordingVar)
-        startAnimation(audio_take, isRecordingVar)
+        audio_take?.postDelayed(stopRecordingRunnable, durationInMillis)
+        probar_voice_timer?.max = durationInMillis.toInt()
+        probar_voice_timer?.postDelayed(updateRecordStatusRunnable, UPDATE_INTERVAL)
+        audioAnim(isRecordingVar)
+        //
+        tv_voice_timer?.base = SystemClock.elapsedRealtime()
+        tv_voice_timer?.start()
     }
 
     fun stopRecording() {
         isRecordingVar = false
 //        recorder?.stopRecording()
-        audio_take.removeCallbacks(stopRecordingRunnable)
-        probar_voice_timer.removeCallbacks(updateRecordStatusRunnable)
+        audio_take?.removeCallbacks(stopRecordingRunnable)
+        probar_voice_timer?.removeCallbacks(updateRecordStatusRunnable)
         clipLength = System.currentTimeMillis() - startTime
 //        probar_voice_timer.max = clipLength.toInt()
-        probar_voice_timer.progress = clipLength.toInt()
+        probar_voice_timer?.progress = clipLength.toInt()
         startTime = -1
-        startVoiceStateAnimation(state_animation, isRecordingVar)
-        startAnimation(audio_take, isRecordingVar)
+        audioAnim(isRecordingVar)
 //        setButtonState()
 //        elf.setEnabled(true)
 //        santa.setEnabled(true)
+        //
+        tv_voice_timer?.stop()
+        val sdf = SimpleDateFormat("mm:ss")
+        tv_voice_timer?.text = sdf.format(clipLength)//"${clipLength / 1000}"
     }
 
     private val stopRecordingRunnable = Runnable {
         if (isRecording()) {
             stopRecording()
-            probar_voice_timer.progress = durationInMillis.toInt()
+            probar_voice_timer?.progress = durationInMillis.toInt()
         }
     }
 
     private val updateRecordStatusRunnable = object : Runnable {
         override fun run() {
-            probar_voice_timer?.progress = getTimeOffset().toInt()
+            probar_voice_timer?.progress = (System.currentTimeMillis() - startTime).toInt()
             probar_voice_timer?.postDelayed(this, UPDATE_INTERVAL)
         }
     }
-
-    fun getTimeOffset(): Long = System.currentTimeMillis() - startTime
 }
