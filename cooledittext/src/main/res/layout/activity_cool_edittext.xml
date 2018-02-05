@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:id="@+id/account_login_form"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:gravity="center"
+              android:orientation="vertical">
+
+    <com.zzh.ui.cooledittext.CoolEditText
+        android:id="@+id/accountinput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.zzh.ui.cooledittext.MyEditText
+            android:id="@+id/account"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="phone"
+            android:singleLine="true"
+            android:hint="账户"
+            android:text=""/>
+
+    </com.zzh.ui.cooledittext.CoolEditText>
+
+    <com.zzh.ui.cooledittext.CoolEditText
+        android:id="@+id/passwordinput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.zzh.ui.cooledittext.MyEditText
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="密码"
+            android:singleLine="true"/>
+
+    </com.zzh.ui.cooledittext.CoolEditText>
+
+    <Button
+        android:id="@+id/account_sign_in_button"
+        style="?android:textAppearanceSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="登陆"
+        android:textStyle="bold"/>
+
+</LinearLayout>
