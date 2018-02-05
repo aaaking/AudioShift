@@ -17,9 +17,8 @@ import dagger.Provides;
 
 @Module
 public class MainModule {
-    private static final int DURATION_IN_SECONDS = 5;
-    private static final int DURATION_IN_MILLIS = DURATION_IN_SECONDS * 1000;
-    private static final String AUDIO_FILENAME = "audio";
+    private static final int DURATION_IN_MILLIS = 5 * 1000;
+    private static final String AUDIO_FILENAME = "audio_shift";
 
     private final AudioApp application;
 
