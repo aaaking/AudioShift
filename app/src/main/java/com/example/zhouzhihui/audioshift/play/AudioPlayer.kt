@@ -6,13 +6,13 @@ import com.example.zhouzhihui.audioshift.TAG
 import java.io.File
 
 
-class AudioPlayer(private val audioTrack: AudioTrack, private val file: File) : Player {
+public class AudioPlayer(val audioTrack: AudioTrack, val file: File) : Player {
 
-    private var speed = 1f
+    var mSpeed = 1f
 
-    private var playerThread: Thread? = null
+    var playerThread: Thread? = null
 
-    private val positionListener = object : AudioTrack.OnPlaybackPositionUpdateListener {
+    val positionListener = object : AudioTrack.OnPlaybackPositionUpdateListener {
         override fun onMarkerReached(track: AudioTrack) {
             track.flush()
             track.release()
@@ -33,7 +33,7 @@ class AudioPlayer(private val audioTrack: AudioTrack, private val file: File) : 
             audioTrack.stop()
         }
         val playbackParams = audioTrack.playbackParams
-        playbackParams.pitch = speed
+        playbackParams.pitch = mSpeed
         audioTrack.playbackParams = playbackParams
         audioTrack.setPlaybackPositionUpdateListener(positionListener)
         audioTrack.play()
@@ -43,7 +43,7 @@ class AudioPlayer(private val audioTrack: AudioTrack, private val file: File) : 
     }
 
     override fun setSpeed(speed: Float) {
-        this.speed = speed
+        this.mSpeed = speed
     }
 
     override fun stopPlaying() {

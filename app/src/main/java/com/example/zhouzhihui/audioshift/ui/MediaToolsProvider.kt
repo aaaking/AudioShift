@@ -9,7 +9,7 @@ import android.media.MediaRecorder
 import android.media.audiofx.PresetReverb
 
 class MediaToolsProvider {
-    private var presetReverb: PresetReverb? = null
+    var presetReverb: PresetReverb? = null
 
     val audioRecord: AudioRecord
         get() {
@@ -22,7 +22,7 @@ class MediaToolsProvider {
                     .build()
         }
 
-    private val reverb: PresetReverb?
+    val reverb: PresetReverb?
         get() {
             if (presetReverb == null) {
                 presetReverb = createPresetReverb()
@@ -30,7 +30,7 @@ class MediaToolsProvider {
             return presetReverb
         }
 
-    private fun getAudioFormat(channelMask: Int): AudioFormat {
+    fun getAudioFormat(channelMask: Int): AudioFormat {
         val sampleRate = AudioTrack.getNativeOutputSampleRate(AudioManager.STREAM_MUSIC)
         return AudioFormat.Builder()
                 .setSampleRate(sampleRate)
@@ -39,7 +39,7 @@ class MediaToolsProvider {
                 .build()
     }
 
-    private fun getInputBufferSize(audioFormat: AudioFormat): Int {
+    fun getInputBufferSize(audioFormat: AudioFormat): Int {
         var bufferSize = AudioRecord.getMinBufferSize(
                 audioFormat.sampleRate,
                 audioFormat.channelCount,
@@ -69,7 +69,7 @@ class MediaToolsProvider {
         return track
     }
 
-    private fun createPresetReverb(): PresetReverb {
+    fun createPresetReverb(): PresetReverb {
         val reverb = PresetReverb(1, 0)
         reverb.preset = PresetReverb.PRESET_PLATE
         reverb.enabled = true
@@ -77,6 +77,6 @@ class MediaToolsProvider {
     }
 
     companion object {
-        private val CHANNEL_SIZE = 1920
+        val CHANNEL_SIZE = 1920
     }
 }

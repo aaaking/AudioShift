@@ -6,12 +6,12 @@ import com.example.zhouzhihui.audioshift.record.AudioRecorder
 import com.example.zhouzhihui.audioshift.record.Recorder
 import java.io.File
 
-class AudioRecorderPlayer(private val mediaToolsProvider: MediaToolsProvider, private val file: File) : Recorder, Player {
+class AudioRecorderPlayer(val mediaToolsProvider: MediaToolsProvider, val file: File) : Recorder, Player {
 
-    private var audioRecorder: AudioRecorder? = null
-    private var audioPlayer: AudioPlayer? = null
+    var audioRecorder: AudioRecorder? = null
+    var audioPlayer: AudioPlayer? = null
 
-    private var speed = 1f
+    var mSpeed = 1f
 
     override fun isRecording(): Boolean {
         return audioRecorder != null && audioRecorder!!.isRecording()
@@ -48,7 +48,7 @@ class AudioRecorderPlayer(private val mediaToolsProvider: MediaToolsProvider, pr
         }
         val audioTrack = mediaToolsProvider.getAudioTrack(fileSize)
         audioPlayer = AudioPlayer(audioTrack, file)
-        audioPlayer!!.setSpeed(speed)
+        audioPlayer!!.setSpeed(mSpeed)
         audioPlayer!!.startPlaying()
     }
 
@@ -60,6 +60,6 @@ class AudioRecorderPlayer(private val mediaToolsProvider: MediaToolsProvider, pr
     }
 
     override fun setSpeed(speed: Float) {
-        this.speed = speed
+        this.mSpeed = speed
     }
 }

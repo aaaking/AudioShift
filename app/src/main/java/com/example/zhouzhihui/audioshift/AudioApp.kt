@@ -16,21 +16,21 @@ val TAG: String = AudioApp::class.java.simpleName
 class AudioApp : Application() {
     companion object {
         var sAppContext: Context? = null
-        private var mainComponent: MainComponent? = null
+        var mainComponent: MainComponent? = null
 
-        fun getComponent(context: Context): MainComponent? {
+        fun getComponent(context: Context): MainComponent {
             val application = context.applicationContext as? AudioApp ?: throw RuntimeException()
             return application.getMainComponent()
         }
     }
 
-    private fun getMainComponent(): MainComponent? {
+    fun getMainComponent(): MainComponent {
         if (mainComponent == null) {
             mainComponent = DaggerMainComponent.builder()
                     .mainModule(MainModule(this))
                     .build()
         }
-        return mainComponent
+        return mainComponent!!
     }
 
     override fun onCreate() {

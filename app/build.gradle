@@ -58,7 +58,7 @@ dependencies {
     //leak canary
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.4'
     releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
-    //dagger2  //https://stackoverflow.com/questions/38833242/unresolved-reference-daggerapplicationcomponent
+    //dagger2  // https://stackoverflow.com/questions/38833242/unresolved-reference-daggerapplicationcomponent
     implementation 'com.google.dagger:dagger:2.11'
     kapt 'com.google.dagger:dagger-compiler:2.11'
 }

@@ -139,11 +139,11 @@ class MainActivity : BaseActivity() {
             true
         })
         audio_take.setOnClickListener {
-            if (isRecording()) {
-//                stopRecording()
-            } else {
-//                startRecording()
-            }
+//            if (isRecording()) {
+////                stopRecording()
+//            } else {
+////                startRecording()
+//            }
             startVoiceStateAnimation(state_animation)
         }
     }
@@ -158,7 +158,7 @@ class MainActivity : BaseActivity() {
         takeIf { savedInstanceState?.getBoolean("aboutDialog") ?: false }?.run { showAboutDialog() }
     }
 
-    @Inject protected var recorder: Recorder? = null
-    private fun isRecording(): Boolean = recorder?.isRecording() ?: false
-    private fun hasRecording(): Boolean = !isRecording() && recorder?.hasRecording() ?: false
+//    @Inject var recorder: Recorder? = null
+//    private fun isRecording(): Boolean = recorder?.isRecording() ?: false
+//    private fun hasRecording(): Boolean = !isRecording() && recorder?.hasRecording() ?: false
 }

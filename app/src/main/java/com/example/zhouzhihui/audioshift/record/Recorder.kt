@@ -1,11 +1,11 @@
 package com.example.zhouzhihui.audioshift.record
 
-interface Recorder {
-    fun isRecording(): Boolean
+public interface Recorder {
+    public fun isRecording(): Boolean
 
-    fun hasRecording(): Boolean
+    public fun hasRecording(): Boolean
 
-    fun stopRecording()
+    public fun stopRecording()
 
-    fun startRecording()
+    public fun startRecording()
 }

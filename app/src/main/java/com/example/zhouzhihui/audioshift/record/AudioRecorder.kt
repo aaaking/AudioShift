@@ -4,10 +4,10 @@ import android.media.AudioRecord
 
 import java.io.File
 
-internal class AudioRecorder(private val audioRecord: AudioRecord, private val file: File) : Recorder {
+class AudioRecorder(val audioRecord: AudioRecord, val file: File) : Recorder {
 
-    private var recorderThread: Thread? = null
-    private var recorderTask: AudioRecorderTask? = null
+    var recorderThread: Thread? = null
+    var recorderTask: AudioRecorderTask? = null
 
     override fun isRecording(): Boolean {
         return recorderThread != null && recorderThread!!.isAlive

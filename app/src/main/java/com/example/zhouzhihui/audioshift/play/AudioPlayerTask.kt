@@ -10,9 +10,9 @@ import java.io.FileNotFoundException
 import java.io.IOException
 import java.io.InputStream
 
-class AudioPlayerTask(private val audioTrack: AudioTrack, private val inputFile: File) : Runnable {
+class AudioPlayerTask(val audioTrack: AudioTrack, val inputFile: File) : Runnable {
 
-    private val inputStream: InputStream?
+    val inputStream: InputStream?
         get() {
             val inputStream: InputStream
             try {
@@ -54,6 +54,6 @@ class AudioPlayerTask(private val audioTrack: AudioTrack, private val inputFile:
     }
 
     companion object {
-        private val BUFFER_SIZE = 1024
+        val BUFFER_SIZE = 1024
     }
 }

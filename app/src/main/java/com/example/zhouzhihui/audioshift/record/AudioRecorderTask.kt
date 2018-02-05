@@ -10,9 +10,9 @@ import java.io.FileOutputStream
 import java.io.IOException
 import java.io.OutputStream
 
-internal class AudioRecorderTask(private val audioRecord: AudioRecord, private val outputFile: File) : Runnable {
+class AudioRecorderTask(val audioRecord: AudioRecord, val outputFile: File) : Runnable {
 
-    private val outputStream: OutputStream?
+    val outputStream: OutputStream?
         get() {
             val outputStream: OutputStream
             try {
@@ -45,6 +45,6 @@ internal class AudioRecorderTask(private val audioRecord: AudioRecord, private v
     }
 
     companion object {
-        private val BUFFER_SIZE = 1024
+        val BUFFER_SIZE = 1024
     }
 }
