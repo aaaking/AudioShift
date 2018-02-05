@@ -15,14 +15,16 @@ import android.view.*
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
+import com.example.zhouzhihui.audioshift.record.Recorder
 import com.example.zhouzhihui.audioshift.ui.*
 import com.example.zhouzhihui.audioshift.util.ScreenUtil
 import com.example.zhouzhihui.audioshift.util.isCancelled
 import com.zzh.cooldialog.CoolDialog
 import com.zzh.cooldialog.CoolStyle
 import kotlinx.android.synthetic.main.activity_main.*
+import javax.inject.Inject
 
-val PERMISSIONS = arrayOf(Manifest.permission.INTERNET, Manifest.permission.RECORD_AUDIO, Manifest.permission.MODIFY_AUDIO_SETTINGS)
+val PERMISSIONS = arrayOf(Manifest.permission.INTERNET, Manifest.permission.RECORD_AUDIO, Manifest.permission.MODIFY_AUDIO_SETTINGS, Manifest.permission.WRITE_EXTERNAL_STORAGE)
 val PERMISSIONS_CODE = 1
 class MainActivity : BaseActivity() {
     var mAboutDialog: CoolDialog? = null
@@ -156,7 +158,7 @@ class MainActivity : BaseActivity() {
     }
 
     var isRecording = false
-//    @Inject var recorder: Recorder? = null
+     var recorder: Recorder? = null @Inject set
 //    private fun isRecording(): Boolean = recorder?.isRecording() ?: false
 //    private fun hasRecording(): Boolean = !isRecording() && recorder?.hasRecording() ?: false
 }

@@ -1,6 +1,7 @@
 package com.example.zhouzhihui.audioshift.dagger
 
 import android.content.Context
+import android.os.Environment
 
 import com.example.zhouzhihui.audioshift.AudioApp
 import com.example.zhouzhihui.audioshift.play.Player
@@ -37,7 +38,15 @@ class MainModule(val application: AudioApp) {
 
     @Provides
     fun providesAudioFile(context: Context): File {
-        return File(context.filesDir, AUDIO_FILENAME)
+        var rootPath = ""
+        if (Environment.MEDIA_MOUNTED == Environment.getExternalStorageState() || !Environment.isExternalStorageRemovable()) {//sd卡能用
+            rootPath = context.getExternalFilesDir(null).path
+        } else {//sd卡不能用
+            if (context.filesDir != null) {
+                rootPath = context.filesDir.path
+            }
+        }
+        return File(rootPath, AUDIO_FILENAME)
     }
 
     @Provides
