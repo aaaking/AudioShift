@@ -11,8 +11,10 @@
     </style>
 
     <declare-styleable name="CoolEditText">
-        <attr name="cet_cursor_width" format="dimension|reference"/>
-        <attr name="cet_cursor_color" format="reference"/>
+        <attr name="cet_right_type" format="integer"/>
+        <attr name="cet_icon_delete" format="reference"/>
+        <attr name="cet_icon_eye_open" format="reference"/>
+        <attr name="cet_icon_eye_close" format="reference"/>
     </declare-styleable>
 
 </resources>

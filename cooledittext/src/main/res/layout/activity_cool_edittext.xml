@@ -12,12 +12,14 @@
         android:id="@+id/accountinput"
         app:hintTextAppearance="@style/TextAppearence.App.TextInputLayout"
         android:textColorHint="@color/hintColor"
+        app:cet_icon_delete="@mipmap/icon_edit_delete"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <com.zzh.ui.cooledittext.MyEditText
             android:textCursorDrawable="@drawable/bg_cursor"
             android:id="@+id/account"
+            android:drawablePadding="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="phone"
@@ -30,6 +32,7 @@
 
     <com.zzh.ui.cooledittext.CoolEditText
         android:id="@+id/passwordinput"
+        app:cet_right_type="1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
