@@ -3,13 +3,16 @@ package com.example.zhouzhihui.audioshift
 import android.graphics.Color
 import android.os.Bundle
 import android.text.Html
-import android.text.method.LinkMovementMethod
 import android.view.*
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import com.example.zhouzhihui.audioshift.ui.BaseActivity
+import com.example.zhouzhihui.audioshift.ui.bigger
+import com.example.zhouzhihui.audioshift.ui.smaller
 import com.example.zhouzhihui.audioshift.util.ScreenUtil
+import com.example.zhouzhihui.audioshift.util.isCancelled
 import com.zzh.cooldialog.CoolDialog
 import com.zzh.cooldialog.CoolStyle
 import kotlinx.android.synthetic.main.activity_main.*
@@ -84,13 +87,20 @@ class MainActivity : BaseActivity() {
             }
 
     private fun setAudioTakeButton() {
-        audio_take.setOnTouchListener(View.OnTouchListener { v, event ->
+        autio_take_circle.setOnTouchListener(View.OnTouchListener { v, event ->
             if (event.action == MotionEvent.ACTION_DOWN) {
+                bigger(v, 50)
             } else if (event.action == MotionEvent.ACTION_CANCEL || event.action == MotionEvent.ACTION_UP) {
+                smaller(v, 50)
+                if (isCancelled(v, event)) {
+                } else {
+                    (v.parent as? View)?.performClick()
+                }
             } else if (event.action == MotionEvent.ACTION_MOVE) {
             }
             true
         })
+        audio_take.setOnClickListener { Toast.makeText(this, "eggakl", Toast.LENGTH_SHORT).show() }
     }
 
     override fun onSaveInstanceState(outState: Bundle?) {

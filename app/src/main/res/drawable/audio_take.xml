@@ -9,15 +9,6 @@
         </shape>
     </item>
     <item
-        android:gravity="center"
-        android:width="50dp"
-        android:height="50dp">
-        <shape>
-            <corners android:radius="24dp"/>
-            <solid android:color="@color/colorPrimaryLightLight"/>
-        </shape>
-    </item>
-    <item
         android:width="50dp"
         android:height="50dp"
         android:drawable="@drawable/icon"

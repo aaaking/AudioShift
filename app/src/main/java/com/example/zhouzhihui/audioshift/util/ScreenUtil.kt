@@ -218,3 +218,9 @@ object ScreenUtil {
         return (dp * displayMetrics.density + 0.5).toInt()
     }
 }
+
+fun isCancelled(view: View, event: MotionEvent): Boolean {
+    val location = IntArray(2)
+    view.getLocationOnScreen(location)
+    return event.rawX < location[0] || event.rawX > location[0] + view.width || event.rawY < location[1] - 40 || event.rawY > location[1] + view.height
+}
