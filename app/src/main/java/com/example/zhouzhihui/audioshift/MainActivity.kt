@@ -24,6 +24,7 @@ import com.zzh.cooldialog.CoolStyle
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
+val UPDATE_INTERVAL = 12L
 val PERMISSIONS = arrayOf(Manifest.permission.INTERNET, Manifest.permission.RECORD_AUDIO, Manifest.permission.MODIFY_AUDIO_SETTINGS, Manifest.permission.WRITE_EXTERNAL_STORAGE)
 val PERMISSIONS_CODE = 1
 class MainActivity : BaseActivity() {
@@ -136,14 +137,11 @@ class MainActivity : BaseActivity() {
             true
         })
         audio_take_container.setOnClickListener {
-//            if (isRecording()) {
-////                stopRecording()
-//            } else {
-////                startRecording()
-//            }
-            isRecording = !isRecording
-            startVoiceStateAnimation(state_animation, isRecording)
-            startAnimation(audio_take, isRecording)
+            if (isRecording()) {
+                stopRecording()
+            } else {
+                startRecording()
+            }
         }
     }
 
@@ -157,8 +155,56 @@ class MainActivity : BaseActivity() {
         takeIf { savedInstanceState?.getBoolean("aboutDialog") ?: false }?.run { showAboutDialog() }
     }
 
-    var isRecording = false
-     var recorder: Recorder? = null @Inject set
-//    private fun isRecording(): Boolean = recorder?.isRecording() ?: false
-//    private fun hasRecording(): Boolean = !isRecording() && recorder?.hasRecording() ?: false
+    private var startTime: Long = -1
+    private var clipLength: Long = 0
+    var isRecordingVar = false
+    var recorder: Recorder? = null @Inject set
+    var durationInMillis: Long = 5000//0L @Inject set
+    private fun isRecording(): Boolean = isRecordingVar//recorder?.isRecording() ?: false
+    private fun hasRecording(): Boolean = !isRecording() && recorder?.hasRecording() ?: false
+
+    fun startRecording() {
+//        elf.setEnabled(false)
+//        santa.setEnabled(false)
+//        recorder?.startRecording()
+        isRecordingVar = true
+        startTime = System.currentTimeMillis()
+        audio_take.postDelayed(stopRecordingRunnable, durationInMillis)
+        probar_voice_timer.max = durationInMillis.toInt()
+        probar_voice_timer.postDelayed(updateRecordStatusRunnable, UPDATE_INTERVAL)
+        startVoiceStateAnimation(state_animation, isRecordingVar)
+        startAnimation(audio_take, isRecordingVar)
+    }
+
+    fun stopRecording() {
+        isRecordingVar = false
+//        recorder?.stopRecording()
+        audio_take.removeCallbacks(stopRecordingRunnable)
+        probar_voice_timer.removeCallbacks(updateRecordStatusRunnable)
+        clipLength = System.currentTimeMillis() - startTime
+//        probar_voice_timer.max = clipLength.toInt()
+        probar_voice_timer.progress = clipLength.toInt()
+        startTime = -1
+        startVoiceStateAnimation(state_animation, isRecordingVar)
+        startAnimation(audio_take, isRecordingVar)
+//        setButtonState()
+//        elf.setEnabled(true)
+//        santa.setEnabled(true)
+    }
+
+    private val stopRecordingRunnable = Runnable {
+        if (isRecording()) {
+            stopRecording()
+            probar_voice_timer.progress = durationInMillis.toInt()
+        }
+    }
+
+    private val updateRecordStatusRunnable = object : Runnable {
+        override fun run() {
+            probar_voice_timer?.progress = getTimeOffset().toInt()
+            probar_voice_timer?.postDelayed(this, UPDATE_INTERVAL)
+        }
+    }
+
+    fun getTimeOffset(): Long = System.currentTimeMillis() - startTime
 }

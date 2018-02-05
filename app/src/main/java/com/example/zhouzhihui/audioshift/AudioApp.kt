@@ -18,19 +18,19 @@ class AudioApp : Application() {
         var sAppContext: Context? = null
         var mainComponent: MainComponent? = null
 
-        fun getComponent(context: Context): MainComponent {
+        fun getComponent(context: Context): MainComponent? {
             val application = context.applicationContext as? AudioApp ?: throw RuntimeException()
             return application.getMainComponent()
         }
     }
 
-    fun getMainComponent(): MainComponent {
+    fun getMainComponent(): MainComponent? {
         if (mainComponent == null) {
             mainComponent = DaggerMainComponent.builder()
                     .mainModule(MainModule(this))
                     .build()
         }
-        return mainComponent!!
+        return mainComponent
     }
 
     override fun onCreate() {
