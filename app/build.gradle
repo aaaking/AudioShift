@@ -42,6 +42,7 @@ def dependencyGroup(Closure closure) {
 
 def module = dependencyGroup {
     implementation project(path: ':cooldialog')
+    implementation project(path: ':cooledittext')
 }
 
 dependencies {
