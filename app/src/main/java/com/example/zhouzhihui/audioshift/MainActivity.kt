@@ -169,13 +169,13 @@ class MainActivity : BaseActivity() {
     var isRecordingVar = false
     var recorder: Recorder? = null @Inject set
     var durationInMillis: Long = 0L @Inject set
-    private fun isRecording(): Boolean = isRecordingVar//recorder?.isRecording() ?: false
+    private fun isRecording(): Boolean = recorder?.isRecording() ?: false
     private fun hasRecording(): Boolean = !isRecording() && recorder?.hasRecording() ?: false
 
     fun startRecording() {
 //        elf.setEnabled(false)
 //        santa.setEnabled(false)
-//        recorder?.startRecording()
+        recorder?.startRecording()
         isRecordingVar = true
         startTime = System.currentTimeMillis()
         audio_take?.postDelayed(stopRecordingRunnable, durationInMillis)
@@ -189,7 +189,7 @@ class MainActivity : BaseActivity() {
 
     fun stopRecording() {
         isRecordingVar = false
-//        recorder?.stopRecording()
+        recorder?.stopRecording()
         audio_take?.removeCallbacks(stopRecordingRunnable)
         probar_voice_timer?.removeCallbacks(updateRecordStatusRunnable)
         clipLength = System.currentTimeMillis() - startTime
