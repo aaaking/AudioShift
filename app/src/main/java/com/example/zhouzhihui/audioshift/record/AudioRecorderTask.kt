@@ -2,14 +2,13 @@ package com.example.zhouzhihui.audioshift.record
 
 import android.media.AudioRecord
 import android.util.Log
+import com.example.zhouzhihui.audioshift.TAG
 
 import java.io.File
 import java.io.FileNotFoundException
 import java.io.FileOutputStream
 import java.io.IOException
 import java.io.OutputStream
-
-import android.content.ContentValues.TAG
 
 internal class AudioRecorderTask(private val audioRecord: AudioRecord, private val outputFile: File) : Runnable {
 

@@ -11,7 +11,7 @@ import android.media.audiofx.PresetReverb
 class MediaToolsProvider {
     private var presetReverb: PresetReverb? = null
 
-    internal val audioRecord: AudioRecord
+    val audioRecord: AudioRecord
         get() {
             val audioFormat = getAudioFormat(AudioFormat.CHANNEL_IN_MONO)
             val bufferSize = getInputBufferSize(audioFormat)
@@ -51,7 +51,7 @@ class MediaToolsProvider {
         return bufferSize
     }
 
-    internal fun getAudioTrack(bufferSize: Long): AudioTrack {
+    fun getAudioTrack(bufferSize: Long): AudioTrack {
         val audioFormat = getAudioFormat(AudioFormat.CHANNEL_OUT_MONO)
         val attributes = AudioAttributes.Builder()
                 .setContentType(AudioAttributes.CONTENT_TYPE_SPEECH)
