@@ -32,7 +32,7 @@ class MainModule(val application: AudioApp) {
     }
 
     @Provides
-    fun providesDurationInMillis(): Int {
+    fun providesDurationInMillis(): Long {
         return DURATION_IN_MILLIS
     }
 
@@ -67,7 +67,7 @@ class MainModule(val application: AudioApp) {
     }
 
     companion object {
-        val DURATION_IN_MILLIS = 5 * 1000
+        val DURATION_IN_MILLIS = 5 * 1000L
         val AUDIO_FILENAME = "audio_shift"
     }
 }

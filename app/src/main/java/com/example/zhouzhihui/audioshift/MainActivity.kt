@@ -168,7 +168,7 @@ class MainActivity : BaseActivity() {
     private var clipLength: Long = 0
     var isRecordingVar = false
     var recorder: Recorder? = null @Inject set
-    var durationInMillis: Long = 5000//0L @Inject set
+    var durationInMillis: Long = 0L @Inject set
     private fun isRecording(): Boolean = isRecordingVar//recorder?.isRecording() ?: false
     private fun hasRecording(): Boolean = !isRecording() && recorder?.hasRecording() ?: false
 
