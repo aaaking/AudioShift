@@ -9,11 +9,9 @@
                 <objectAnimator
                     android:duration="150"
                     android:propertyName="pathData"
-                    android:repeatCount="infinite"
-                    android:repeatMode="reverse"
                     android:valueType="pathType"
-                    android:valueTo="M0 0 h750 v750"
-                    android:valueFrom="M357.3,559.6h36.3v119.4h-36.3z"/>
+                    android:valueTo="M0 0 h750 v750 h-750 -v750z"
+                    android:valueFrom="M371.1,72.6L378.8,72.6A100,100 0,0 1,478.8 172.6L478.8,387.9A100,100 0,0 1,378.8 487.9L371.1,487.9A100,100 0,0 1,271.1 387.9L271.1,172.6A100,100 0,0 1,371.1 72.6z"/>
             </set>
         </appt:attr>
     </target>
@@ -24,8 +22,6 @@
                 <objectAnimator
                     android:duration="150"
                     android:propertyName="pathData"
-                    android:repeatCount="infinite"
-                    android:repeatMode="reverse"
                     android:valueType="pathType"
                     android:valueTo="M750 750 h-750"
                     android:valueFrom="M200.5,384.6C200.5,481.2 278.9,559.6 375.5,559.6L375.5,559.6C472.1,559.6 550.4,481.2 550.4,384.6"/>
@@ -39,12 +35,11 @@
                 <objectAnimator
                     android:duration="150"
                     android:propertyName="pathData"
-                    android:repeatCount="infinite"
-                    android:repeatMode="reverse"
                     android:valueType="pathType"
-                    android:valueTo="M0 0 h750 v750 h-750 -v750z"
-                    android:valueFrom="M371.1,72.6L378.8,72.6A100,100 0,0 1,478.8 172.6L478.8,387.9A100,100 0,0 1,378.8 487.9L371.1,487.9A100,100 0,0 1,271.1 387.9L271.1,172.6A100,100 0,0 1,371.1 72.6z"/>
+                    android:valueTo="M0 0 h750 v750"
+                    android:valueFrom="M357.3,559.6h36.3v119.4h-36.3z"/>
             </set>
         </appt:attr>
     </target>
+
 </animated-vector>
