@@ -4,11 +4,11 @@ import android.graphics.Color
 import android.os.Bundle
 import android.support.v7.widget.Toolbar
 import android.text.Html
+import android.util.Log
 import android.view.*
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import com.example.zhouzhihui.audioshift.ui.BaseActivity
 import com.example.zhouzhihui.audioshift.ui.bigger
 import com.example.zhouzhihui.audioshift.ui.smaller
@@ -95,6 +95,7 @@ class MainActivity : BaseActivity() {
                 if (isCancelled(v, event)) {
                 } else {
                     (v.parent as? View)?.performClick()
+                    Log.i(TAG, "v.background: ${v.background}")
                 }
             } else if (event.action == MotionEvent.ACTION_MOVE) {
             }
