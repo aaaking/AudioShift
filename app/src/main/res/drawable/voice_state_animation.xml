@@ -6,7 +6,7 @@
         <aapt:attr name="android:animation">
             <set>
                 <objectAnimator
-                    android:duration="150"
+                    android:duration="@integer/voice_state_duration"
                     android:propertyName="pathData"
                     android:repeatCount="infinite"
                     android:repeatMode="reverse"
@@ -21,7 +21,7 @@
         <aapt:attr name="android:animation">
             <set>
                 <objectAnimator
-                    android:duration="150"
+                    android:duration="@integer/voice_state_duration"
                     android:propertyName="pathData"
                     android:repeatCount="infinite"
                     android:repeatMode="reverse"
@@ -36,7 +36,7 @@
         <aapt:attr name="android:animation">
             <set>
                 <objectAnimator
-                    android:duration="150"
+                    android:duration="@integer/voice_state_duration"
                     android:propertyName="pathData"
                     android:repeatCount="infinite"
                     android:repeatMode="reverse"
@@ -51,7 +51,7 @@
         <aapt:attr name="android:animation">
             <set>
                 <objectAnimator
-                    android:duration="150"
+                    android:duration="@integer/voice_state_duration"
                     android:propertyName="pathData"
                     android:repeatCount="infinite"
                     android:repeatMode="reverse"
@@ -66,7 +66,7 @@
         <aapt:attr name="android:animation">
             <set>
                 <objectAnimator
-                    android:duration="150"
+                    android:duration="@integer/voice_state_duration"
                     android:propertyName="pathData"
                     android:repeatCount="infinite"
                     android:repeatMode="reverse"
@@ -81,7 +81,7 @@
         <aapt:attr name="android:animation">
             <set>
                 <objectAnimator
-                    android:duration="150"
+                    android:duration="@integer/voice_state_duration"
                     android:propertyName="pathData"
                     android:repeatCount="infinite"
                     android:repeatMode="reverse"
@@ -96,7 +96,7 @@
         <aapt:attr name="android:animation">
             <set>
                 <objectAnimator
-                    android:duration="150"
+                    android:duration="@integer/voice_state_duration"
                     android:propertyName="pathData"
                     android:repeatCount="infinite"
                     android:repeatMode="reverse"
@@ -111,7 +111,7 @@
         <aapt:attr name="android:animation">
             <set>
                 <objectAnimator
-                    android:duration="150"
+                    android:duration="@integer/voice_state_duration"
                     android:propertyName="pathData"
                     android:repeatCount="infinite"
                     android:repeatMode="reverse"
@@ -126,7 +126,7 @@
         <aapt:attr name="android:animation">
             <set>
                 <objectAnimator
-                    android:duration="150"
+                    android:duration="@integer/voice_state_duration"
                     android:propertyName="pathData"
                     android:repeatCount="infinite"
                     android:repeatMode="reverse"
@@ -141,7 +141,7 @@
         <aapt:attr name="android:animation">
             <set>
                 <objectAnimator
-                    android:duration="150"
+                    android:duration="@integer/voice_state_duration"
                     android:propertyName="pathData"
                     android:repeatCount="infinite"
                     android:repeatMode="reverse"
@@ -156,7 +156,7 @@
         <aapt:attr name="android:animation">
             <set>
                 <objectAnimator
-                    android:duration="150"
+                    android:duration="@integer/voice_state_duration"
                     android:propertyName="pathData"
                     android:repeatCount="infinite"
                     android:repeatMode="reverse"
@@ -171,7 +171,7 @@
         <aapt:attr name="android:animation">
             <set>
                 <objectAnimator
-                    android:duration="150"
+                    android:duration="@integer/voice_state_duration"
                     android:propertyName="pathData"
                     android:repeatCount="infinite"
                     android:repeatMode="reverse"
