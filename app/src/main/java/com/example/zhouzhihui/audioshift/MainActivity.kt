@@ -38,10 +38,17 @@ class MainActivity : BaseActivity() {
     private fun hasRequiredPermissions(): Boolean = PERMISSIONS.none { ActivityCompat.checkSelfPermission(this, it) != PackageManager.PERMISSION_GRANTED }
     fun requestRequiredPermissions(view: View?) = ActivityCompat.requestPermissions(this, PERMISSIONS, PERMISSIONS_CODE)
     override fun onCreate(savedInstanceState: Bundle?) {
+        val iconWidth = resources.getDimensionPixelOffset(R.dimen.dialog_icon_width)
+        val logo = resources.getDrawable(R.drawable.icon)
+        logo.setBounds(0, 0, iconWidth, iconWidth)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         AudioApp.getComponent(this)?.inject(this)
+//        (toolbar as? Toolbar)?.logo = logo
         setSupportActionBar(toolbar as? Toolbar)
+        getSupportActionBar()?.setDisplayShowHomeEnabled(true)
+//        getSupportActionBar()?.setLogo(logo)
+        getSupportActionBar()?.setDisplayUseLogoEnabled(true)
         setAudioTakeButton()
         if (!hasRequiredPermissions()) {
             requestRequiredPermissions(null)
