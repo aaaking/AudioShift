@@ -224,26 +224,29 @@ class MainActivity : BaseActivity() {
     private fun isRecording(): Boolean = recorder?.isRecording() ?: false
     private fun hasRecording(): Boolean = !isRecording() && recorder?.hasRecording() ?: false
 
-    fun startRecording() {
+    fun startRecording() =
 //        elf.setEnabled(false)
 //        santa.setEnabled(false)
-        recorder?.startRecording()
-        startTime = System.currentTimeMillis()
-        probar_voice_timer?.max = durationInMillis.toInt()
-        audioAnim(isRecording())
-        tv_voice_timer?.base = SystemClock.elapsedRealtime()
-        tv_voice_timer?.start()
-        mCountDownTimer?.cancel()
-        mCountDownTimer = object : CountDownTimer(durationInMillis, 10) {
-            override fun onFinish() {
-                stopRecording()// onFinish
+            takeIf { mAboutDialog?.isShowing != true && mSaveRecordFileDialog?.isShowing != true }?.run {
+                recorder?.startRecording()
+                startTime = System.currentTimeMillis()
+                probar_voice_timer?.max = durationInMillis.toInt()
+                audioAnim(isRecording())
+                tv_voice_timer?.base = SystemClock.elapsedRealtime()
+                tv_voice_timer?.start()
+                mCountDownTimer?.cancel()
+                mCountDownTimer = object : CountDownTimer(durationInMillis, 10) {
+                    override fun onFinish() {
+                        stopRecording()// onFinish
+                    }
+
+                    override fun onTick(millisUntilFinished: Long) {
+                        probar_voice_timer?.progress = (System.currentTimeMillis() - startTime).toInt()
+                    }
+                }
+                mCountDownTimer?.start()
             }
-            override fun onTick(millisUntilFinished: Long) {
-                probar_voice_timer?.progress = (System.currentTimeMillis() - startTime).toInt()
-            }
-        }
-        mCountDownTimer?.start()
-    }
+
 
     fun stopRecording() {
         mCountDownTimer?.cancel()
