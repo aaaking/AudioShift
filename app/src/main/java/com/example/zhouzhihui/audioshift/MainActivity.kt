@@ -161,6 +161,7 @@ class MainActivity : BaseActivity() {
     }
 
     private fun setAudioTakeButton() {
+        Log.i(TAG, "${recorder} ${recorder?.isRecording()} ${durationInMillis}")
         autio_take_circle.setOnTouchListener(View.OnTouchListener { v, event ->
             if (event.action == MotionEvent.ACTION_DOWN) {
                 bigger(v, 50)
@@ -169,7 +170,6 @@ class MainActivity : BaseActivity() {
                 if (isCancelled(v, event)) {
                 } else {
                     (v.parent as? View)?.performClick()
-                    Log.i(TAG, "v.background: ${v.background}")
                 }
             } else if (event.action == MotionEvent.ACTION_MOVE) {
             }
@@ -208,9 +208,11 @@ class MainActivity : BaseActivity() {
     private fun hasRecording(): Boolean = !isRecording() && recorder?.hasRecording() ?: false
 
     fun startRecording() {
+        Log.i(TAG, "${recorder} ${recorder?.isRecording()}")
 //        elf.setEnabled(false)
 //        santa.setEnabled(false)
         recorder?.startRecording()
+        Log.i(TAG, "${recorder} ${recorder?.isRecording()}")
         isRecordingVar = true
         startTime = System.currentTimeMillis()
         probar_voice_timer?.max = durationInMillis.toInt()
@@ -220,10 +222,7 @@ class MainActivity : BaseActivity() {
         if (mCountDownTimer == null) {
             mCountDownTimer = object : CountDownTimer(durationInMillis, 10) {
                 override fun onFinish() {
-                    if (isRecording()) {
-                        stopRecording()
-                        probar_voice_timer?.progress = durationInMillis.toInt()
-                    }
+                    stopRecording()// onFinish
                 }
                 override fun onTick(millisUntilFinished: Long) {
                     probar_voice_timer?.progress = (System.currentTimeMillis() - startTime).toInt()
