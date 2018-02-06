@@ -27,7 +27,7 @@ class MainModule(val application: AudioApp) {
 
     @Provides
     @Singleton
-    fun providesMediaToolsProvider(): MediaManager = MediaManager()
+    fun providesMediaManager(): MediaManager = MediaManager()
 
     @Provides
     fun providesDurationInMillis(): Long = DURATION_IN_MILLIS
