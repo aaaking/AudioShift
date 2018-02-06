@@ -8,7 +8,7 @@ import android.media.AudioTrack
 import android.media.MediaRecorder
 import android.media.audiofx.PresetReverb
 
-class MediaToolsProvider {
+class MediaManager {
     var presetReverb: PresetReverb? = null
 
     val audioRecord: AudioRecord

@@ -9,7 +9,7 @@ import com.example.zhouzhihui.audioshift.TAG
 import com.example.zhouzhihui.audioshift.play.Player
 import com.example.zhouzhihui.audioshift.record.Recorder
 import com.example.zhouzhihui.audioshift.ui.AudioRecorderPlayer
-import com.example.zhouzhihui.audioshift.ui.MediaToolsProvider
+import com.example.zhouzhihui.audioshift.ui.MediaManager
 
 import java.io.File
 
@@ -27,7 +27,7 @@ class MainModule(val application: AudioApp) {
 
     @Provides
     @Singleton
-    fun providesMediaToolsProvider(): MediaToolsProvider = MediaToolsProvider()
+    fun providesMediaToolsProvider(): MediaManager = MediaManager()
 
     @Provides
     fun providesDurationInMillis(): Long = DURATION_IN_MILLIS
@@ -50,7 +50,7 @@ class MainModule(val application: AudioApp) {
 
     @Provides
     @Singleton
-    fun providesAudioRecorderPlayer(mediaToolsProvider: MediaToolsProvider, audioFile: File): AudioRecorderPlayer = AudioRecorderPlayer(mediaToolsProvider, audioFile)
+    fun providesAudioRecorderPlayer(mediaManager: MediaManager, audioFile: File): AudioRecorderPlayer = AudioRecorderPlayer(mediaManager, audioFile)
 
     @Provides
     fun providesRecorder(audioRecorderPlayer: AudioRecorderPlayer): Recorder = audioRecorderPlayer
