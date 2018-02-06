@@ -219,7 +219,6 @@ class MainActivity : BaseActivity() {
 
     private var startTime: Long = -1
     private var clipLength: Long = 0
-    var isRecordingVar = false
     var recorder: Recorder? = null @Inject set
     var durationInMillis: Long = 0L @Inject set
     private fun isRecording(): Boolean = recorder?.isRecording() ?: false
@@ -229,10 +228,9 @@ class MainActivity : BaseActivity() {
 //        elf.setEnabled(false)
 //        santa.setEnabled(false)
         recorder?.startRecording()
-        isRecordingVar = true
         startTime = System.currentTimeMillis()
         probar_voice_timer?.max = durationInMillis.toInt()
-        audioAnim(isRecordingVar)
+        audioAnim(isRecording())
         tv_voice_timer?.base = SystemClock.elapsedRealtime()
         tv_voice_timer?.start()
         mCountDownTimer?.cancel()
@@ -258,9 +256,8 @@ class MainActivity : BaseActivity() {
             probar_voice_timer?.progress = clipLength.toInt()
             startTime = -1
             showSaveRecordFileDialog()
-            isRecordingVar = false
             recorder?.stopRecording()
-            audioAnim(isRecordingVar)
+            audioAnim(isRecording())
 //        elf.setEnabled(true)
 //        santa.setEnabled(true)
         }
