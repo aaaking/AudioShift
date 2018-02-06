@@ -5,11 +5,13 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
+import android.graphics.drawable.GradientDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.os.SystemClock
 import android.provider.Settings
+import android.support.design.widget.TextInputLayout
 import android.support.v4.app.ActivityCompat
 import android.support.v7.widget.Toolbar
 import android.text.Html
@@ -17,6 +19,7 @@ import android.util.Log
 import android.view.*
 import android.widget.FrameLayout
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import com.example.zhouzhihui.audioshift.record.Recorder
 import com.example.zhouzhihui.audioshift.ui.*
@@ -25,6 +28,7 @@ import com.example.zhouzhihui.audioshift.util.isCancelled
 import com.zzh.cooldialog.COOL_STYLE_ROTATE
 import com.zzh.cooldialog.CoolDialog
 import com.zzh.cooldialog.CoolStyle
+import com.zzh.ui.cooledittext.CoolEditText
 import kotlinx.android.synthetic.main.activity_main.*
 import java.text.SimpleDateFormat
 import javax.inject.Inject
@@ -130,6 +134,20 @@ class MainActivity : BaseActivity() {
 
     private fun showSaveRecordFileDialog() = run {
         if (mSaveRecordFileDialog == null) {
+            val editLayout = TextInputLayout(this)
+            val edit = CoolEditText(this)
+            GradientDrawable().apply {
+                cornerRadius = resources.getDimension(R.dimen.btn_common_radius)
+                setColor(Color.WHITE)
+                edit.setBackgroundDrawable(this)
+                edit.setText("音频文件_1")
+                edit.setPadding(0, 5, ScreenUtil.dp2px(this@MainActivity, 3f), 5)
+                editLayout.hint = "文件名："
+                editLayout.setHintTextAppearance(R.style.TextInputLayoutTheme)
+                editLayout.addView(edit)
+                val lp = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+                (edit.layoutParams as? FrameLayout.LayoutParams)?.setMargins(0, ScreenUtil.dp2px(this@MainActivity, 8f), 0, 0)
+            }
             mSaveRecordFileDialog = CoolDialog(this)
             mSaveRecordFileDialog?.withIcon(R.drawable.icon)
                     ?.withTitle(resources.getString(R.string.save_record_file_title))
@@ -153,6 +171,7 @@ class MainActivity : BaseActivity() {
                     })
                     ?.withCancelable(false)
                     ?.withCanceledOnTouchOutside(false)
+                    ?.withContentCustom(null, R.layout.layout_save_file_et)
                     ?.withCoolStyle(CoolStyle(mSaveRecordFileDialog?.mRootView, COOL_STYLE_ROTATE))
         }
         if (!isDestroyed && !isFinishing) {

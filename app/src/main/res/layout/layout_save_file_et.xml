@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.TextInputLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/audio_file_name_layout"
+    app:hintTextAppearance="@style/TextInputLayoutTheme"
+    android:hint="文件名："
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <com.zzh.ui.cooledittext.CoolEditText
+        android:id="@+id/et_audio_file_name"
+        android:text="音频文件_1"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"/>
+</android.support.design.widget.TextInputLayout>

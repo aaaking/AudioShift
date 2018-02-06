@@ -81,7 +81,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:lineSpacingExtra="10dp"
-            app:srcCompat="@drawable/audio_take_animate2stop"/>
+            app:srcCompat="@drawable/audio_take_animate2start"/>
     </FrameLayout>
 
     <LinearLayout
