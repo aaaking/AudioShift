@@ -7,7 +7,7 @@ import com.example.zhouzhihui.audioshift.record.Recorder
 import com.example.zhouzhihui.audioshift.record.fileHasContent
 import java.io.File
 
-class AudioRecorderPlayer(val mediaManager: MediaManager, val file: File) : Recorder, Player {
+class RecorderPlayer(val mediaManager: MediaManager, val file: File) : Recorder, Player {
 
     var audioRecorder: AudioRecorder? = null
     var audioPlayer: AudioPlayer? = null

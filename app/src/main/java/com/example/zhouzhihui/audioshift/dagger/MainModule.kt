@@ -8,7 +8,7 @@ import com.example.zhouzhihui.audioshift.AudioApp
 import com.example.zhouzhihui.audioshift.TAG
 import com.example.zhouzhihui.audioshift.play.Player
 import com.example.zhouzhihui.audioshift.record.Recorder
-import com.example.zhouzhihui.audioshift.ui.AudioRecorderPlayer
+import com.example.zhouzhihui.audioshift.ui.RecorderPlayer
 import com.example.zhouzhihui.audioshift.ui.MediaManager
 
 import java.io.File
@@ -50,13 +50,13 @@ class MainModule(val application: AudioApp) {
 
     @Provides
     @Singleton
-    fun providesAudioRecorderPlayer(mediaManager: MediaManager, audioFile: File): AudioRecorderPlayer = AudioRecorderPlayer(mediaManager, audioFile)
+    fun providesRecorderPlayer(mediaManager: MediaManager, audioFile: File): RecorderPlayer = RecorderPlayer(mediaManager, audioFile)
 
     @Provides
-    fun providesRecorder(audioRecorderPlayer: AudioRecorderPlayer): Recorder = audioRecorderPlayer
+    fun providesRecorder(recorderPlayer: RecorderPlayer): Recorder = recorderPlayer
 
     @Provides
-    fun providesPlayer(audioRecorderPlayer: AudioRecorderPlayer): Player = audioRecorderPlayer
+    fun providesPlayer(recorderPlayer: RecorderPlayer): Player = recorderPlayer
 
     companion object {
         val DURATION_IN_MILLIS = 5 * 1000L
