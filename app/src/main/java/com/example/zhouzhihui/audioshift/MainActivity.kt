@@ -285,7 +285,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     override fun onSaveInstanceState(outState: Bundle?) {
         super.onSaveInstanceState(outState)
         outState?.putBoolean("aboutDialog", mAboutDialog?.isShowing ?: false)
-        // todo 1 save state  2 record failed
+        // todo 1 save state  2 record failed  3 night theme
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
