@@ -21,25 +21,13 @@ import dagger.Provides
 @Module
 class MainModule(val application: AudioApp) {
 
-    @Provides
-    @Singleton
-    fun providesContext(): Context {
-        return application
-    }
+    @Provides @Singleton fun providesContext(): Context = application
 
-    @Provides
-    @Singleton
-    fun providesMediaToolsProvider(): MediaToolsProvider {
-        return MediaToolsProvider()
-    }
+    @Provides @Singleton fun providesMediaToolsProvider(): MediaToolsProvider = MediaToolsProvider()
 
-    @Provides
-    fun providesDurationInMillis(): Long {
-        return DURATION_IN_MILLIS
-    }
+    @Provides fun providesDurationInMillis(): Long = DURATION_IN_MILLIS
 
-    @Provides
-    fun providesAudioFile(context: Context): File {
+    @Provides fun providesAudioFile(context: Context): File {
         val file = File(providesRootPath(context), AUDIO_DIRECTORY + File.separator + AUDIO_FILENAME)
         var result = file.parentFile.mkdirs()
         Log.i(TAG, "file.mkdirs() result: ${result} ${file.exists()}")
@@ -58,22 +46,11 @@ class MainModule(val application: AudioApp) {
         return rootPath
     }
 
-    @Provides
-    @Singleton
-    fun providesAudioRecorderPlayer(mediaToolsProvider: MediaToolsProvider, audioFile: File): AudioRecorderPlayer {
-        return AudioRecorderPlayer(mediaToolsProvider, audioFile)
+    @Provides @Singleton fun providesAudioRecorderPlayer(mediaToolsProvider: MediaToolsProvider, audioFile: File): AudioRecorderPlayer = AudioRecorderPlayer(mediaToolsProvider, audioFile)
 
-    }
+    @Provides fun providesRecorder(audioRecorderPlayer: AudioRecorderPlayer): Recorder = audioRecorderPlayer
 
-    @Provides
-    fun providesRecorder(audioRecorderPlayer: AudioRecorderPlayer): Recorder {
-        return audioRecorderPlayer
-    }
-
-    @Provides
-    fun providesPlayer(audioRecorderPlayer: AudioRecorderPlayer): Player {
-        return audioRecorderPlayer
-    }
+    @Provides fun providesPlayer(audioRecorderPlayer: AudioRecorderPlayer): Player = audioRecorderPlayer
 
     companion object {
         val DURATION_IN_MILLIS = 5 * 1000L
