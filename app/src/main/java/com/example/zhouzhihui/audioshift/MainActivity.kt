@@ -139,6 +139,7 @@ class MainActivity : BaseActivity() {
                         override fun onClick(v: View?) {
                             super.onClick(v)
                             saveRecordFile(recorder?.getRecordFile(), mSaveRecordFileDialog?.mRootView?.findViewById<CoolEditText>(R.id.et_audio_file_name)?.text?.toString())
+                            tv_match_voice_count.text = getRecordedFileNum(recorder?.getRecordFile())
                         }
                     })
                     ?.withDuration(300)
@@ -178,7 +179,7 @@ class MainActivity : BaseActivity() {
     }
 
     private fun setAudioTakeButton() {
-        Log.i(TAG, "${recorder} ${recorder?.isRecording()} ${durationInMillis}")
+        tv_match_voice_count.text = getRecordedFileNum(recorder?.getRecordFile())
         autio_take_circle.setOnTouchListener(View.OnTouchListener { v, event ->
             if (event.action == MotionEvent.ACTION_DOWN) {
                 bigger(v, 50)
@@ -250,18 +251,18 @@ class MainActivity : BaseActivity() {
         mCountDownTimer?.cancel()
         mCountDownTimer = null
         takeIf { isRecording() }?.run {
-            showSaveRecordFileDialog()
-            isRecordingVar = false
-            recorder?.stopRecording()
+            tv_voice_timer?.stop()
+            val sdf = SimpleDateFormat("mm:ss")
+            tv_voice_timer?.text = sdf.format(clipLength)
             clipLength = System.currentTimeMillis() - startTime
             probar_voice_timer?.progress = clipLength.toInt()
             startTime = -1
+            showSaveRecordFileDialog()
+            isRecordingVar = false
+            recorder?.stopRecording()
             audioAnim(isRecordingVar)
 //        elf.setEnabled(true)
 //        santa.setEnabled(true)
-            tv_voice_timer?.stop()
-            val sdf = SimpleDateFormat("mm:ss")
-            tv_voice_timer?.text = sdf.format(clipLength)//"${clipLength / 1000}"
         }
     }
 }

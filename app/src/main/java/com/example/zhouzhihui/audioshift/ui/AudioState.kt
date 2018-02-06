@@ -28,6 +28,13 @@ fun getSaveFileName(tempFile: File?): String = tempFile?.parentFile?.listFiles()
 } ?: "音频文件_1"
 
 /**
+ * 已经录音的文件数量，不包括临时文件
+ */
+fun getRecordedFileNum(tempFile: File?): String = tempFile?.parentFile?.listFiles()?.filter { it.absolutePath != tempFile.absolutePath }?.run {
+    "$size"
+} ?: "0"
+
+/**
  * 从一个文件列表中找出后缀是数字的最大的数字，比如文件列表：音频文件_000121、音频文件_289、音频文件、音频文件_111，那么返回结果是289
  */
 fun getMaxNum(list: List<File>?): Int = list?.run {
