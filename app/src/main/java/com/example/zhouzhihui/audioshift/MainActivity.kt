@@ -145,9 +145,7 @@ class MainActivity : BaseActivity() {
                     ?.withDismissListener(object : CoolDialog.CoolDialogDismissListener(mSaveRecordFileDialog) {
                         override fun onDismiss(dialog: DialogInterface?) {
                             super.onDismiss(dialog)
-                            probar_voice_timer?.max = durationInMillis.toInt()
-                            probar_voice_timer?.progress = 0
-                            tv_voice_timer?.base = SystemClock.elapsedRealtime()
+                            onDialogDismiss()
                         }
                     })
                     ?.withCancelable(false)
@@ -168,8 +166,15 @@ class MainActivity : BaseActivity() {
                 mSaveRecordFileDialog?.show()
             } else {
                 Toast.makeText(this@MainActivity, "录音失败", Toast.LENGTH_SHORT).show()
+                onDialogDismiss()
             }
         }
+    }
+
+    fun onDialogDismiss() {
+        probar_voice_timer?.max = durationInMillis.toInt()
+        probar_voice_timer?.progress = 0
+        tv_voice_timer?.base = SystemClock.elapsedRealtime()
     }
 
     private fun setAudioTakeButton() {

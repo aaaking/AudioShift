@@ -2,8 +2,10 @@ package com.example.zhouzhihui.audioshift.ui
 
 import android.graphics.drawable.Animatable
 import android.text.TextUtils
+import android.util.Log
 import android.widget.ImageView
 import com.example.zhouzhihui.audioshift.R
+import com.example.zhouzhihui.audioshift.TAG
 import java.io.File
 
 /**
@@ -21,6 +23,7 @@ fun saveRecordFile(tempFile: File?, saveFileName: String?) = tempFile?.takeIf { 
 }
 
 fun getSaveFileName(tempFile: File?): String = tempFile?.parentFile?.listFiles()?.filter { it.absolutePath != tempFile.absolutePath }?.run {
+    Log.i(TAG, "$size   ${getMaxNum(this)}")
     "音频文件_${Math.max(size, getMaxNum(this)) + 1}"
 } ?: "音频文件_1"
 
@@ -34,13 +37,19 @@ fun getMaxNum(list: List<File>?): Int = list?.run {
 } ?: 0
 
 /**
- * 返回文件后缀的数字部分，比如文件：音频文件_0001，那么返回1
+ * 返回文件后缀的数字部分，比如文件：音频文件_0001，那么返回1    音频文件_1000，那么返回1000
  */
 fun findDigit(file: File?): Int = file?.name?.run {
-    StringBuilder("0").let {
+    var value = 0
+    StringBuilder().let {
         (length - 1 downTo 0)
                 .takeWhile { get(it).isDigit() == true }
                 .forEach { i -> it.append(get(i)) }
-        it.toString().toInt().toString().reversed().toInt()
+        with(it.toString()) {
+            if (isEmpty()) 0 else {
+                (length - 1 downTo 0).forEach { value += get(it).toString().toInt() * 10 * it }
+                value
+            }
+        }
     }
 } ?: 0
