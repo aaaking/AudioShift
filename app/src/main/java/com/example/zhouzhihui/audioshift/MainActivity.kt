@@ -97,55 +97,57 @@ class MainActivity : BaseActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    private fun showAboutDialog() =
-            if (mAboutDialog == null) {
-                val myMessage = Html.fromHtml("app制作人：黑山<br>邮箱: <a href=\"mailto:1059084407@qq.com\">1059084407@qq.com</a><br>简书: <a href=\"https://www.jianshu.com/u/0b651536da90\">宛丘之上兮</a>")
+    private fun showAboutDialog() = run {
+        if (mAboutDialog == null) {
+            val myMessage = Html.fromHtml("app制作人：黑山<br>邮箱: <a href=\"mailto:1059084407@qq.com\">1059084407@qq.com</a><br>简书: <a href=\"https://www.jianshu.com/u/0b651536da90\">宛丘之上兮</a>")
 //                val myMessage = Html.fromHtml(resources.getString(R.string.about_msg))
-                var extraStr = TextView(this)
-                var padding = ScreenUtil.dp2px(this, 20f)
-                extraStr.setText(R.string.about_app_public_wx)
-                extraStr.setTextColor(Color.WHITE)
-                extraStr.setPadding(0, padding, 0, padding / 3)
-                var extraImg = ImageView(this)
-                extraImg.setImageResource(R.mipmap.wx_public)
-                var lp = FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-                lp.gravity = Gravity.CENTER
+            var extraStr = TextView(this)
+            var padding = ScreenUtil.dp2px(this, 20f)
+            extraStr.setText(R.string.about_app_public_wx)
+            extraStr.setTextColor(Color.WHITE)
+            extraStr.setPadding(0, padding, 0, padding / 3)
+            var extraImg = ImageView(this)
+            extraImg.setImageResource(R.mipmap.wx_public)
+            var lp = FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+            lp.gravity = Gravity.CENTER
 
-                mAboutDialog = CoolDialog(this)
-                mAboutDialog?.withIcon(R.drawable.icon)
-                        ?.withTitle(resources.getString(R.string.about_app))
-                        ?.withMsg(myMessage)
-                        ?.withContentCustom(null, R.layout.layout_dialog_content_custom)
-                        ?.withContentCustom(extraStr)
-                        ?.withContentCustom(extraImg)
-                        ?.withPositiveBtn(resources.getString(android.R.string.yes))
-                        ?.withDuration(500)
-                        ?.withCoolStyle(CoolStyle(mAboutDialog?.mRootView))
-                        ?.show()
-            } else {
-                mAboutDialog?.show()
-            }
+            mAboutDialog = CoolDialog(this)
+            mAboutDialog?.withIcon(R.drawable.icon)
+                    ?.withTitle(resources.getString(R.string.about_app))
+                    ?.withMsg(myMessage)
+                    ?.withContentCustom(null, R.layout.layout_dialog_content_custom)
+                    ?.withContentCustom(extraStr)
+                    ?.withContentCustom(extraImg)
+                    ?.withPositiveBtn(resources.getString(android.R.string.yes))
+                    ?.withDuration(500)
+                    ?.withCoolStyle(CoolStyle(mAboutDialog?.mRootView))
+        }
+        if (!isDestroyed && !isFinishing) {
+            mAboutDialog?.show()
+        }
+    }
 
-    private fun showSaveRecordFileDialog() =
-            if (mSaveRecordFileDialog == null) {
-                mSaveRecordFileDialog = CoolDialog(this)
-                mSaveRecordFileDialog?.withIcon(R.drawable.icon)
-                        ?.withTitle(resources.getString(R.string.save_record_file_title))
-                        ?.withMsg(resources.getString(R.string.save_record_file_msg))
-                        ?.withContentCustom(null, R.layout.layout_dialog_content_custom)
-                        ?.withNegativeBtn(resources.getString(android.R.string.no))
-                        ?.withPositiveBtn(resources.getString(R.string.save), mSaveRecordFileDialog?.btnPositiveBg, object : CoolDialog.CoolDialogClickListener(mSaveRecordFileDialog) {
-                            override fun onClick(v: View?) {
-                                super.onClick(v)
-                                saveRecordFile(null)
-                            }
-                        })
-                        ?.withDuration(300)
-                        ?.withCoolStyle(CoolStyle(mSaveRecordFileDialog?.mRootView, COOL_STYLE_ROTATE))
-                        ?.show()
-            } else {
-                mSaveRecordFileDialog?.show()
-            }
+    private fun showSaveRecordFileDialog() = run {
+        if (mSaveRecordFileDialog == null) {
+            mSaveRecordFileDialog = CoolDialog(this)
+            mSaveRecordFileDialog?.withIcon(R.drawable.icon)
+                    ?.withTitle(resources.getString(R.string.save_record_file_title))
+                    ?.withMsg(resources.getString(R.string.save_record_file_msg))
+                    ?.withContentCustom(null, R.layout.layout_dialog_content_custom)
+                    ?.withNegativeBtn(resources.getString(android.R.string.no))
+                    ?.withPositiveBtn(resources.getString(R.string.save), mSaveRecordFileDialog?.btnPositiveBg, object : CoolDialog.CoolDialogClickListener(mSaveRecordFileDialog) {
+                        override fun onClick(v: View?) {
+                            super.onClick(v)
+                            saveRecordFile(null)
+                        }
+                    })
+                    ?.withDuration(300)
+                    ?.withCoolStyle(CoolStyle(mSaveRecordFileDialog?.mRootView, COOL_STYLE_ROTATE))
+        }
+        if (!isDestroyed && !isFinishing) {
+            mSaveRecordFileDialog?.show()
+        }
+    }
 
     private fun setAudioTakeButton() {
         autio_take_circle.setOnTouchListener(View.OnTouchListener { v, event ->
@@ -222,6 +224,8 @@ class MainActivity : BaseActivity() {
     }
 
     fun stopRecording() {
+        mCountDownTimer?.cancel()
+        mCountDownTimer = null
         if (!isRecording()) {
             return
         }
@@ -239,7 +243,5 @@ class MainActivity : BaseActivity() {
         val sdf = SimpleDateFormat("mm:ss")
         tv_voice_timer?.text = sdf.format(clipLength)//"${clipLength / 1000}"
         showSaveRecordFileDialog()
-        mCountDownTimer?.cancel()
-        mCountDownTimer = null
     }
 }

@@ -21,36 +21,42 @@ import dagger.Provides
 @Module
 class MainModule(val application: AudioApp) {
 
-    @Provides @Singleton fun providesContext(): Context = application
+    @Provides
+    @Singleton
+    fun providesContext(): Context = application
 
-    @Provides @Singleton fun providesMediaToolsProvider(): MediaToolsProvider = MediaToolsProvider()
+    @Provides
+    @Singleton
+    fun providesMediaToolsProvider(): MediaToolsProvider = MediaToolsProvider()
 
-    @Provides fun providesDurationInMillis(): Long = DURATION_IN_MILLIS
+    @Provides
+    fun providesDurationInMillis(): Long = DURATION_IN_MILLIS
 
-    @Provides fun providesAudioFile(context: Context): File {
+    @Provides
+    fun providesAudioFile(context: Context): File {
         val file = File(providesRootPath(context), AUDIO_DIRECTORY + File.separator + AUDIO_FILENAME)
         var result = file.parentFile.mkdirs()
         Log.i(TAG, "file.mkdirs() result: ${result} ${file.exists()}")
         return file
     }
 
-    @Provides fun providesRootPath(context: Context): String {
-        var rootPath = ""
-        if (Environment.MEDIA_MOUNTED == Environment.getExternalStorageState() || !Environment.isExternalStorageRemovable()) {//sd卡能用
-            rootPath = context.getExternalFilesDir(null).path
-        } else {//sd卡不能用
-            if (context.filesDir != null) {
-                rootPath = context.filesDir.path
+    @Provides
+    fun providesRootPath(context: Context): String =
+            if (Environment.MEDIA_MOUNTED == Environment.getExternalStorageState() || !Environment.isExternalStorageRemovable()) {//sd卡能用
+                context.getExternalFilesDir(null).path
+            } else {//sd卡不能用
+                context.filesDir.path
             }
-        }
-        return rootPath
-    }
 
-    @Provides @Singleton fun providesAudioRecorderPlayer(mediaToolsProvider: MediaToolsProvider, audioFile: File): AudioRecorderPlayer = AudioRecorderPlayer(mediaToolsProvider, audioFile)
+    @Provides
+    @Singleton
+    fun providesAudioRecorderPlayer(mediaToolsProvider: MediaToolsProvider, audioFile: File): AudioRecorderPlayer = AudioRecorderPlayer(mediaToolsProvider, audioFile)
 
-    @Provides fun providesRecorder(audioRecorderPlayer: AudioRecorderPlayer): Recorder = audioRecorderPlayer
+    @Provides
+    fun providesRecorder(audioRecorderPlayer: AudioRecorderPlayer): Recorder = audioRecorderPlayer
 
-    @Provides fun providesPlayer(audioRecorderPlayer: AudioRecorderPlayer): Player = audioRecorderPlayer
+    @Provides
+    fun providesPlayer(audioRecorderPlayer: AudioRecorderPlayer): Player = audioRecorderPlayer
 
     companion object {
         val DURATION_IN_MILLIS = 5 * 1000L
