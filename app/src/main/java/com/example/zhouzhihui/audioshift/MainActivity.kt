@@ -211,6 +211,7 @@ class MainActivity : BaseActivity() {
     override fun onSaveInstanceState(outState: Bundle?) {
         super.onSaveInstanceState(outState)
         outState?.putBoolean("aboutDialog", mAboutDialog?.isShowing ?: false)
+        // todo save state
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
