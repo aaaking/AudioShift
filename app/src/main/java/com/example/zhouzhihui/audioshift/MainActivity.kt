@@ -11,16 +11,12 @@ import android.os.Bundle
 import android.os.CountDownTimer
 import android.os.SystemClock
 import android.provider.Settings
-import android.support.design.widget.TextInputLayout
 import android.support.v4.app.ActivityCompat
 import android.support.v7.widget.Toolbar
 import android.text.Html
 import android.util.Log
 import android.view.*
-import android.widget.FrameLayout
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
+import android.widget.*
 import com.example.zhouzhihui.audioshift.record.Recorder
 import com.example.zhouzhihui.audioshift.ui.*
 import com.example.zhouzhihui.audioshift.util.ScreenUtil
@@ -167,8 +163,12 @@ class MainActivity : BaseActivity() {
             }
         }
         if (!isDestroyed && !isFinishing) {
-            mSaveRecordFileDialog?.mRootView?.findViewById<CoolEditText>(R.id.et_audio_file_name)?.setText(getSaveFileName(recorder?.getRecordFile()))
-            mSaveRecordFileDialog?.show()
+            if (recorder?.getRecordFile()?.length() ?: 0 > 0) {
+                mSaveRecordFileDialog?.mRootView?.findViewById<CoolEditText>(R.id.et_audio_file_name)?.setText(getSaveFileName(recorder?.getRecordFile()))
+                mSaveRecordFileDialog?.show()
+            } else {
+                Toast.makeText(this@MainActivity, "录音失败", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
