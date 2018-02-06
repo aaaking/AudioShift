@@ -10,7 +10,11 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.provider.Settings
+import android.support.annotation.NonNull
+import android.support.design.widget.NavigationView
 import android.support.v4.app.ActivityCompat
+import android.support.v4.view.GravityCompat
+import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.widget.Toolbar
 import android.text.Html
 import android.util.Log
@@ -28,10 +32,14 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import java.text.SimpleDateFormat
 import javax.inject.Inject
+import android.support.v4.widget.DrawerLayout
+import android.widget.Toast
+
+
 
 val PERMISSIONS = arrayOf(Manifest.permission.INTERNET, Manifest.permission.RECORD_AUDIO, Manifest.permission.MODIFY_AUDIO_SETTINGS, Manifest.permission.WRITE_EXTERNAL_STORAGE)
 val PERMISSIONS_CODE = 1
-class MainActivity : BaseActivity() {
+class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
     var mAboutDialog: CoolDialog? = null
     var mCountDownTimer: CountDownTimer? = null
     var mSaveRecordFileDialog: CoolDialog? = null
@@ -45,7 +53,38 @@ class MainActivity : BaseActivity() {
         if (!hasRequiredPermissions()) {
             requestRequiredPermissions(null)
         }
-        (toolbar as? Toolbar)?.apply { setToolbar(this,  R.drawable.icon) }
+        (toolbar as? Toolbar)?.apply { setToolbar(this,  R.drawable.icon, drawer_layout) }
+        nav_view.setNavigationItemSelectedListener(this)
+        nav_view_right.setNavigationItemSelectedListener(object : NavigationView.OnNavigationItemSelectedListener {
+            override fun onNavigationItemSelected(@NonNull item: MenuItem): Boolean {
+                when (item.itemId) {
+                    R.id.nav_camera_right -> {
+                        // Handle the camera action
+                    }
+                    R.id.nav_gallery_right -> {
+
+                    }
+                    R.id.nav_slideshow_right -> {
+
+                    }
+                    R.id.nav_manage_right -> {
+
+                    }
+                    R.id.nav_share_right -> {
+
+                    }
+                    R.id.nav_send_right -> {
+
+                    }
+                }
+
+                Toast.makeText(this@MainActivity, "Handle from navigation right", Toast.LENGTH_SHORT).show()
+                val drawer = findViewById<View>(R.id.drawer_layout) as DrawerLayout
+                drawer.closeDrawer(GravityCompat.END)
+                return true
+
+            }
+        })
     }
 
     override fun onResume() {
@@ -96,6 +135,41 @@ class MainActivity : BaseActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onBackPressed() {
+        when {
+            drawer_layout.isDrawerOpen(GravityCompat.START) -> drawer_layout.closeDrawer(GravityCompat.START)
+            drawer_layout.isDrawerOpen(GravityCompat.END) -> drawer_layout.closeDrawer(GravityCompat.END)
+            else -> super.onBackPressed()
+        }
+    }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.nav_camera -> {
+                // Handle the camera action
+            }
+            R.id.nav_gallery -> {
+
+            }
+            R.id.nav_slideshow -> {
+
+            }
+            R.id.nav_manage -> {
+
+            }
+            R.id.nav_share -> {
+
+            }
+            R.id.nav_send -> {
+
+            }
+        }
+        Toast.makeText(this@MainActivity, "Handle from navigation left", Toast.LENGTH_SHORT).show()
+        val drawer = findViewById<View>(R.id.drawer_layout) as DrawerLayout
+        drawer.closeDrawer(GravityCompat.START)
+        return true
     }
 
     private fun showAboutDialog() = run {
@@ -211,7 +285,7 @@ class MainActivity : BaseActivity() {
     override fun onSaveInstanceState(outState: Bundle?) {
         super.onSaveInstanceState(outState)
         outState?.putBoolean("aboutDialog", mAboutDialog?.isShowing ?: false)
-        // todo save state
+        // todo 1 save state  2 record failed
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle?) {

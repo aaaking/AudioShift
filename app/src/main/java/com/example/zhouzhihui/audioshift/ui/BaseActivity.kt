@@ -3,6 +3,8 @@ package com.example.zhouzhihui.audioshift.ui
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
+import android.support.v4.view.GravityCompat
+import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.app.AppCompatDelegate
 import android.support.v7.widget.Toolbar
@@ -47,7 +49,7 @@ open class BaseActivity : AppCompatActivity() {
         }
     }
 
-    fun setToolbar(toolbar: Toolbar, resId: Int) {
+    fun setToolbar(toolbar: Toolbar, resId: Int, drawer_layout: DrawerLayout) {
         val iconWidth = resources.getDimensionPixelOffset(R.dimen.dialog_icon_width)
         val iconLeftMargin = ScreenUtil.dp2px(this, 7f)
         val logo = resources.getDrawable(resId)
@@ -70,6 +72,13 @@ open class BaseActivity : AppCompatActivity() {
                         child.x = iconLeftMargin.toFloat()
                         right = child.right
                         Log.i(com.example.zhouzhihui.audioshift.TAG, "imageview right : ${child.right}")
+                        child.setOnClickListener {
+                            if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
+                                drawer_layout.closeDrawer(GravityCompat.START)
+                            } else {
+                                drawer_layout.openDrawer(GravityCompat.START)
+                            }
+                        }
                     } else if (child is TextView) {
                         Log.i(com.example.zhouzhihui.audioshift.TAG, "textview x : ${iconLeftMargin.toFloat() * 2 + iconWidth}")
                         child.x = iconLeftMargin.toFloat() * 3 + iconWidth * 2
