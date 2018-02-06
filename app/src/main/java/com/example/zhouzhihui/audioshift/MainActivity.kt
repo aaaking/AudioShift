@@ -6,6 +6,7 @@ import android.content.pm.PackageManager
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.os.SystemClock
 import android.provider.Settings
 import android.support.v4.app.ActivityCompat
@@ -16,7 +17,6 @@ import android.view.*
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import com.example.zhouzhihui.audioshift.record.Recorder
 import com.example.zhouzhihui.audioshift.ui.*
 import com.example.zhouzhihui.audioshift.util.ScreenUtil
@@ -25,16 +25,14 @@ import com.zzh.cooldialog.COOL_STYLE_ROTATE
 import com.zzh.cooldialog.CoolDialog
 import com.zzh.cooldialog.CoolStyle
 import kotlinx.android.synthetic.main.activity_main.*
-import java.text.DateFormat
 import java.text.SimpleDateFormat
-import java.time.format.DateTimeFormatter
 import javax.inject.Inject
 
-val UPDATE_INTERVAL = 12L
 val PERMISSIONS = arrayOf(Manifest.permission.INTERNET, Manifest.permission.RECORD_AUDIO, Manifest.permission.MODIFY_AUDIO_SETTINGS, Manifest.permission.WRITE_EXTERNAL_STORAGE)
 val PERMISSIONS_CODE = 1
 class MainActivity : BaseActivity() {
     var mAboutDialog: CoolDialog? = null
+    var mCountDownTimer: CountDownTimer? = null
     var mSaveRecordFileDialog: CoolDialog? = null
     private fun hasRequiredPermissions(): Boolean = PERMISSIONS.none { ActivityCompat.checkSelfPermission(this, it) != PackageManager.PERMISSION_GRANTED }
     fun requestRequiredPermissions(view: View?) = ActivityCompat.requestPermissions(this, PERMISSIONS, PERMISSIONS_CODE)
@@ -202,22 +200,34 @@ class MainActivity : BaseActivity() {
         recorder?.startRecording()
         isRecordingVar = true
         startTime = System.currentTimeMillis()
-        audio_take?.postDelayed(stopRecordingRunnable, durationInMillis)
         probar_voice_timer?.max = durationInMillis.toInt()
-        probar_voice_timer?.postDelayed(updateRecordStatusRunnable, UPDATE_INTERVAL)
         audioAnim(isRecordingVar)
         //
         tv_voice_timer?.base = SystemClock.elapsedRealtime()
         tv_voice_timer?.start()
+        if (mCountDownTimer == null) {
+            mCountDownTimer = object : CountDownTimer(durationInMillis, 10) {
+                override fun onFinish() {
+                    if (isRecording()) {
+                        stopRecording()
+                        probar_voice_timer?.progress = durationInMillis.toInt()
+                    }
+                }
+                override fun onTick(millisUntilFinished: Long) {
+                    probar_voice_timer?.progress = (System.currentTimeMillis() - startTime).toInt()
+                }
+            }
+        }
+        mCountDownTimer?.start()
     }
 
     fun stopRecording() {
+        if (!isRecording()) {
+            return
+        }
         isRecordingVar = false
         recorder?.stopRecording()
-        audio_take?.removeCallbacks(stopRecordingRunnable)
-        probar_voice_timer?.removeCallbacks(updateRecordStatusRunnable)
         clipLength = System.currentTimeMillis() - startTime
-//        probar_voice_timer.max = clipLength.toInt()
         probar_voice_timer?.progress = clipLength.toInt()
         startTime = -1
         audioAnim(isRecordingVar)
@@ -229,19 +239,7 @@ class MainActivity : BaseActivity() {
         val sdf = SimpleDateFormat("mm:ss")
         tv_voice_timer?.text = sdf.format(clipLength)//"${clipLength / 1000}"
         showSaveRecordFileDialog()
-    }
-
-    private val stopRecordingRunnable = Runnable {
-        if (isRecording()) {
-            stopRecording()
-            probar_voice_timer?.progress = durationInMillis.toInt()
-        }
-    }
-
-    private val updateRecordStatusRunnable = object : Runnable {
-        override fun run() {
-            probar_voice_timer?.progress = (System.currentTimeMillis() - startTime).toInt()
-            probar_voice_timer?.postDelayed(this, UPDATE_INTERVAL)
-        }
+        mCountDownTimer?.cancel()
+        mCountDownTimer = null
     }
 }
