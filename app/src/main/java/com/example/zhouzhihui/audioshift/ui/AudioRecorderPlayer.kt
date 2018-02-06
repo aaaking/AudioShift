@@ -13,13 +13,9 @@ class AudioRecorderPlayer(val mediaToolsProvider: MediaToolsProvider, val file: 
 
     var mSpeed = 1f
 
-    override fun isRecording(): Boolean {
-        return audioRecorder != null && audioRecorder!!.isRecording()
-    }
+    override fun isRecording(): Boolean = audioRecorder?.isRecording() ?: false
 
-    override fun hasRecording(): Boolean {
-        return file.exists()
-    }
+    override fun hasRecording(): Boolean = audioRecorder?.hasRecording() ?: false
 
     override fun startRecording() {
         val audioRecord = mediaToolsProvider.audioRecord
@@ -28,15 +24,11 @@ class AudioRecorderPlayer(val mediaToolsProvider: MediaToolsProvider, val file: 
     }
 
     override fun stopRecording() {
-        if (audioRecorder != null) {
-            audioRecorder!!.stopRecording()
-        }
+        audioRecorder?.stopRecording()
         audioRecorder = null
     }
 
-    override fun isPlaying(): Boolean {
-        return audioPlayer != null && audioPlayer!!.isPlaying()
-    }
+    override fun isPlaying(): Boolean = audioPlayer?.isPlaying() ?: false
 
     override fun startPlaying() {
         val fileSize = file.length()

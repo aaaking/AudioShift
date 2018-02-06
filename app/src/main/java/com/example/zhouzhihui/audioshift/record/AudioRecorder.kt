@@ -9,13 +9,9 @@ class AudioRecorder(val audioRecord: AudioRecord, val file: File) : Recorder {
     var recorderThread: Thread? = null
     var recorderTask: AudioRecorderTask? = null
 
-    override fun isRecording(): Boolean {
-        return recorderThread != null
-    }
+    override fun isRecording(): Boolean = recorderThread != null
 
-    override fun hasRecording(): Boolean {
-        return file.exists() && file.length() > 0
-    }
+    override fun hasRecording(): Boolean = fileHasContent(file.parentFile)
 
     override fun startRecording() {
         recorderTask = AudioRecorderTask(audioRecord, file)
@@ -30,4 +26,11 @@ class AudioRecorder(val audioRecord: AudioRecord, val file: File) : Recorder {
         recorderThread = null
         recorderTask = null
     }
+
+    private tailrec fun fileHasContent(fileP: File?): Boolean =
+            when {
+                fileP == null -> false
+                fileP.isDirectory -> fileP.listFiles()?.any { it.length() > 0 } ?: false
+                else -> fileHasContent(fileP.parentFile)
+            }
 }
