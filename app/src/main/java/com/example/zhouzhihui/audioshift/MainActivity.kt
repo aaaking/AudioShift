@@ -25,6 +25,7 @@ import com.zzh.cooldialog.CoolDialog
 import com.zzh.cooldialog.CoolStyle
 import com.zzh.ui.cooledittext.CoolEditText
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.app_bar_main.*
 import java.text.SimpleDateFormat
 import javax.inject.Inject
 
