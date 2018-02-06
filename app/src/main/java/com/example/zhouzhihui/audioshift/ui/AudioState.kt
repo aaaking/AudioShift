@@ -47,7 +47,7 @@ fun findDigit(file: File?): Int = file?.name?.run {
                 .forEach { i -> it.append(get(i)) }
         with(it.toString()) {
             if (isEmpty()) 0 else {
-                (length - 1 downTo 0).forEach { value += get(it).toString().toInt() * 10 * it }
+                (length - 1 downTo 0).forEach { value += get(it).toString().toInt() * Math.pow(10.0, it.toDouble()).toInt() }
                 value
             }
         }
