@@ -1,6 +1,7 @@
 package com.example.zhouzhihui.audioshift.ui
 
 import android.graphics.drawable.Animatable
+import android.text.TextUtils
 import android.util.Log
 import android.widget.ImageView
 import android.widget.Toast
@@ -19,7 +20,6 @@ fun startBtnPlayAnimation(imageView: ImageView?, startAnim: Boolean) = imageView
     (drawable as? Animatable)?.start()
 }
 
-fun saveRecordFile(tempFile: File?, saveFileName: String?) {
-    Toast.makeText(AudioApp.sAppContext, "saveRecordFile", Toast.LENGTH_SHORT).show()
-    Log.i(TAG, "${tempFile?.absolutePath}  ${saveFileName}")
+fun saveRecordFile(tempFile: File?, saveFileName: String?) = tempFile?.takeIf { tempFile.length() > 0 && !TextUtils.isEmpty(saveFileName) }?.run {
+    tempFile.renameTo(File(tempFile.parentFile.absolutePath + File.separator + saveFileName))
 }
