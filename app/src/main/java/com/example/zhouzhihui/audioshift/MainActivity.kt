@@ -142,6 +142,8 @@ class MainActivity : BaseActivity() {
                         }
                     })
                     ?.withDuration(300)
+                    ?.withCancelable(false)
+                    ?.withCanceledOnTouchOutside(false)
                     ?.withCoolStyle(CoolStyle(mSaveRecordFileDialog?.mRootView, COOL_STYLE_ROTATE))
         }
         if (!isDestroyed && !isFinishing) {
@@ -204,7 +206,6 @@ class MainActivity : BaseActivity() {
         startTime = System.currentTimeMillis()
         probar_voice_timer?.max = durationInMillis.toInt()
         audioAnim(isRecordingVar)
-        //
         tv_voice_timer?.base = SystemClock.elapsedRealtime()
         tv_voice_timer?.start()
         if (mCountDownTimer == null) {
@@ -226,22 +227,20 @@ class MainActivity : BaseActivity() {
     fun stopRecording() {
         mCountDownTimer?.cancel()
         mCountDownTimer = null
-        if (!isRecording()) {
-            return
-        }
-        isRecordingVar = false
-        recorder?.stopRecording()
-        clipLength = System.currentTimeMillis() - startTime
-        probar_voice_timer?.progress = clipLength.toInt()
-        startTime = -1
-        audioAnim(isRecordingVar)
+        takeIf { isRecording() }?.run {
+            isRecordingVar = false
+            recorder?.stopRecording()
+            clipLength = System.currentTimeMillis() - startTime
+            probar_voice_timer?.progress = clipLength.toInt()
+            startTime = -1
+            audioAnim(isRecordingVar)
 //        setButtonState()
 //        elf.setEnabled(true)
 //        santa.setEnabled(true)
-        //
-        tv_voice_timer?.stop()
-        val sdf = SimpleDateFormat("mm:ss")
-        tv_voice_timer?.text = sdf.format(clipLength)//"${clipLength / 1000}"
-        showSaveRecordFileDialog()
+            tv_voice_timer?.stop()
+            val sdf = SimpleDateFormat("mm:ss")
+            tv_voice_timer?.text = sdf.format(clipLength)//"${clipLength / 1000}"
+            showSaveRecordFileDialog()
+        }
     }
 }
