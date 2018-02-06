@@ -10,7 +10,7 @@ class AudioRecorder(val audioRecord: AudioRecord, val file: File) : Recorder {
     var recorderTask: AudioRecorderTask? = null
 
     override fun isRecording(): Boolean {
-        return recorderThread != null && recorderThread!!.isAlive
+        return recorderThread != null
     }
 
     override fun hasRecording(): Boolean {
