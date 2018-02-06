@@ -44,7 +44,7 @@ class MainActivity : BaseActivity() {
         if (!hasRequiredPermissions()) {
             requestRequiredPermissions(null)
         }
-        (toolbar as Toolbar)?.apply { setToolbar(this as Toolbar,  R.drawable.icon) }
+        (toolbar as? Toolbar)?.apply { setToolbar(this,  R.drawable.icon) }
     }
 
     override fun onResume() {
