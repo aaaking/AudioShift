@@ -36,7 +36,7 @@ class MainModule(val application: AudioApp) {
     fun providesAudioFile(context: Context): File {
         val file = File(providesRootPath(context), AUDIO_DIRECTORY + File.separator + AUDIO_FILENAME)
         var result = file.parentFile.mkdirs()
-        Log.i(TAG, "file.mkdirs() result: ${result} ${file.exists()}")
+        Log.i(TAG, "file.mkdirs() result: ${result} ${file.exists()} ${file.name} ${file.path}")
         return file
     }
 

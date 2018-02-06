@@ -167,7 +167,7 @@ class MainActivity : BaseActivity() {
             }
         }
         if (!isDestroyed && !isFinishing) {
-            mSaveRecordFileDialog?.mRootView?.findViewById<CoolEditText>(R.id.et_audio_file_name)?.setText("ogiwaheoigh")
+            mSaveRecordFileDialog?.mRootView?.findViewById<CoolEditText>(R.id.et_audio_file_name)?.setText(getSaveFileName(recorder?.getRecordFile()))
             mSaveRecordFileDialog?.show()
         }
     }

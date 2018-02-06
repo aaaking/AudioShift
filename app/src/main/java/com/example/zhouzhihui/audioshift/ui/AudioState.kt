@@ -2,12 +2,8 @@ package com.example.zhouzhihui.audioshift.ui
 
 import android.graphics.drawable.Animatable
 import android.text.TextUtils
-import android.util.Log
 import android.widget.ImageView
-import android.widget.Toast
-import com.example.zhouzhihui.audioshift.AudioApp
 import com.example.zhouzhihui.audioshift.R
-import com.example.zhouzhihui.audioshift.TAG
 import java.io.File
 
 /**
@@ -23,3 +19,28 @@ fun startBtnPlayAnimation(imageView: ImageView?, startAnim: Boolean) = imageView
 fun saveRecordFile(tempFile: File?, saveFileName: String?) = tempFile?.takeIf { tempFile.length() > 0 && !TextUtils.isEmpty(saveFileName) }?.run {
     tempFile.renameTo(File(tempFile.parentFile.absolutePath + File.separator + saveFileName))
 }
+
+fun getSaveFileName(tempFile: File?): String = tempFile?.parentFile?.listFiles()?.filter { it.absolutePath != tempFile.absolutePath }?.run {
+    "音频文件_${Math.max(size, getMaxNum(this)) + 1}"
+} ?: "音频文件_1"
+
+/**
+ * 从一个文件列表中找出后缀是数字的最大的数字，比如文件列表：音频文件_000121、音频文件_289、音频文件、音频文件_111，那么返回结果是289
+ */
+fun getMaxNum(list: List<File>?): Int = list?.run {
+    var maxValue = 0
+    list.map { it -> findDigit(it) }.asSequence().filter { it > maxValue }.forEach { maxValue = it }
+    return maxValue
+} ?: 0
+
+/**
+ * 返回文件后缀的数字部分，比如文件：音频文件_0001，那么返回1
+ */
+fun findDigit(file: File?): Int = file?.name?.run {
+    StringBuilder("0").let {
+        (length - 1 downTo 0)
+                .takeWhile { get(it).isDigit() == true }
+                .forEach { i -> it.append(get(i)) }
+        it.toString().toInt().toString().reversed().toInt()
+    }
+} ?: 0
