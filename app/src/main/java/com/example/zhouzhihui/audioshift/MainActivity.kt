@@ -55,36 +55,6 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         }
         (toolbar as? Toolbar)?.apply { setToolbar(this,  R.drawable.icon, drawer_layout) }
         nav_view.setNavigationItemSelectedListener(this)
-        nav_view_right.setNavigationItemSelectedListener(object : NavigationView.OnNavigationItemSelectedListener {
-            override fun onNavigationItemSelected(@NonNull item: MenuItem): Boolean {
-                when (item.itemId) {
-                    R.id.nav_camera_right -> {
-                        // Handle the camera action
-                    }
-                    R.id.nav_gallery_right -> {
-
-                    }
-                    R.id.nav_slideshow_right -> {
-
-                    }
-                    R.id.nav_manage_right -> {
-
-                    }
-                    R.id.nav_share_right -> {
-
-                    }
-                    R.id.nav_send_right -> {
-
-                    }
-                }
-
-                Toast.makeText(this@MainActivity, "Handle from navigation right", Toast.LENGTH_SHORT).show()
-                val drawer = findViewById<View>(R.id.drawer_layout) as DrawerLayout
-                drawer.closeDrawer(GravityCompat.END)
-                return true
-
-            }
-        })
     }
 
     override fun onResume() {

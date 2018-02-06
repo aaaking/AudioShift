@@ -28,6 +28,6 @@
         android:layout_height="match_parent"
         android:layout_gravity="end"
         android:fitsSystemWindows="false"
-        app:menu="@menu/activity_main_drawer_right"/>
+        app:headerLayout="@layout/nav_header_right"/>
 
 </android.support.v4.widget.DrawerLayout>
