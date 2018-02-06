@@ -57,11 +57,11 @@ class CoolEditText : TextInputEditText, View.OnTouchListener, TextWatcher,View.O
             removeRightButton()
         } else if (rightType == TYPE_RIGHT_EYE) {
             //输入密码可见
-            if (getTransformationMethod() === android.text.method.PasswordTransformationMethod.getInstance()) {
-                setTransformationMethod(HideReturnsTransformationMethod.getInstance())
+            if (transformationMethod === android.text.method.PasswordTransformationMethod.getInstance()) {
+                transformationMethod = HideReturnsTransformationMethod.getInstance()
                 setRightImage(eyeCloseRes)
             } else {
-                setTransformationMethod(PasswordTransformationMethod.getInstance())
+                transformationMethod = PasswordTransformationMethod.getInstance()
                 setRightImage(eyeOpenRes)
             }
             this.postInvalidate()
