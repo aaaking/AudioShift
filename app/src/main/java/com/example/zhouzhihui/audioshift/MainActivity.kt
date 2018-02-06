@@ -234,7 +234,6 @@ class MainActivity : BaseActivity() {
             probar_voice_timer?.progress = clipLength.toInt()
             startTime = -1
             audioAnim(isRecordingVar)
-//        setButtonState()
 //        elf.setEnabled(true)
 //        santa.setEnabled(true)
             tv_voice_timer?.stop()
