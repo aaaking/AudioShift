@@ -4,6 +4,7 @@ import com.example.zhouzhihui.audioshift.play.AudioPlayer
 import com.example.zhouzhihui.audioshift.play.Player
 import com.example.zhouzhihui.audioshift.record.AudioRecorder
 import com.example.zhouzhihui.audioshift.record.Recorder
+import com.example.zhouzhihui.audioshift.record.fileHasContent
 import java.io.File
 
 class AudioRecorderPlayer(val mediaToolsProvider: MediaToolsProvider, val file: File) : Recorder, Player {
@@ -13,9 +14,11 @@ class AudioRecorderPlayer(val mediaToolsProvider: MediaToolsProvider, val file: 
 
     var mSpeed = 1f
 
+    override fun getRecordFile(): File? = audioRecorder?.getRecordFile() ?: file
+
     override fun isRecording(): Boolean = audioRecorder?.isRecording() ?: false
 
-    override fun hasRecording(): Boolean = audioRecorder?.hasRecording() ?: false
+    override fun hasRecording(): Boolean = audioRecorder?.hasRecording() ?: fileHasContent(file.parentFile)
 
     override fun startRecording() {
         val audioRecord = mediaToolsProvider.audioRecord

@@ -139,7 +139,7 @@ class MainActivity : BaseActivity() {
                     ?.withPositiveBtn(resources.getString(R.string.save), mSaveRecordFileDialog?.btnPositiveBg, object : CoolDialog.CoolDialogClickListener(mSaveRecordFileDialog) {
                         override fun onClick(v: View?) {
                             super.onClick(v)
-                            saveRecordFile(null)
+                            saveRecordFile(recorder?.getRecordFile())
                         }
                     })
                     ?.withDuration(300)

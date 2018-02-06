@@ -5,6 +5,7 @@ import android.media.AudioRecord
 import java.io.File
 
 class AudioRecorder(val audioRecord: AudioRecord, val file: File) : Recorder {
+    override fun getRecordFile(): File? = file
 
     var recorderThread: Thread? = null
     var recorderTask: AudioRecorderTask? = null
@@ -27,10 +28,11 @@ class AudioRecorder(val audioRecord: AudioRecord, val file: File) : Recorder {
         recorderTask = null
     }
 
-    private tailrec fun fileHasContent(fileP: File?): Boolean =
-            when {
-                fileP == null -> false
-                fileP.isDirectory -> fileP.listFiles()?.any { it.length() > 0 } ?: false
-                else -> fileHasContent(fileP.parentFile)
-            }
 }
+
+tailrec fun fileHasContent(fileP: File?): Boolean =
+        when {
+            fileP == null -> false
+            fileP.isDirectory -> fileP.listFiles()?.any { it.length() > 0 } ?: false
+            else -> fileHasContent(fileP.parentFile)
+        }
