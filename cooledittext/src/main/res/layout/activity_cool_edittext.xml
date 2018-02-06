@@ -8,17 +8,17 @@
               android:gravity="center"
               android:orientation="vertical">
 
-    <com.zzh.ui.cooledittext.CoolEditText
+    <android.support.design.widget.TextInputLayout
         android:id="@+id/accountinput"
         app:hintTextAppearance="@style/TextAppearence.App.TextInputLayout"
         android:textColorHint="@color/hintColor"
-        app:cet_icon_delete="@mipmap/icon_edit_delete"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.zzh.ui.cooledittext.MyEditText
+        <com.zzh.ui.cooledittext.CoolEditText
             android:textCursorDrawable="@drawable/bg_cursor"
-            android:id="@+id/account"
+            app:cet_icon_delete="@mipmap/icon_edit_delete"
+            android:id="@+id/et_account"
             android:drawablePadding="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -28,22 +28,22 @@
             android:hint="账户"
             android:text=""/>
 
-    </com.zzh.ui.cooledittext.CoolEditText>
+    </android.support.design.widget.TextInputLayout>
 
-    <com.zzh.ui.cooledittext.CoolEditText
+    <android.support.design.widget.TextInputLayout
         android:id="@+id/passwordinput"
         app:cet_right_type="1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.zzh.ui.cooledittext.MyEditText
+        <com.zzh.ui.cooledittext.CoolEditText
             android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="密码"
             android:singleLine="true"/>
 
-    </com.zzh.ui.cooledittext.CoolEditText>
+    </android.support.design.widget.TextInputLayout>
 
     <Button
         android:id="@+id/account_sign_in_button"

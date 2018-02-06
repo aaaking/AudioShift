@@ -11,6 +11,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cool_edittext)
-        accountinput.setIconResource(R.mipmap.icon_edit_delete)
+        et_account.setIconResource(R.mipmap.icon_edit_delete)
     }
 }

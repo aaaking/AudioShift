@@ -2,7 +2,7 @@ package com.zzh.ui.cooledittext
 
 import android.content.Context
 import android.graphics.drawable.Drawable
-import android.support.design.widget.TextInputLayout
+import android.support.design.widget.TextInputEditText
 import android.text.Editable
 import android.text.TextWatcher
 import android.text.method.HideReturnsTransformationMethod
@@ -19,13 +19,13 @@ import android.view.View
 val TYPE_RIGHT_DEL = 0
 val TYPE_RIGHT_EYE = 1
 val TAG = CoolEditText::class.java.simpleName
-class CoolEditText : TextInputLayout, View.OnTouchListener, TextWatcher,View.OnFocusChangeListener {
+class CoolEditText : TextInputEditText, View.OnTouchListener, TextWatcher,View.OnFocusChangeListener {
     override fun onTouch(v: View?, event: MotionEvent?): Boolean {
-        if (editText?.compoundDrawables?.get(2) == null)
+        if (compoundDrawables?.get(2) == null)
             return false
         if (event?.action != MotionEvent.ACTION_UP)
             return false
-        if (event?.x > (editText?.width ?: 0) - (editText?.paddingRight ?: 0) - rightImage.intrinsicWidth) {
+        if (event?.x > width - paddingRight - rightImage.intrinsicWidth) {
             clickRightBtn()
             return true//点击右边的icon消耗掉此次事件
         }
@@ -53,15 +53,15 @@ class CoolEditText : TextInputLayout, View.OnTouchListener, TextWatcher,View.OnF
     fun clickRightBtn() {
         if (rightType == TYPE_RIGHT_DEL) {
             //删除
-            editText?.setText("")
+            setText("")
             removeRightButton()
         } else if (rightType == TYPE_RIGHT_EYE) {
             //输入密码可见
-            if (editText?.getTransformationMethod() === android.text.method.PasswordTransformationMethod.getInstance()) {
-                editText?.setTransformationMethod(HideReturnsTransformationMethod.getInstance())
+            if (getTransformationMethod() === android.text.method.PasswordTransformationMethod.getInstance()) {
+                setTransformationMethod(HideReturnsTransformationMethod.getInstance())
                 setRightImage(eyeCloseRes)
             } else {
-                editText?.setTransformationMethod(PasswordTransformationMethod.getInstance())
+                setTransformationMethod(PasswordTransformationMethod.getInstance())
                 setRightImage(eyeOpenRes)
             }
             this.postInvalidate()
@@ -97,17 +97,16 @@ class CoolEditText : TextInputLayout, View.OnTouchListener, TextWatcher,View.OnF
         deleteImageRes = ta.getResourceId(R.styleable.CoolEditText_cet_icon_delete, R.mipmap.icon_edit_delete)
         eyeOpenRes = ta.getResourceId(R.styleable.CoolEditText_cet_icon_eye_open, R.mipmap.icon_password_eye_open)
         eyeCloseRes = ta.getResourceId(R.styleable.CoolEditText_cet_icon_eye_close, R.mipmap.icon_password_eye_close)
-        Log.i(TAG, "init editText ${editText}")
+        Log.i(TAG, "init ${this} ")
+        setRightBtnType()
+        setOnTouchListener(this)
+        addTextChangedListener(this)
+        onFocusChangeListener = this
     }
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
-        setRightBtnType()
-        editText?.setOnTouchListener(this)
-//        editText?.setPadding(100, editText?.paddingTop ?: 0, editText?.paddingRight ?: 0, editText?.paddingBottom ?: 0)
-        editText?.addTextChangedListener(this)
-        editText?.onFocusChangeListener = this
-        Log.i(TAG, "onAttachedToWindow editText ${editText}")
+        Log.i(TAG, "onAttachedToWindow ${this} ")
     }
 
     fun setIconResource(id: Int) {
@@ -130,7 +129,7 @@ class CoolEditText : TextInputLayout, View.OnTouchListener, TextWatcher,View.OnF
 
     fun manageImage() {
         if (isShowRightBtn) {
-            if (editText == null || editText?.text.toString() == "" || editText?.isFocused != true)
+            if (text.toString() == "" || !isFocused)
             //增加是否是当前焦点
                 removeRightButton()
             else
@@ -141,11 +140,11 @@ class CoolEditText : TextInputLayout, View.OnTouchListener, TextWatcher,View.OnF
     }
 
     fun removeRightButton() {
-        editText?.setCompoundDrawables(this.icon, editText?.compoundDrawables?.get(1), null, editText?.compoundDrawables?.get(3))
+        setCompoundDrawables(this.icon, compoundDrawables?.get(1), null, compoundDrawables?.get(3))
     }
 
     fun addRightButton() {
-        editText?.setCompoundDrawables(this.icon, editText?.compoundDrawables?.get(1), rightImage, editText?.compoundDrawables?.get(3))
+        setCompoundDrawables(this.icon, compoundDrawables?.get(1), rightImage, compoundDrawables?.get(3))
     }
 
     private fun setRightBtnType() {
