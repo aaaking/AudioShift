@@ -175,10 +175,11 @@ class MainActivity : BaseActivity() {
     fun onDialogDismiss() {
         probar_voice_timer?.max = durationInMillis.toInt()
         probar_voice_timer?.progress = 0
-        tv_voice_timer?.base = SystemClock.elapsedRealtime()
+        tv_voice_timer?.text = "00:00:000"
     }
 
     private fun setAudioTakeButton() {
+        tv_voice_timer?.text = "00:00:000"
         tv_match_voice_count.text = getRecordedFileNum(recorder?.getRecordFile())
         autio_take_circle.setOnTouchListener(View.OnTouchListener { v, event ->
             if (event.action == MotionEvent.ACTION_DOWN) {
@@ -218,7 +219,6 @@ class MainActivity : BaseActivity() {
     }
 
     private var startTime: Long = -1
-    private var clipLength: Long = 0
     var recorder: Recorder? = null @Inject set
     var durationInMillis: Long = 0L @Inject set
     private fun isRecording(): Boolean = recorder?.isRecording() ?: false
@@ -232,16 +232,16 @@ class MainActivity : BaseActivity() {
                 startTime = System.currentTimeMillis()
                 probar_voice_timer?.max = durationInMillis.toInt()
                 audioAnim(isRecording())
-                tv_voice_timer?.base = SystemClock.elapsedRealtime()
-                tv_voice_timer?.start()
                 mCountDownTimer?.cancel()
                 mCountDownTimer = object : CountDownTimer(durationInMillis, 10) {
                     override fun onFinish() {
+                        tv_voice_timer?.text = SimpleDateFormat("mm:ss:SSS").format(durationInMillis)
                         stopRecording()// onFinish
                     }
 
                     override fun onTick(millisUntilFinished: Long) {
                         probar_voice_timer?.progress = (System.currentTimeMillis() - startTime).toInt()
+                        tv_voice_timer?.text = SimpleDateFormat("mm:ss:SSS").format(durationInMillis - millisUntilFinished)
                     }
                 }
                 mCountDownTimer?.start()
@@ -252,11 +252,7 @@ class MainActivity : BaseActivity() {
         mCountDownTimer?.cancel()
         mCountDownTimer = null
         takeIf { isRecording() }?.run {
-            tv_voice_timer?.stop()
-            val sdf = SimpleDateFormat("mm:ss")
-            tv_voice_timer?.text = sdf.format(clipLength)
-            clipLength = System.currentTimeMillis() - startTime
-            probar_voice_timer?.progress = clipLength.toInt()
+            probar_voice_timer?.progress = (System.currentTimeMillis() - startTime).toInt()
             startTime = -1
             showSaveRecordFileDialog()
             recorder?.stopRecording()
