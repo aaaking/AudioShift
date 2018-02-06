@@ -1,6 +1,7 @@
 package com.example.zhouzhihui.audioshift
 
 import android.Manifest
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
@@ -142,6 +143,14 @@ class MainActivity : BaseActivity() {
                         }
                     })
                     ?.withDuration(300)
+                    ?.withDismissListener(object : CoolDialog.CoolDialogDismissListener(mSaveRecordFileDialog) {
+                        override fun onDismiss(dialog: DialogInterface?) {
+                            super.onDismiss(dialog)
+                            probar_voice_timer?.max = durationInMillis.toInt()
+                            probar_voice_timer?.progress = 0
+                            tv_voice_timer?.base = SystemClock.elapsedRealtime()
+                        }
+                    })
                     ?.withCancelable(false)
                     ?.withCanceledOnTouchOutside(false)
                     ?.withCoolStyle(CoolStyle(mSaveRecordFileDialog?.mRootView, COOL_STYLE_ROTATE))
@@ -228,6 +237,7 @@ class MainActivity : BaseActivity() {
         mCountDownTimer?.cancel()
         mCountDownTimer = null
         takeIf { isRecording() }?.run {
+            showSaveRecordFileDialog()
             isRecordingVar = false
             recorder?.stopRecording()
             clipLength = System.currentTimeMillis() - startTime
@@ -239,7 +249,6 @@ class MainActivity : BaseActivity() {
             tv_voice_timer?.stop()
             val sdf = SimpleDateFormat("mm:ss")
             tv_voice_timer?.text = sdf.format(clipLength)//"${clipLength / 1000}"
-            showSaveRecordFileDialog()
         }
     }
 }

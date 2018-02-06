@@ -80,7 +80,7 @@ class CoolDialog : Dialog, DialogInterface {
         btnNegativeBg = context.resources.getDrawable(R.drawable.bg_negative_btn)
         btnPositiveBg = context.resources.getDrawable(R.drawable.bg_positive_btn)
         setOnShowListener { mCoolStyle?.startPlayStyle() }
-        setOnDismissListener { mCoolStyle?.stopPlayStyle() }
+        setOnDismissListener(CoolDialogDismissListener(this))
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -165,9 +165,17 @@ class CoolDialog : Dialog, DialogInterface {
         setOnClickListener(clickListener)
     }
 
-    open class CoolDialogClickListener(var dialog: CoolDialog?): View.OnClickListener {
+    fun withDismissListener(dismissListener: CoolDialogDismissListener = CoolDialogDismissListener(this)): CoolDialog = apply { setOnDismissListener(dismissListener) }
+
+    open class CoolDialogClickListener(var mDialog: CoolDialog?): View.OnClickListener {
         override fun onClick(v: View?) {
-            dialog?.dismiss()
+            mDialog?.dismiss()
+        }
+    }
+
+    open class CoolDialogDismissListener(var mDialog: CoolDialog?): DialogInterface.OnDismissListener {
+        override fun onDismiss(dialog: DialogInterface?) {
+            mDialog?.mCoolStyle?.stopPlayStyle()
         }
     }
 
