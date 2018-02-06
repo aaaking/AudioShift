@@ -37,44 +37,14 @@ class MainActivity : BaseActivity() {
     private fun hasRequiredPermissions(): Boolean = PERMISSIONS.none { ActivityCompat.checkSelfPermission(this, it) != PackageManager.PERMISSION_GRANTED }
     fun requestRequiredPermissions(view: View?) = ActivityCompat.requestPermissions(this, PERMISSIONS, PERMISSIONS_CODE)
     override fun onCreate(savedInstanceState: Bundle?) {
-        val iconWidth = resources.getDimensionPixelOffset(R.dimen.dialog_icon_width)
-        val iconLeftMargin = ScreenUtil.dp2px(this, 7f)
-        val logo = resources.getDrawable(R.drawable.icon)
-        logo.setBounds(0, 0, iconWidth, iconWidth)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         AudioApp.getComponent(this)?.inject(this)
-        (toolbar as? Toolbar)?.navigationIcon = logo
-        setSupportActionBar(toolbar as? Toolbar)
-        getSupportActionBar()?.setDisplayShowHomeEnabled(true)
-//        getSupportActionBar()?.setLogo(logo)
-        getSupportActionBar()?.setDisplayUseLogoEnabled(true)
         setAudioTakeButton()
         if (!hasRequiredPermissions()) {
             requestRequiredPermissions(null)
         }
-        var right = 0
-        (toolbar as? Toolbar)?.viewTreeObserver?.addOnPreDrawListener(object : ViewTreeObserver.OnPreDrawListener  {
-            override fun onPreDraw(): Boolean {
-                for (i in 0 until ((toolbar as? Toolbar)?.childCount ?: -1)) {
-                    val child = (toolbar as? Toolbar)?.getChildAt(i)
-                    if ((child as? ImageView)?.drawable === logo) {
-                        (child as ImageView).adjustViewBounds = true
-                        val lp = child.layoutParams
-                        lp.width = iconWidth
-                        lp.height = iconWidth
-                        child.x = iconLeftMargin.toFloat()
-                        right = child.right
-                        Log.i(TAG, "imageview right : ${child.right}")
-                    } else if (child is TextView) {
-                        Log.i(TAG, "textview x : ${iconLeftMargin.toFloat() * 2 + iconWidth}")
-                        child.x = iconLeftMargin.toFloat() * 3 + iconWidth * 2
-                    }
-                }
-                (toolbar as? Toolbar)?.viewTreeObserver?.removeOnPreDrawListener(this)
-                return true
-            }
-        })
+        (toolbar as Toolbar)?.apply { setToolbar(this as Toolbar,  R.drawable.icon) }
     }
 
     override fun onResume() {
