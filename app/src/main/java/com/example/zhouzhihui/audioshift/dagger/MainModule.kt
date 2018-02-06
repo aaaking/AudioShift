@@ -40,6 +40,13 @@ class MainModule(val application: AudioApp) {
 
     @Provides
     fun providesAudioFile(context: Context): File {
+        val file = File(providesRootPath(context), AUDIO_DIRECTORY + File.separator + AUDIO_FILENAME)
+        var result = file.parentFile.mkdirs()
+        Log.i(TAG, "file.mkdirs() result: ${result} ${file.exists()}")
+        return file
+    }
+
+    @Provides fun providesRootPath(context: Context): String {
         var rootPath = ""
         if (Environment.MEDIA_MOUNTED == Environment.getExternalStorageState() || !Environment.isExternalStorageRemovable()) {//sd卡能用
             rootPath = context.getExternalFilesDir(null).path
@@ -48,10 +55,7 @@ class MainModule(val application: AudioApp) {
                 rootPath = context.filesDir.path
             }
         }
-        val file = File(rootPath, AUDIO_DIRECTORY + File.separator + AUDIO_FILENAME)
-        var result = file.parentFile.mkdirs()
-        Log.i(TAG, "file.mkdirs() result: ${result} ${file.exists()}")
-        return file
+        return rootPath
     }
 
     @Provides
