@@ -208,25 +208,22 @@ class MainActivity : BaseActivity() {
     private fun hasRecording(): Boolean = !isRecording() && recorder?.hasRecording() ?: false
 
     fun startRecording() {
-        Log.i(TAG, "${recorder} ${recorder?.isRecording()}")
 //        elf.setEnabled(false)
 //        santa.setEnabled(false)
         recorder?.startRecording()
-        Log.i(TAG, "${recorder} ${recorder?.isRecording()}")
         isRecordingVar = true
         startTime = System.currentTimeMillis()
         probar_voice_timer?.max = durationInMillis.toInt()
         audioAnim(isRecordingVar)
         tv_voice_timer?.base = SystemClock.elapsedRealtime()
         tv_voice_timer?.start()
-        if (mCountDownTimer == null) {
-            mCountDownTimer = object : CountDownTimer(durationInMillis, 10) {
-                override fun onFinish() {
-                    stopRecording()// onFinish
-                }
-                override fun onTick(millisUntilFinished: Long) {
-                    probar_voice_timer?.progress = (System.currentTimeMillis() - startTime).toInt()
-                }
+        mCountDownTimer?.cancel()
+        mCountDownTimer = object : CountDownTimer(durationInMillis, 10) {
+            override fun onFinish() {
+                stopRecording()// onFinish
+            }
+            override fun onTick(millisUntilFinished: Long) {
+                probar_voice_timer?.progress = (System.currentTimeMillis() - startTime).toInt()
             }
         }
         mCountDownTimer?.start()
