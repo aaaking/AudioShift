@@ -4,8 +4,9 @@
         <!-- Hint color and label color in FALSE state -->
         <!-- Label color in TRUE state and bar color FALSE and TRUE State -->
         <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">14dp</item>
         <!--<item name="android:textColorHint">@color/textColor</item>-->
-        <item name="colorAccent">@color/colorCoolEditTextAccent</item>
+        <!--<item name="colorAccent">@color/colorCoolEditTextAccent</item>-->
         <!--<item name="colorControlNormal">@color/colorCoolEditTextNormal</item>-->
         <!--<item name="colorControlActivated">@color/colorCoolEditTextActivated</item>-->
     </style>

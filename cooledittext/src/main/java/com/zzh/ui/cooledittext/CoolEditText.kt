@@ -150,4 +150,9 @@ class CoolEditText : TextInputEditText, View.OnTouchListener, TextWatcher,View.O
     private fun setRightBtnType() {
         setRightImage(if (rightType == TYPE_RIGHT_EYE) eyeOpenRes else deleteImageRes)
     }
+
+    override fun setText(text: CharSequence?, type: BufferType?) {
+        super.setText(text, type)
+        setSelection(getText().length)
+    }
 }

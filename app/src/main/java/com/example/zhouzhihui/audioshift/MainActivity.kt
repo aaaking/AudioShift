@@ -134,30 +134,15 @@ class MainActivity : BaseActivity() {
 
     private fun showSaveRecordFileDialog() = run {
         if (mSaveRecordFileDialog == null) {
-            val editLayout = TextInputLayout(this)
-            val edit = CoolEditText(this)
-            GradientDrawable().apply {
-                cornerRadius = resources.getDimension(R.dimen.btn_common_radius)
-                setColor(Color.WHITE)
-                edit.setBackgroundDrawable(this)
-                edit.setText("音频文件_1")
-                edit.setPadding(0, 5, ScreenUtil.dp2px(this@MainActivity, 3f), 5)
-                editLayout.hint = "文件名："
-                editLayout.setHintTextAppearance(R.style.TextInputLayoutTheme)
-                editLayout.addView(edit)
-                val lp = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
-                (edit.layoutParams as? FrameLayout.LayoutParams)?.setMargins(0, ScreenUtil.dp2px(this@MainActivity, 8f), 0, 0)
-            }
             mSaveRecordFileDialog = CoolDialog(this)
             mSaveRecordFileDialog?.withIcon(R.drawable.icon)
                     ?.withTitle(resources.getString(R.string.save_record_file_title))
                     ?.withMsg(resources.getString(R.string.save_record_file_msg))
-                    ?.withContentCustom(null, R.layout.layout_dialog_content_custom)
                     ?.withNegativeBtn(resources.getString(android.R.string.no))
                     ?.withPositiveBtn(resources.getString(R.string.save), mSaveRecordFileDialog?.btnPositiveBg, object : CoolDialog.CoolDialogClickListener(mSaveRecordFileDialog) {
                         override fun onClick(v: View?) {
                             super.onClick(v)
-                            saveRecordFile(recorder?.getRecordFile())
+                            saveRecordFile(recorder?.getRecordFile(), mSaveRecordFileDialog?.mRootView?.findViewById<CoolEditText>(R.id.et_audio_file_name)?.text?.toString())
                         }
                     })
                     ?.withDuration(300)
@@ -173,8 +158,16 @@ class MainActivity : BaseActivity() {
                     ?.withCanceledOnTouchOutside(false)
                     ?.withContentCustom(null, R.layout.layout_save_file_et)
                     ?.withCoolStyle(CoolStyle(mSaveRecordFileDialog?.mRootView, COOL_STYLE_ROTATE))
+            val edit = mSaveRecordFileDialog?.mRootView?.findViewById<CoolEditText>(R.id.et_audio_file_name)
+            GradientDrawable().apply {
+                cornerRadius = resources.getDimension(R.dimen.btn_common_radius)
+                setColor(Color.WHITE)
+                edit?.setBackgroundDrawable(this)
+                ((edit?.parent as? View)?.layoutParams as? LinearLayout.LayoutParams)?.setMargins(0, ScreenUtil.dp2px(this@MainActivity, 20f), 0, 0)
+            }
         }
         if (!isDestroyed && !isFinishing) {
+            mSaveRecordFileDialog?.mRootView?.findViewById<CoolEditText>(R.id.et_audio_file_name)?.setText("ogiwaheoigh")
             mSaveRecordFileDialog?.show()
         }
     }
