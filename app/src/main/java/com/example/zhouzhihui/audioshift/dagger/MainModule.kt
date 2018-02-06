@@ -2,8 +2,10 @@ package com.example.zhouzhihui.audioshift.dagger
 
 import android.content.Context
 import android.os.Environment
+import android.util.Log
 
 import com.example.zhouzhihui.audioshift.AudioApp
+import com.example.zhouzhihui.audioshift.TAG
 import com.example.zhouzhihui.audioshift.play.Player
 import com.example.zhouzhihui.audioshift.record.Recorder
 import com.example.zhouzhihui.audioshift.ui.AudioRecorderPlayer
@@ -46,7 +48,10 @@ class MainModule(val application: AudioApp) {
                 rootPath = context.filesDir.path
             }
         }
-        return File(rootPath, AUDIO_FILENAME)
+        val file = File(rootPath, AUDIO_DIRECTORY + File.separator + AUDIO_FILENAME)
+        var result = file.parentFile.mkdirs()
+        Log.i(TAG, "file.mkdirs() result: ${result} ${file.exists()}")
+        return file
     }
 
     @Provides
@@ -68,6 +73,7 @@ class MainModule(val application: AudioApp) {
 
     companion object {
         val DURATION_IN_MILLIS = 5 * 1000L
-        val AUDIO_FILENAME = "audio_shift"
+        val AUDIO_DIRECTORY = "audio_files"
+        val AUDIO_FILENAME = "tempFile"
     }
 }
