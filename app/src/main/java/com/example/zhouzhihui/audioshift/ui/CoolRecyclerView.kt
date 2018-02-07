@@ -68,5 +68,12 @@ class CoolRecyclerView : RecyclerView {
         }
     }
 
+    fun notifyItemInserted(pos: Int, scrollToBottom: Boolean) {
+        adapter?.notifyItemInserted(pos)
+        if (scrollToBottom && (adapter?.itemCount ?: 0) > 0) {
+            scrollToPosition(adapter.itemCount - 1)
+        }
+    }
+
     private fun getOrientation(parent: RecyclerView): Int = (parent.layoutManager as? LinearLayoutManager)?.orientation ?: LinearLayoutManager.VERTICAL
 }
