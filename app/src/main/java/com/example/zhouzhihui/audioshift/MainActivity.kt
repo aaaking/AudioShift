@@ -55,7 +55,19 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         }
         (toolbar as? Toolbar)?.apply { setToolbar(this,  R.drawable.icon, drawer_layout) }
         nav_view.setNavigationItemSelectedListener(this)
-        setRightDrawer(this, right_drawer_recyclerview, recorder?.getRecordFile())
+        drawer_layout.addDrawerListener(object : DrawerLayout.DrawerListener {
+            override fun onDrawerStateChanged(newState: Int) {
+            }
+            override fun onDrawerSlide(drawerView: View?, slideOffset: Float) {
+            }
+            override fun onDrawerClosed(drawerView: View?) {
+            }
+            override fun onDrawerOpened(drawerView: View?) {
+                if (drawer_layout.isDrawerOpen(GravityCompat.END)) {
+                    setRightDrawer(this@MainActivity, right_drawer_recyclerview, recorder?.getRecordFile())
+                }
+            }
+        })
         open_file_directory.setOnClickListener {
             Intent(Intent.ACTION_VIEW).apply {
                 setDataAndType(Uri.parse(recorder?.getRecordFile()?.parentFile?.absolutePath), "resource/folder")

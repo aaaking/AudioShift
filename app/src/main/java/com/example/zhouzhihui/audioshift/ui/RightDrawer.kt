@@ -14,9 +14,16 @@ import java.util.*
 /**
  * Created by 周智慧 on 07/02/2018.
  */
-fun setRightDrawer(activity: Activity, recyclerview: CoolRecyclerView, file: File?) = file?.parentFile?.listFiles()?.filter { it.absolutePath != file.absolutePath }?.run {
-    var adapter = RightDrawerAdap(this, activity)
-    recyclerview.adapter = adapter
+/**
+ * init recyclerview only once, if adapter != null do nothing
+ */
+fun setRightDrawer(activity: Activity, recyclerview: CoolRecyclerView, file: File?) = recyclerview.apply {
+    takeIf { adapter == null }?.run {
+        file?.parentFile?.listFiles()?.filter { it.absolutePath != file.absolutePath }?.run {
+            var adapter = RightDrawerAdap(this, activity)
+            recyclerview.adapter = adapter
+        }
+    }
 }
 
 
