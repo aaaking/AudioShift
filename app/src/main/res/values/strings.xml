@@ -10,6 +10,7 @@
     <string name="save_record_file_title">保存录音文件</string>
     <string name="save_record_file_msg">是否保存录音文件？</string>
     <string name="save">保存</string>
+    <string name="open_record_file">打开录音文件</string>
 
     <string name="about_app_author">app制作人：黑山</string>
     <string name="about_app_email">邮箱: <a href="mailto:1059084407@qq.com">1059084407@qq.com</a></string>

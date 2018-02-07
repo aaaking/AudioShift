@@ -120,6 +120,11 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         val id = item?.itemId
         when (id) {
+            R.id.open_record_file -> {
+                if (!drawer_layout.isDrawerOpen(GravityCompat.END)) {
+                    drawer_layout.openDrawer(GravityCompat.END)
+                }
+            }
             R.id.menu_about -> {
                 showAboutDialog()
 //                var author = SpannableString(resources.getString(R.string.about_app_author))
