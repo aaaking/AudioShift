@@ -16,6 +16,7 @@ import java.util.*
  */
 
 class RightDrawerAdap : RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    var shouldUpdateData = false
     var mDatas = ArrayList<Any>()
     var mActivity: Activity? = null
     constructor(datas: List<Any>, listeners: Any) {

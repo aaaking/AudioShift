@@ -1,6 +1,7 @@
 package com.example.zhouzhihui.audioshift
 
 import android.Manifest
+import android.app.Activity
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -35,10 +36,12 @@ import javax.inject.Inject
 import android.support.v4.widget.DrawerLayout
 import android.widget.Toast
 import kotlinx.android.synthetic.main.nav_header_right.*
+import java.io.File
 
 
 val PERMISSIONS = arrayOf(Manifest.permission.INTERNET, Manifest.permission.RECORD_AUDIO, Manifest.permission.MODIFY_AUDIO_SETTINGS, Manifest.permission.WRITE_EXTERNAL_STORAGE)
 val PERMISSIONS_CODE = 1
+val REQUEST_CODE_SELECT_AUDIO_FILE = 6
 class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
     var mAboutDialog: CoolDialog? = null
     var mCountDownTimer: CountDownTimer? = null
@@ -71,13 +74,21 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             }
         })
         open_file_directory.setOnClickListener {
-            Intent(Intent.ACTION_VIEW).apply {
-                setDataAndType(Uri.parse(recorder?.getRecordFile()?.parentFile?.absolutePath), "resource/folder")
+            Intent(Intent.ACTION_GET_CONTENT).apply {
+                setDataAndType(Uri.parse(recorder?.getRecordFile()?.parentFile?.absolutePath), "file/*")
                 if (resolveActivityInfo(packageManager, 0) != null) {
-                    startActivity(this)
+                    startActivityForResult(this, REQUEST_CODE_SELECT_AUDIO_FILE)
                 }
             }
         }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        Log.i(TAG, "${requestCode}   ${resultCode}  ${data?.getData()}  ${data?.getData()?.path}")
+        if (requestCode == REQUEST_CODE_SELECT_AUDIO_FILE && resultCode == Activity.RESULT_OK) {
+            Log.i(TAG, "${File(data?.getData()?.path).name} ${recorder?.getRecordFile()?.path}")
+        }
+        super.onActivityResult(requestCode, resultCode, data)
     }
 
     override fun onResume() {
