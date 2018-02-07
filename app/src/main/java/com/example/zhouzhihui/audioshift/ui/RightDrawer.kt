@@ -11,6 +11,7 @@ import android.widget.TextView
 import com.example.zhouzhihui.audioshift.R
 import com.example.zhouzhihui.audioshift.TAG
 import java.io.File
+import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -57,7 +58,7 @@ class RightDrawerVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
     var tv_file_time = itemView.findViewById<TextView>(R.id.tv_file_time)
     fun bind(file: File?, adapter: RightDrawerAdap) {
         tv_file_name.text = file?.name
-        tv_file_size.text = "${((file?.length() ?: 0) / 1000f)}KB"
+        tv_file_size.text = "${DecimalFormat("#.##").format(((file?.length() ?: 0) / 1000f))}KB"
         tv_file_time.text = SimpleDateFormat("YYYY/MM/dd aa hh:mm").format(file?.lastModified() ?: 0)
         if (adapterPosition > adapter.curMaxPos) {
             Log.i(TAG, "bind ${adapterPosition} ${layoutPosition}")
