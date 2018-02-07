@@ -160,7 +160,7 @@
         android:strokeColor="#00000000"
         android:strokeWidth="1"/>
     <group
-        android:name="group_mouth"
+        android:name="group_teeth_mouth"
         android:pivotX="255"
         android:pivotY="344.1"
         android:scaleY="1">
