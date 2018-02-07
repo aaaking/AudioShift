@@ -10,4 +10,10 @@
         <!--<item name="colorControlNormal">@color/colorCoolEditTextNormal</item>-->
         <!--<item name="colorControlActivated">@color/colorCoolEditTextActivated</item>-->
     </style>
+
+    <declare-styleable name="CoolRecyclerView">
+        <attr name="dividerHeight" format="dimension"/>
+        <attr name="layout_manager_type" format="integer"/>
+        <attr name="grid_span_count" format="integer"/>
+    </declare-styleable>
 </resources>

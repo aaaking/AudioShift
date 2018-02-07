@@ -102,6 +102,7 @@ class CoolEditText : TextInputEditText, View.OnTouchListener, TextWatcher,View.O
         setOnTouchListener(this)
         addTextChangedListener(this)
         onFocusChangeListener = this
+        ta.recycle()
     }
 
     override fun onAttachedToWindow() {
