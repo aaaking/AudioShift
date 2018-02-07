@@ -58,7 +58,7 @@ class CoolRecyclerView : RecyclerView {
             }
             addItemDecoration(decorationThin)
         }
-        setHasFixedSize(true)
+//        setHasFixedSize(true)
     }
 
     private fun getOrientation(parent: RecyclerView): Int = (parent.layoutManager as? LinearLayoutManager)?.orientation ?: LinearLayoutManager.VERTICAL

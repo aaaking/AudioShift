@@ -11,11 +11,10 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.provider.Settings
-import android.support.annotation.NonNull
 import android.support.design.widget.NavigationView
 import android.support.v4.app.ActivityCompat
 import android.support.v4.view.GravityCompat
-import android.support.v7.app.ActionBarDrawerToggle
+import android.support.v4.widget.DrawerLayout
 import android.support.v7.widget.Toolbar
 import android.text.Html
 import android.util.Log
@@ -31,12 +30,10 @@ import com.zzh.cooldialog.CoolStyle
 import com.zzh.ui.cooledittext.CoolEditText
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
-import java.text.SimpleDateFormat
-import javax.inject.Inject
-import android.support.v4.widget.DrawerLayout
-import android.widget.Toast
 import kotlinx.android.synthetic.main.nav_header_right.*
 import java.io.File
+import java.text.SimpleDateFormat
+import javax.inject.Inject
 
 
 val PERMISSIONS = arrayOf(Manifest.permission.INTERNET, Manifest.permission.RECORD_AUDIO, Manifest.permission.MODIFY_AUDIO_SETTINGS, Manifest.permission.WRITE_EXTERNAL_STORAGE)
