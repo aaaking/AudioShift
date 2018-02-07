@@ -63,8 +63,10 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             override fun onDrawerClosed(drawerView: View?) {
             }
             override fun onDrawerOpened(drawerView: View?) {
-                if (drawer_layout.isDrawerOpen(GravityCompat.END)) {
-                    setRightDrawer(this@MainActivity, right_drawer_recyclerview, recorder?.getRecordFile())
+                if (right_drawer_recyclerview.adapter == null && drawer_layout.isDrawerOpen(GravityCompat.END)) {
+                    recorder?.getRecordFile()?.parentFile?.listFiles()?.filter { it.absolutePath != recorder?.getRecordFile()?.absolutePath }?.run {
+                        right_drawer_recyclerview.adapter = RightDrawerAdap(this, this@MainActivity)//init recyclerview only once, if adapter != null do nothing
+                    }
                 }
             }
         })

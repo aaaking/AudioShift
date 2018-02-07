@@ -14,18 +14,6 @@ import java.util.*
 /**
  * Created by 周智慧 on 07/02/2018.
  */
-/**
- * init recyclerview only once, if adapter != null do nothing
- */
-fun setRightDrawer(activity: Activity, recyclerview: CoolRecyclerView, file: File?) = recyclerview.apply {
-    takeIf { adapter == null }?.run {
-        file?.parentFile?.listFiles()?.filter { it.absolutePath != file.absolutePath }?.run {
-            var adapter = RightDrawerAdap(this, activity)
-            recyclerview.adapter = adapter
-        }
-    }
-}
-
 
 class RightDrawerAdap : RecyclerView.Adapter<RecyclerView.ViewHolder> {
     var mDatas = ArrayList<Any>()
