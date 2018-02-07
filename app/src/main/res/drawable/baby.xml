@@ -76,20 +76,6 @@
         android:strokeColor="#00000000"
         android:strokeWidth="1"/>
     <path
-        android:name="mouth"
-        android:fillColor="#53506D"
-        android:fillType="nonZero"
-        android:pathData="M203.7,321.7C196,321.7 190.1,328.9 191.9,336.5C198.5,365.2 224.3,386.5 255,386.5C285.7,386.5 311.4,365.2 318.1,336.5C319.9,328.9 314,321.7 306.3,321.7L203.7,321.7L203.7,321.7Z"
-        android:strokeColor="#00000000"
-        android:strokeWidth="1"/>
-    <path
-        android:name="teeth"
-        android:fillColor="#FFFFFF"
-        android:fillType="nonZero"
-        android:pathData="M270.1,340.9L270.1,340.9C265.9,340.9 262.4,337.4 262.4,333.2L262.4,321.7L277.7,321.7L277.7,333.2C277.7,337.4 274.3,340.9 270.1,340.9Z"
-        android:strokeColor="#00000000"
-        android:strokeWidth="1"/>
-    <path
         android:fillColor="#F4B298"
         android:fillType="nonZero"
         android:pathData="M271.5,261.1L238.5,261.1C232.7,261.1 227.9,265.9 227.9,271.8L227.9,271.8C227.9,277.6 232.7,282.4 238.5,282.4L271.5,282.4C277.3,282.4 282.1,277.6 282.1,271.8L282.1,271.8C282.1,265.9 277.3,261.1 271.5,261.1Z"
@@ -171,6 +157,20 @@
         android:fillColor="#FFC25F"
         android:fillType="nonZero"
         android:pathData="M59.7,133.2L63.9,141.8C65.2,144.3 67.6,146.1 70.5,146.5L80,147.9C87.1,149 90,157.7 84.8,162.8L77.9,169.5C75.9,171.5 74.9,174.4 75.4,177.2L77,186.7C78.3,193.8 70.8,199.2 64.4,195.9L55.9,191.4C53.4,190.1 50.3,190.1 47.8,191.4L39.3,195.9C32.9,199.2 25.4,193.8 26.6,186.7L28.2,177.2C28.7,174.4 27.8,171.5 25.7,169.5L18.9,162.8C13.7,157.7 16.5,149 23.7,147.9L33.2,146.5C36,146.1 38.5,144.3 39.8,141.8L44,133.2C47.2,126.7 56.5,126.7 59.7,133.2Z"
+        android:strokeColor="#00000000"
+        android:strokeWidth="1"/>
+    <path
+        android:name="mouth"
+        android:fillColor="#53506D"
+        android:fillType="nonZero"
+        android:pathData="M203.7,321.7C196,321.7 190.1,328.9 191.9,336.5C198.5,365.2 224.3,386.5 255,386.5C285.7,386.5 311.4,365.2 318.1,336.5C319.9,328.9 314,321.7 306.3,321.7L203.7,321.7L203.7,321.7Z"
+        android:strokeColor="#00000000"
+        android:strokeWidth="1"/>
+    <path
+        android:name="teeth"
+        android:fillColor="#FFFFFF"
+        android:fillType="nonZero"
+        android:pathData="M270.1,340.9L270.1,340.9C265.9,340.9 262.4,337.4 262.4,333.2L262.4,321.7L277.7,321.7L277.7,333.2C277.7,337.4 274.3,340.9 270.1,340.9Z"
         android:strokeColor="#00000000"
         android:strokeWidth="1"/>
 </vector>
