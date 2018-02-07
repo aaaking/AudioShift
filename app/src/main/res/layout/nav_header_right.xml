@@ -1,15 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:paddingTop="@dimen/toppadding_to_fit_statusbar"
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp"
     android:background="@color/colorPrimary"
-    android:layout_height="match_parent">
+    android:orientation="vertical">
+
     <com.example.zhouzhihui.audioshift.ui.CoolRecyclerView
         android:id="@+id/right_drawer_recyclerview"
-        app:dividerHeight="5dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></com.example.zhouzhihui.audioshift.ui.CoolRecyclerView>
-</LinearLayout>
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="70dp"
+        app:dividerHeight="8dp"/>
+
+    <TextView
+        android:id="@+id/open_file_directory"
+        android:layout_width="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:textColor="@android:color/white"
+        android:layout_height="70dp"
+        android:textStyle="bold"
+        android:paddingRight="20dp"
+        android:text="打开文件目录"/>
+</FrameLayout>

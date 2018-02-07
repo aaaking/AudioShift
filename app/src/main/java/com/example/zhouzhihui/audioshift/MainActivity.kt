@@ -56,6 +56,14 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         (toolbar as? Toolbar)?.apply { setToolbar(this,  R.drawable.icon, drawer_layout) }
         nav_view.setNavigationItemSelectedListener(this)
         setRightDrawer(this, right_drawer_recyclerview, recorder?.getRecordFile())
+        open_file_directory.setOnClickListener {
+            Intent(Intent.ACTION_VIEW).apply {
+                setDataAndType(Uri.parse(recorder?.getRecordFile()?.parentFile?.absolutePath), "resource/folder")
+                if (resolveActivityInfo(packageManager, 0) != null) {
+                    startActivity(this)
+                }
+            }
+        }
     }
 
     override fun onResume() {
