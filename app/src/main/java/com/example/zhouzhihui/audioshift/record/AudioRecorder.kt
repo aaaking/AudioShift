@@ -17,8 +17,8 @@ class AudioRecorder(val audioRecord: AudioRecord, val file: File) : Recorder {
     override fun startRecording() {
         recorderTask = AudioRecorderTask(audioRecord, file)
         recorderThread = Thread(recorderTask)
-        recorderThread!!.start()
         audioRecord.startRecording()
+        recorderThread!!.start()
     }
 
     override fun stopRecording() {
