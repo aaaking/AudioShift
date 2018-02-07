@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:clipChildren="false"
     tools:context="com.example.zhouzhihui.audioshift.MainActivity">
 
     <include layout="@layout/toolbar"
@@ -58,6 +59,7 @@
             android:layout_width="72dp"
             android:layout_height="66dp"
             app:srcCompat="@drawable/voice_state_animation"/>
+
     </LinearLayout>
 
     <FrameLayout
@@ -85,6 +87,20 @@
             android:lineSpacingExtra="10dp"
             app:srcCompat="@drawable/audio_take_animate2start"/>
     </FrameLayout>
+
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/iv_player"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
+        app:layout_constraintTop_toBottomOf="@+id/rl_match_voice_state"
+        app:layout_constraintBottom_toTopOf="@+id/audio_take_container"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:clickable="true"
+        android:scaleType="centerInside"
+        app:layout_constraintVertical_bias="0.3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/baby"/>
 
     <LinearLayout
         android:id="@+id/required_permission_layout"
