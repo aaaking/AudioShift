@@ -6,6 +6,7 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
+import android.graphics.drawable.Animatable
 import android.graphics.drawable.GradientDrawable
 import android.net.Uri
 import android.os.Bundle
@@ -267,6 +268,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     }
 
     private fun setAudioTakeButton() {
+        iv_player.setOnClickListener { (iv_player.drawable as? Animatable)?.apply { if (isRunning) stop() else start() } }
         tv_voice_timer?.text = "00:00:000"
         tv_match_voice_count.text = getRecordedFileNum(recorder?.getRecordFile())
         autio_take_circle.setOnTouchListener(View.OnTouchListener { v, event ->
