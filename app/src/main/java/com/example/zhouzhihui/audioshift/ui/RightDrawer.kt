@@ -22,6 +22,9 @@ class RightDrawerAdap : RecyclerView.Adapter<RecyclerView.ViewHolder> {
     constructor(datas: List<Any>, listeners: Any) {
         mDatas.clear()
         mDatas.addAll(datas)
+//        mDatas.addAll(mDatas)
+//        mDatas.addAll(mDatas)
+//        mDatas.addAll(mDatas)
         mActivity = listeners as? Activity
     }
     override fun getItemCount(): Int = mDatas.size

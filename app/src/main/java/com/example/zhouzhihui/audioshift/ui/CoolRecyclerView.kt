@@ -5,6 +5,8 @@ import android.graphics.Rect
 import android.support.v7.widget.*
 import android.util.AttributeSet
 import android.view.View
+import android.view.animation.AnimationUtils
+import android.view.animation.LayoutAnimationController
 import com.example.zhouzhihui.audioshift.R
 import com.example.zhouzhihui.audioshift.util.ScreenUtil
 
@@ -59,6 +61,11 @@ class CoolRecyclerView : RecyclerView {
             addItemDecoration(decorationThin)
         }
 //        setHasFixedSize(true)
+        LayoutAnimationController(AnimationUtils.loadAnimation(context, R.anim.item_animation_fall_down)).apply {
+            delay = 0.15f
+            order = LayoutAnimationController.ORDER_NORMAL
+            this@CoolRecyclerView.layoutAnimation = this
+        }
     }
 
     private fun getOrientation(parent: RecyclerView): Int = (parent.layoutManager as? LinearLayoutManager)?.orientation ?: LinearLayoutManager.VERTICAL

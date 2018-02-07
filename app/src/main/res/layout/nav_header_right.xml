@@ -26,5 +26,6 @@
         android:layout_height="70dp"
         android:textStyle="bold"
         android:paddingRight="20dp"
+        android:paddingTop="20dp"
         android:text="打开文件目录"/>
 </FrameLayout>
