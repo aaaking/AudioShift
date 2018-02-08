@@ -31,7 +31,7 @@ val COOL_STYLE_3D_SLIT_V = 14
 data class CoolStyle(var mTargetView: View?, var mStyle: Int = COOL_STYLE_SLIDE_BOTTOM) {
     private var mDuration = -1L
     private var mAlphaDuration = -1L
-    private var mAnimatorSet: AnimatorSet = AnimatorSet()
+    var mAnimatorSet: AnimatorSet = AnimatorSet()
 
     fun startPlayStyle() = takeIf { mTargetView != null }?.run {
         setAnimation()
