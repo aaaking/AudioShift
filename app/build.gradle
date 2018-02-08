@@ -7,7 +7,7 @@ android {
     compileSdkVersion compileSdk
     defaultConfig {
         applicationId "com.example.zhouzhihui.audioshift"
-        minSdkVersion 23
+        minSdkVersion minSdk
         targetSdkVersion targetSdk
         versionCode 1
         versionName "1.0"
