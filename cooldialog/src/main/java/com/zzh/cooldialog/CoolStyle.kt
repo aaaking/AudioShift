@@ -59,17 +59,17 @@ data class CoolStyle(var mTargetView: View?, var mStyle: Int = COOL_STYLE_SLIDE_
             COOL_STYLE_SLIDE_TOP -> getSlideTopAnimators(mTargetView)?.apply { mAnimatorSet.playTogether(this) }
             COOL_STYLE_SLIDE_LEFT -> getSlideLeftAnimators(mTargetView)?.apply { mAnimatorSet.playTogether(this) }
             COOL_STYLE_SLIDE_RIGHT -> getSlideRightAnimators(mTargetView)?.apply { mAnimatorSet.playTogether(this) }
-            COOL_STYLE_ROTATE -> getRotateAnimators(mTargetView)?.apply { mAnimatorSet.playTogether(this) }
+            COOL_STYLE_ROTATE -> getRotateAnimators(mTargetView)?.apply { mAnimatorSet.playTogether(this) }//
             COOL_STYLE_FADE_IN -> getFadeInAnimators(mTargetView)?.apply { mAnimatorSet.playTogether(this) }
             COOL_STYLE_FALL_DOWN -> getFallDownAnimators(mTargetView)?.apply { mAnimatorSet.playTogether(this) }
-            COOL_STYLE_FALL_DOWN_OFFSET -> getFallDownOffsetAnimators(mTargetView)?.apply { mAnimatorSet.playTogether(this) }
+            COOL_STYLE_FALL_DOWN_OFFSET -> getFallDownOffsetAnimators(mTargetView)?.apply { mAnimatorSet.playTogether(this) }//
             COOL_STYLE_SHAKE -> getShakeAnimators(mTargetView)?.apply { mAnimatorSet.playTogether(this) }
-            COOL_STYLE_3D_ROTATE_LEFT -> get3DRotateLeftAnimators(mTargetView)?.apply { mAnimatorSet.playTogether(this) }
-            COOL_STYLE_3D_ROTATE_BOTTOM -> get3DRotateBottomAnimators(mTargetView)?.apply { mAnimatorSet.playTogether(this) }
+            COOL_STYLE_3D_ROTATE_LEFT -> get3DRotateLeftAnimators(mTargetView)?.apply { mAnimatorSet.playTogether(this) }//
+            COOL_STYLE_3D_ROTATE_BOTTOM -> get3DRotateBottomAnimators(mTargetView)?.apply { mAnimatorSet.playTogether(this) }//
             COOL_STYLE_3D_FLIP_H -> get3DFlitHAnimators(mTargetView)?.apply { mAnimatorSet.playTogether(this) }
             COOL_STYLE_3D_FLIP_V -> get3DFlitVAnimators(mTargetView)?.apply { mAnimatorSet.playTogether(this) }
-            COOL_STYLE_3D_SLIT_H -> get3DSlitHAnimators(mTargetView)?.apply { mAnimatorSet.playTogether(this) }
-            COOL_STYLE_3D_SLIT_V -> get3DSlitVAnimators(mTargetView)?.apply { mAnimatorSet.playTogether(this) }
+            COOL_STYLE_3D_SLIT_H -> get3DSlitHAnimators(mTargetView)?.apply { mAnimatorSet.playTogether(this) }//
+            COOL_STYLE_3D_SLIT_V -> get3DSlitVAnimators(mTargetView)?.apply { mAnimatorSet.playTogether(this) }//
         }
     }
 
