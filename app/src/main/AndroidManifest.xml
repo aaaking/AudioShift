@@ -15,12 +15,13 @@
         android:roundIcon="@drawable/icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".CoolDialogAC">
+        <activity android:name=".cooldialogExample.CoolDialogAC">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity android:name=".cooldialogExample.AnimaExampleAC"/>
     </application>
 
 </manifest>

@@ -1,4 +1,4 @@
-package com.example.zhouzhihui.audioshift
+package com.example.zhouzhihui.audioshift.cooldialogExample
 
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
+import com.example.zhouzhihui.audioshift.R
 import com.example.zhouzhihui.audioshift.ui.BaseActivity
 import com.example.zhouzhihui.audioshift.ui.CoolRecyclerView
 import com.example.zhouzhihui.audioshift.util.ScreenUtil
@@ -106,5 +107,9 @@ class CoolDialogAC : BaseActivity() {
                 })
                 ?.withCoolStyle(CoolStyle(mRootView, COOL_STYLE_3D_FLIP_H))
         show()
+    }
+
+    fun anim_example(view: View) {
+        startAnimaExampleAC(this)
     }
 }
