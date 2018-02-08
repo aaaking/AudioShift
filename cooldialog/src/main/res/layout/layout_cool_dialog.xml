@@ -47,8 +47,7 @@
         android:paddingBottom="@dimen/dialog_padding_top"
         android:paddingLeft="@dimen/dialog_padding_left"
         android:paddingRight="@dimen/dialog_padding_left"
-        android:paddingTop="@dimen/dialog_padding_top"
-        app:layout_constraintTop_toBottomOf="@id/top">
+        android:paddingTop="@dimen/dialog_padding_top">
 
         <TextView
             android:id="@+id/tv_msg_main"
@@ -87,8 +86,6 @@
             android:layout_height="wrap_content"/>
         <!--bottom button-->
         <LinearLayout
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
             android:paddingBottom="5dp"
             android:paddingTop="@dimen/dialog_padding_top"
             android:layout_width="match_parent"
@@ -97,10 +94,7 @@
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
             android:gravity="center_horizontal|bottom"
-            android:layout_gravity="bottom"
-            app:layout_constraintVertical_bias="1"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/middle">
+            android:layout_gravity="bottom">
             <Button
                 android:id="@+id/btn_no"
                 android:layout_width="0dp"
