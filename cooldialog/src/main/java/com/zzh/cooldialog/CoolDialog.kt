@@ -86,8 +86,8 @@ class CoolDialog : Dialog, DialogInterface {
         super.onCreate(savedInstanceState)
         val params = window?.attributes
         params?.width = ViewGroup.LayoutParams.MATCH_PARENT
-        params?.height = ViewGroup.LayoutParams.WRAP_CONTENT//ScreenUtil.dp2px(context, 300f)//ViewGroup.LayoutParams.MATCH_PARENT
-        val padding = context.resources.getDimensionPixelOffset(R.dimen.dialog_margin)//setPadding(padding, 0, padding, 0)
+        params?.height = ViewGroup.LayoutParams.WRAP_CONTENT
+        val padding = context.resources.getDimensionPixelOffset(R.dimen.dialog_margin)
         window?.decorView?.setPadding(padding, padding, padding, padding)
     }
 
