@@ -11,6 +11,8 @@
     <!--top-->
     <FrameLayout
         android:id="@+id/top"
+        android:visibility="gone"
+        tools:visibility="visible"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dialog_top_height"
         tools:background="@color/colorPrimary">
@@ -32,9 +34,7 @@
             android:gravity="center"
             android:text="hjewghwahghawhgowaehg"
             android:textColor="@android:color/white"
-            android:textSize="17dp"
-            android:visibility="gone"
-            tools:visibility="visible"/>
+            android:textSize="17dp"/>
     </FrameLayout>
 
     <!--middle content-->

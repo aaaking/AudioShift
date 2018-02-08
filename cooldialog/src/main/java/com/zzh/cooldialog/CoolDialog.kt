@@ -41,6 +41,7 @@ class CoolDialog : Dialog, DialogInterface {
     var mBgTop: Drawable? = GradientDrawable()
     var mBg: Drawable? = GradientDrawable()
     var iv_top: AppCompatImageView? = null
+    var topContainer: View? = null
     var tv_title: TextView? = null
     //middle
     var tv_msg_main: TextView? = null
@@ -68,7 +69,8 @@ class CoolDialog : Dialog, DialogInterface {
         mRootView?.apply {
             setBackgroundDrawable(mBg)
             iv_top = findViewById(R.id.iv_top)
-            findViewById<View?>(R.id.top)?.setBackgroundDrawable(mBgTop)
+            topContainer = findViewById(R.id.top)
+            topContainer?.setBackgroundDrawable(mBgTop)
             tv_title = findViewById(R.id.tv_title)
             tv_msg_main = findViewById(R.id.tv_msg_main)
             tv_msg_sub = findViewById(R.id.tv_msg_sub)
@@ -95,7 +97,7 @@ class CoolDialog : Dialog, DialogInterface {
         mBg = bg
         mBgTop = topBg
         mRootView?.setBackgroundDrawable(mBg)
-        mRootView?.findViewById<View?>(R.id.top)?.setBackgroundDrawable(mBgTop)
+        topContainer?.setBackgroundDrawable(mBgTop)
     }
 
     fun withBgAndTopbgColor(bgCorlor: Int, topBgCorlor: Int) = apply {
@@ -128,8 +130,8 @@ class CoolDialog : Dialog, DialogInterface {
         tv_title?.apply {
             text = str
             setTextColor(color)
-            visibility = if (TextUtils.isEmpty(str)) View.GONE else View.VISIBLE
         }
+        topContainer?.visibility = if (TextUtils.isEmpty(str)) View.GONE else View.VISIBLE
     }
 
     fun withMsg(str: CharSequence, color: Int = Color.WHITE): CoolDialog = apply {
