@@ -1,5 +1,6 @@
 package com.zzh.cooldialog
 
+import android.animation.Animator
 import android.app.Dialog
 import android.content.Context
 import android.content.DialogInterface
@@ -179,6 +180,13 @@ class CoolDialog : Dialog, DialogInterface {
     }
 
     fun withDismissListener(dismissListener: CoolDialogDismissListener = CoolDialogDismissListener(this)): CoolDialog = apply { setOnDismissListener(dismissListener) }
+
+    fun withCustomAnim(items: Collection<Animator>, together: Boolean = true) = apply {
+        mCoolStyle = CoolStyle(mRootView, -1).apply {
+            setDuration(mDuration)
+            mAnimatorSet.apply { if (together) playTogether(items) else playSequentially(items.toList()) }
+        }
+    }
 
     open class CoolDialogClickListener(var mDialog: CoolDialog?): View.OnClickListener {
         override fun onClick(v: View?) {
