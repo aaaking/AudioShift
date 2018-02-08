@@ -209,7 +209,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                     ?.withContentCustom(extraStr)
                     ?.withContentCustom(extraImg)
                     ?.withPositiveBtn(resources.getString(android.R.string.yes))
-                    ?.withDuration(500)
+                    ?.withDuration(300)
                     ?.withCoolStyle(CoolStyle(mAboutDialog?.mRootView))
         }
         if (!isDestroyed && !isFinishing) {

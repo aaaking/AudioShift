@@ -14,7 +14,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.ViewStub
 import android.widget.Button
-import android.widget.FrameLayout
 import android.widget.TextView
 
 /**
@@ -39,6 +38,8 @@ class CoolDialog : Dialog, DialogInterface {
     private var mDuration = -1L
     private var mCoolStyle: CoolStyle? = null
     //top
+    var mBgTop: Drawable? = GradientDrawable()
+    var mBg: Drawable? = GradientDrawable()
     var iv_top: AppCompatImageView? = null
     var tv_title: TextView? = null
     //middle
@@ -59,17 +60,15 @@ class CoolDialog : Dialog, DialogInterface {
     init {
         var radius = context.resources.getDimension(R.dimen.btn_common_radius)
         var colorDark = context.resources.getColor(R.color.colorPrimaryDark)
-        val bg = GradientDrawable()
-        bg.cornerRadius = radius
-        bg.setColor(context.resources.getColor(R.color.colorPrimaryLightLight))
-        val bgTop = GradientDrawable()
-        bgTop.cornerRadii = floatArrayOf(radius, radius, radius, radius, 0f, 0f, 0f, 0f)
-        bgTop.setColor(colorDark)
+        (mBg as? GradientDrawable)?.cornerRadius = radius
+        (mBg as? GradientDrawable)?.setColor(context.resources.getColor(R.color.colorPrimaryLightLight))
+        (mBgTop as? GradientDrawable)?.cornerRadii = floatArrayOf(radius, radius, radius, radius, 0f, 0f, 0f, 0f)
+        (mBgTop as? GradientDrawable)?.setColor(colorDark)
         mRootView = View.inflate(context, R.layout.layout_cool_dialog, null)
         mRootView?.apply {
-            setBackgroundDrawable(bg)
+            setBackgroundDrawable(mBg)
             iv_top = findViewById(R.id.iv_top)
-            (findViewById<View>(R.id.top) as? FrameLayout)?.setBackgroundDrawable(bgTop)
+            findViewById<View?>(R.id.top)?.setBackgroundDrawable(mBgTop)
             tv_title = findViewById(R.id.tv_title)
             tv_msg_main = findViewById(R.id.tv_msg_main)
             tv_msg_sub = findViewById(R.id.tv_msg_sub)
@@ -92,14 +91,26 @@ class CoolDialog : Dialog, DialogInterface {
         window?.decorView?.setPadding(padding, padding, padding, padding)
     }
 
+    fun withBgAndTopbg(bg: Drawable?, topBg: Drawable?) = apply {
+        mBg = bg
+        mBgTop = topBg
+        mRootView?.setBackgroundDrawable(mBg)
+        mRootView?.findViewById<View?>(R.id.top)?.setBackgroundDrawable(mBgTop)
+    }
+
+    fun withBgAndTopbgColor(bgCorlor: Int, topBgCorlor: Int) = apply {
+        (mBg as? GradientDrawable)?.setColor(bgCorlor)
+        (mBgTop as? GradientDrawable)?.setColor(topBgCorlor)
+    }
+
     fun withDuration(duration: Long): CoolDialog = apply {
         mDuration = duration
-        mCoolStyle?.mDuration = duration
+        mCoolStyle?.setDuration(mDuration)
     }
 
     fun withCoolStyle(style: CoolStyle): CoolDialog = apply {
         mCoolStyle = style
-        mCoolStyle?.mDuration = mDuration
+        mCoolStyle?.setDuration(mDuration)
     }
 
     fun withCancelable(cancelable: Boolean): CoolDialog = apply { setCancelable(cancelable) }
