@@ -1,8 +1,19 @@
 package com.example.zhouzhihui.audioshift
 
+import android.graphics.Color
 import android.os.Bundle
 import android.support.v7.widget.Toolbar
+import android.text.Html
+import android.view.Gravity
+import android.view.View
+import android.view.ViewGroup
+import android.widget.FrameLayout
+import android.widget.ImageView
+import android.widget.TextView
 import com.example.zhouzhihui.audioshift.ui.BaseActivity
+import com.example.zhouzhihui.audioshift.util.ScreenUtil
+import com.zzh.cooldialog.CoolDialog
+import com.zzh.cooldialog.CoolStyle
 import kotlinx.android.synthetic.main.toolbar.*
 
 /**
@@ -13,5 +24,43 @@ class CoolDialogAC : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cooldialog)
         setSupportActionBar(toolbar as? Toolbar)
+    }
+
+    fun btn_default(view: View) = CoolDialog(this).apply {
+        val myMessage = Html.fromHtml("app制作人：黑山<br>邮箱: <a href=\"mailto:1059084407@qq.com\">1059084407@qq.com</a><br>简书: <a href=\"https://www.jianshu.com/u/0b651536da90\">宛丘之上兮</a>")
+        var extraStr = TextView(this@CoolDialogAC)
+        var padding = ScreenUtil.dp2px(this@CoolDialogAC, 20f)
+        extraStr.setText(R.string.about_app_public_wx)
+        extraStr.setTextColor(Color.WHITE)
+        extraStr.setPadding(0, padding, 0, padding / 3)
+        var extraImg = ImageView(this@CoolDialogAC)
+        extraImg.setImageResource(R.mipmap.wx_public)
+        var lp = FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        lp.gravity = Gravity.CENTER
+        withIcon(R.drawable.icon)
+                ?.withTitle(resources.getString(R.string.about_app))
+                ?.withMsg(myMessage)
+                ?.withContentCustom(extraStr)
+                ?.withContentCustom(extraImg)
+                ?.withPositiveBtn(resources.getString(android.R.string.yes))
+                ?.withDuration(300)
+                ?.withCoolStyle(CoolStyle(mRootView))
+        show()
+    }
+
+    fun custom_bg(view: View) = CoolDialog(this).apply {
+
+    }
+    fun custom_top(view: View) = CoolDialog(this).apply {
+
+    }
+    fun custom_content(view: View) = CoolDialog(this).apply {
+
+    }
+    fun custom_content_with_layout(view: View) = CoolDialog(this).apply {
+
+    }
+    fun custom_icon(view: View) = CoolDialog(this).apply {
+
     }
 }
