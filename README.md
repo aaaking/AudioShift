@@ -1,2 +1,2 @@
 # AudioShift
- [地址](https://www.jianshu.com/u/0b651536da90)
+ [地址](https://www.jianshu.com/p/a668576bd1af)
