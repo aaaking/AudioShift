@@ -20,31 +20,31 @@
                 android:layout_height="wrap_content"/>
             <Button
                 android:id="@+id/custom_bg"
-                android:text="自定义顶部"
+                android:text="自定义背景"
                 android:onClick="custom_bg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
             <Button
                 android:id="@+id/custom_top"
-                android:text="自定义顶部"
+                android:text="自定义顶部背景"
                 android:onClick="custom_top"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
             <Button
                 android:id="@+id/custom_content"
-                android:text="自定义顶部"
+                android:text="自定义内容"
                 android:onClick="custom_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
             <Button
                 android:id="@+id/custom_content_with_layout"
-                android:text="自定义顶部"
+                android:text="根据layout自定义内容"
                 android:onClick="custom_content_with_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
             <Button
                 android:id="@+id/custom_icon"
-                android:text="自定义顶部"
+                android:text="自定义icon"
                 android:onClick="custom_icon"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
