@@ -185,6 +185,4 @@ data class CoolStyle(var mTargetView: View?, var mStyle: Int = COOL_STYLE_SLIDE_
                 ObjectAnimator.ofFloat(view, "scaleY", 0f, 0.4f, 0.8f, 0.9f, 1f).setDuration(mDuration)
         )
     }
-
-
 }
