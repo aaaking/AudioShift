@@ -1,6 +1,7 @@
 package com.example.zhouzhihui.audioshift
 
 import android.graphics.Color
+import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.support.v7.widget.Toolbar
 import android.text.Html
@@ -12,6 +13,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.example.zhouzhihui.audioshift.ui.BaseActivity
 import com.example.zhouzhihui.audioshift.util.ScreenUtil
+import com.zzh.cooldialog.COOL_STYLE_3D_ROTATE_LEFT
 import com.zzh.cooldialog.CoolDialog
 import com.zzh.cooldialog.CoolStyle
 import kotlinx.android.synthetic.main.toolbar.*
@@ -49,10 +51,20 @@ class CoolDialogAC : BaseActivity() {
     }
 
     fun custom_bg(view: View) = CoolDialog(this).apply {
-
     }
     fun custom_top(view: View) = CoolDialog(this).apply {
-
+        var radius = context.resources.getDimension(com.zzh.cooldialog.R.dimen.btn_common_radius)
+        val topBg = GradientDrawable()
+        topBg.cornerRadii = floatArrayOf(radius, radius, radius, radius, 0f, 0f, 0f, 0f)
+        topBg.setColor(Color.BLUE)
+        withTitle(resources.getString(R.string.about_app))
+                ?.withMsg("msg1")
+        withBgAndTopbg(mBg, topBg)
+                ?.withNegativeBtn(resources.getString(android.R.string.no))
+                ?.withPositiveBtn(resources.getString(android.R.string.yes))
+                ?.withDuration(300)
+                ?.withCoolStyle(CoolStyle(mRootView, COOL_STYLE_3D_ROTATE_LEFT))
+        show()
     }
     fun custom_content(view: View) = CoolDialog(this).apply {
 
