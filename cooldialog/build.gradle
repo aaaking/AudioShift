@@ -1,11 +1,14 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
+version="1.0.0"
+def siteUrl = 'https://github.com/aaaking/AudioShift'
+def gitUrl = 'https://github.com/aaaking/AudioShift.git'
+group = "com.zzh.cooldialog"
 android {
     compileSdkVersion compileSdk
-
-
-
     defaultConfig {
         minSdkVersion minSdk
         targetSdkVersion targetSdk
@@ -27,7 +30,6 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-
     api supportDependencies.appcompat
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
@@ -37,4 +39,60 @@ dependencies {
 }
 repositories {
     mavenCentral()
+}
+
+install {
+    repositories.mavenInstaller {
+        pom {
+            project {
+                packaging 'aar'
+                // Add your description here
+                name 'An Android library that providers common dialog'
+                url siteUrl
+                licenses {
+                    license {
+                        name 'The Apache Software License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                developers {
+                    developer {
+                        id 'aaaking'
+                        name 'aaaking'
+                        email 'zhihui0727@gmail.com'
+                    }
+                }
+                scm {
+                    connection gitUrl
+                    developerConnection gitUrl
+                    url siteUrl
+                }
+            }
+        }
+    }
+}
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+artifacts {
+    archives sourcesJar
+}
+Properties properties = new Properties()
+File gradle_properties = project.rootProject.file('local.properties');
+if (gradle_properties.exists()) {
+    properties.load(project.rootProject.file('local.properties').newDataInputStream())
+}
+bintray {
+    user = properties.getProperty("bintray.user")
+    key = properties.getProperty("bintray.apikey")
+    configurations = ['archives']
+    pkg {
+        repo = "maven"
+        name = "cooldialog"
+        websiteUrl = siteUrl
+        vcsUrl = gitUrl
+        licenses = ["Apache-2.0"]
+        publish = true
+    }
 }
