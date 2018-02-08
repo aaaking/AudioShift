@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<LinearLayout
+    android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -70,50 +71,61 @@
             android:visibility="gone"
             tools:visibility="visible"/>
 
+    </LinearLayout>
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center_horizontal|bottom"
+        android:orientation="vertical">
         <ViewStub
             android:id="@+id/content_custom_stub"
+            android:layout_marginBottom="60dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
-    </LinearLayout>
+        <!--bottom button-->
+        <LinearLayout
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:paddingBottom="@dimen/dialog_padding_top"
+            android:paddingTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:gravity="center_horizontal|bottom"
+            android:layout_gravity="bottom"
+            app:layout_constraintVertical_bias="1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/middle">
+            <Button
+                android:id="@+id/btn_no"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:visibility="gone"
+                tools:visibility="visible"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:textColor="@color/colorPrimaryDark"
+                android:background="@drawable/bg_negative_btn"
+                android:layout_height="@dimen/btn_height"
+                android:text="@android:string/cancel"/>
 
-    <!--bottom button-->
-    <LinearLayout
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:paddingBottom="@dimen/dialog_padding_top"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
-        android:gravity="center"
-        app:layout_constraintVertical_bias="1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/middle">
-        <Button
-            android:id="@+id/btn_no"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:visibility="gone"
-            tools:visibility="visible"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:textColor="@color/colorPrimaryDark"
-            android:background="@drawable/bg_negative_btn"
-            android:layout_height="@dimen/btn_height"
-            android:text="@android:string/cancel"/>
-
-        <Button
-            android:id="@+id/btn_yes"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:visibility="gone"
-            tools:visibility="visible"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:textColor="@android:color/white"
-            android:background="@drawable/bg_positive_btn"
-            android:layout_height="@dimen/btn_height"
-            android:text="@android:string/ok"/>
-    </LinearLayout>
-</android.support.constraint.ConstraintLayout>
+            <Button
+                android:id="@+id/btn_yes"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:visibility="gone"
+                tools:visibility="visible"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:textColor="@android:color/white"
+                android:background="@drawable/bg_positive_btn"
+                android:layout_height="@dimen/btn_height"
+                android:text="@android:string/ok"/>
+        </LinearLayout>
+    </FrameLayout>
+</LinearLayout>
