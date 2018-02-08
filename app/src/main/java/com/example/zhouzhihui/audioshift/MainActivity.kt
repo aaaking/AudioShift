@@ -195,7 +195,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             var padding = ScreenUtil.dp2px(this, 20f)
             extraStr.setText(R.string.about_app_public_wx)
             extraStr.setTextColor(Color.WHITE)
-            extraStr.setPadding(0, padding, 0, padding / 3)
+            extraStr.setPadding(0, 0, 0, padding / 3)
             var extraImg = ImageView(this)
             extraImg.setImageResource(R.mipmap.wx_public)
             var lp = FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
