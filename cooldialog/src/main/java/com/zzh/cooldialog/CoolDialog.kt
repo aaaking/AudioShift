@@ -11,6 +11,7 @@ import android.os.Bundle
 import android.support.v7.widget.AppCompatImageView
 import android.text.TextUtils
 import android.text.method.LinkMovementMethod
+import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewStub
@@ -38,6 +39,7 @@ class CoolDialog : Dialog, DialogInterface {
     var mRootView: View? = null
     private var mDuration = -1L
     private var mCoolStyle: CoolStyle? = null
+    private var mPadding = 0
     //top
     var mBgTop: Drawable? = GradientDrawable()
     var mBg: Drawable? = GradientDrawable()
@@ -90,8 +92,8 @@ class CoolDialog : Dialog, DialogInterface {
         val params = window?.attributes
         params?.width = ViewGroup.LayoutParams.MATCH_PARENT
         params?.height = ViewGroup.LayoutParams.WRAP_CONTENT
-        val padding = context.resources.getDimensionPixelOffset(R.dimen.dialog_margin)
-        window?.decorView?.setPadding(padding, padding, padding, padding)
+        mPadding = context.resources.getDimensionPixelOffset(R.dimen.dialog_margin)
+        window?.decorView?.setPadding(mPadding, mPadding, mPadding, mPadding)
     }
 
     fun withBgAndTopbg(bg: Drawable?, topBg: Drawable?) = apply {
@@ -200,7 +202,7 @@ class CoolDialog : Dialog, DialogInterface {
         }
     }
 
-    override fun show() {
+    fun show(gravity: Int = Gravity.CENTER, paddingLeft: Int = mPadding, paddingTop: Int = mPadding, paddingRight: Int = mPadding, paddingBottom: Int = mPadding) = apply {
         //Here's the magic..
         //Set the dialog to not focusable (makes navigation ignore us adding the window)
 //        window?.addFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE)
@@ -215,5 +217,7 @@ class CoolDialog : Dialog, DialogInterface {
 //
 //                or View.SYSTEM_UI_FLAG_IMMERSIVE)//(context as? Activity)?.window?.decorView?.systemUiVisibility ?: View.VISIBLE
 //        window?.clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE)
+        window?.decorView?.setPadding(paddingLeft, paddingTop, paddingRight, paddingBottom)
+        window?.setGravity(gravity)
     }
 }
