@@ -11,6 +11,7 @@ CoolDialog能够满足大部分样式需求，包括：
 4. 自定义“取消”和“确定”按钮`withNegativeBtn`、`withPositiveBtn`
 5. 自定义对话框内容`withMsg`、`withMsgSub`、`withContentCustom`
 6. 自定义对话框动画`withCustomAnim`
+7. 自定义Gravity和左上右下的边距`show(gravity: Int = Gravity.CENTER, paddingLeft: Int = mPadding, paddingTop: Int = mPadding, paddingRight: Int = mPadding, paddingBottom: Int = mPadding)`
 
 <p align="center">
  
