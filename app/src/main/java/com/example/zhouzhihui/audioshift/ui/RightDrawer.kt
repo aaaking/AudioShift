@@ -24,15 +24,25 @@ class RightDrawerAdap : RecyclerView.Adapter<RecyclerView.ViewHolder> {
     var shouldUpdateData = false
     var mDatas = ArrayList<Any>()
     var mActivity: Activity? = null
-    constructor(datas: List<Any>, listeners: Any) {
+    constructor(datas: List<Any>?, listeners: Any) {
         mDatas.clear()
-        mDatas.addAll(datas)
+        if (datas != null) {
+            mDatas.addAll(datas)
+        }
 //        mDatas.addAll(mDatas)
 //        mDatas.addAll(mDatas)
 //        mDatas.addAll(mDatas)
         mActivity = listeners as? Activity
     }
     override fun getItemCount(): Int = mDatas.size
+
+    fun updateData(datas: List<Any>?) = apply {
+        mDatas.clear()
+        if (datas != null) {
+            mDatas.addAll(datas)
+        }
+        notifyDataSetChanged()
+    }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
         (holder as? RightDrawerVH)?.bind(mDatas[position] as? File, this)

@@ -5,6 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:background="@color/colorPrimary"
     android:paddingTop="@dimen/toppadding_to_fit_statusbar"
     android:paddingLeft="5dp"
     android:paddingRight="5dp"
@@ -20,11 +21,24 @@
     <TextView
         android:id="@+id/open_file_directory"
         android:layout_width="wrap_content"
+        android:layout_gravity="bottom|left"
+        android:textColor="@android:color/white"
+        android:layout_height="70dp"
+        android:textStyle="bold"
+        android:paddingRight="70dp"
+        android:paddingLeft="20dp"
+        android:paddingTop="20dp"
+        android:text="打开文件目录"/>
+
+    <TextView
+        android:id="@+id/refresh_file_directory"
+        android:layout_width="70dp"
         android:layout_gravity="bottom|right"
         android:textColor="@android:color/white"
         android:layout_height="70dp"
         android:textStyle="bold"
         android:paddingRight="20dp"
+        android:paddingLeft="20dp"
         android:paddingTop="20dp"
-        android:text="打开文件目录"/>
+        android:text="刷新"/>
 </FrameLayout>

@@ -68,14 +68,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                 if (drawer_layout?.isDrawerOpen(GravityCompat.END) == true) {
                     if (right_drawer_recyclerview == null) {
                         viewstub_right_drawlayout?.inflate()
-                        recorder?.getRecordFile()?.parentFile?.listFiles()?.filter { it.absolutePath != recorder?.getRecordFile()?.absolutePath }?.run {
-                            right_drawer_recyclerview?.adapter = RightDrawerAdap(this, this@MainActivity)//init recyclerview only once, if adapter != null do nothing
-//                        right_drawer_recyclerview?.postDelayed({
-//                            (right_drawer_recyclerview?.adapter as? RightDrawerAdap)?.mDatas?.add(recorder!!.getRecordFile()!!)
-//                            right_drawer_recyclerview?.notifyItemInserted((right_drawer_recyclerview?.adapter as RightDrawerAdap)?.mDatas.size, true)
-//                            Toast.makeText(this@MainActivity, "${(right_drawer_recyclerview?.adapter as? RightDrawerAdap)?.mDatas?.size}", Toast.LENGTH_SHORT).show()
-//                        }, 3300)
-                        }
+                        right_drawer_recyclerview?.adapter = RightDrawerAdap(recorder?.getRecordFile()?.parentFile?.listFiles()?.filter { it.absolutePath != recorder?.getRecordFile()?.absolutePath }, this@MainActivity)//init recyclerview only once, if adapter != null do nothing
                         open_file_directory?.setOnClickListener {
                             Intent(Intent.ACTION_GET_CONTENT).apply {
                                 setDataAndType(Uri.parse(recorder?.getRecordFile()?.parentFile?.absolutePath), "file/*")
@@ -83,6 +76,10 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                                     startActivityForResult(this, REQUEST_CODE_SELECT_AUDIO_FILE)
                                 }
                             }
+                        }
+                        refresh_file_directory?.setOnClickListener {
+                            (right_drawer_recyclerview?.adapter as? RightDrawerAdap)?.updateData(recorder?.getRecordFile()?.parentFile?.listFiles()?.filter { it.absolutePath != recorder?.getRecordFile()?.absolutePath })
+                            tv_match_voice_count?.text = getLatestModifiedFileName(recorder?.getRecordFile())
                         }
                     } else if (recordedFilesBeforeShowRightDrawer.size > 0) {
                         notifyRightDrawerListData()
@@ -271,7 +268,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     }
 
     fun afterSaveRecordFile(fileName: String?, saveSuccess: Boolean) = fileName?.takeIf { saveSuccess && fileName.trim().isNotEmpty() }?.run {
-        tv_match_voice_count.text = fileName
+        tv_match_voice_count?.text = fileName
         recorder?.getRecordFile()?.parentFile?.absolutePath?.apply {
             recordedFilesBeforeShowRightDrawer.add(File(this, fileName))
         }
@@ -289,7 +286,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     private fun setAudioTakeButton() {
         iv_player.setOnClickListener { (iv_player.drawable as? Animatable)?.apply { if (isRunning) stop() else start() } }
         tv_voice_timer?.text = "00:00:000"
-        tv_match_voice_count.text = getLatestModifiedFileName(recorder?.getRecordFile())
+        tv_match_voice_count?.text = getLatestModifiedFileName(recorder?.getRecordFile())
         autio_take_circle.setOnTouchListener(View.OnTouchListener { v, event ->
             if (event.action == MotionEvent.ACTION_DOWN) {
                 bigger(v, 50)
