@@ -18,6 +18,7 @@ import android.support.v4.view.GravityCompat
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.widget.Toolbar
 import android.text.Html
+import android.text.TextUtils
 import android.util.Log
 import android.view.*
 import android.widget.*
@@ -226,8 +227,9 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                     ?.withPositiveBtn(resources.getString(R.string.save), mSaveRecordFileDialog?.btnPositiveBg, object : CoolDialog.CoolDialogClickListener(mSaveRecordFileDialog) {
                         override fun onClick(v: View?) {
                             super.onClick(v)
-                            saveRecordFile(recorder?.getRecordFile(), mSaveRecordFileDialog?.mRootView?.findViewById<CoolEditText>(R.id.et_audio_file_name)?.text?.toString())
-                            tv_match_voice_count.text = getLatestModifiedFileName(recorder?.getRecordFile())
+                            val fileName = mSaveRecordFileDialog?.mRootView?.findViewById<CoolEditText>(R.id.et_audio_file_name)?.text?.toString() ?: ""
+                            saveRecordFile(recorder?.getRecordFile(), fileName)
+                            afterSaveRecordFile(fileName)
                         }
                     })
                     ?.withDuration(300)
@@ -258,6 +260,10 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                 onDialogDismiss()
             }
         }
+    }
+
+    fun afterSaveRecordFile(fileName: String?) = fileName?.takeIf { fileName?.trim()?.isNotEmpty() }?.run {
+        tv_match_voice_count.text = fileName
     }
 
     fun onDialogDismiss() {

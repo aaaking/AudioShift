@@ -18,7 +18,7 @@ fun startBtnPlayAnimation(imageView: ImageView?, startAnim: Boolean) = imageView
     (drawable as? Animatable)?.start()
 }
 
-fun saveRecordFile(tempFile: File?, saveFileName: String?) = tempFile?.takeIf { tempFile.length() > 0 && !TextUtils.isEmpty(saveFileName) }?.run {
+fun saveRecordFile(tempFile: File?, saveFileName: String?) = tempFile?.takeIf { tempFile.length() > 0 && (saveFileName?.trim()?.length ?: -1) > 0 }?.run {
     tempFile.renameTo(File(tempFile.parentFile.absolutePath + File.separator + saveFileName))
 }
 
