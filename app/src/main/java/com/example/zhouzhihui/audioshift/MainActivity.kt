@@ -80,6 +80,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                         refresh_file_directory?.setOnClickListener {
                             (right_drawer_recyclerview?.adapter as? RightDrawerAdap)?.updateData(recorder?.getRecordFile()?.parentFile?.listFiles()?.filter { it.absolutePath != recorder?.getRecordFile()?.absolutePath })
                             tv_match_voice_count?.text = getLatestModifiedFileName(recorder?.getRecordFile())
+                            recordedFilesBeforeShowRightDrawer.clear()
                         }
                     } else if (recordedFilesBeforeShowRightDrawer.size > 0) {
                         notifyRightDrawerListData()
