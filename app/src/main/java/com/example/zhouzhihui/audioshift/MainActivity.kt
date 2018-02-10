@@ -12,11 +12,10 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.provider.Settings
-import android.support.annotation.NonNull
 import android.support.design.widget.NavigationView
 import android.support.v4.app.ActivityCompat
 import android.support.v4.view.GravityCompat
-import android.support.v7.app.ActionBarDrawerToggle
+import android.support.v4.widget.DrawerLayout
 import android.support.v7.widget.Toolbar
 import android.text.Html
 import android.util.Log
@@ -32,12 +31,10 @@ import com.zzh.cooldialog.CoolStyle
 import com.zzh.ui.cooledittext.CoolEditText
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
-import java.text.SimpleDateFormat
-import javax.inject.Inject
-import android.support.v4.widget.DrawerLayout
-import android.widget.Toast
 import kotlinx.android.synthetic.main.nav_header_right.*
 import java.io.File
+import java.text.SimpleDateFormat
+import javax.inject.Inject
 
 
 val PERMISSIONS = arrayOf(Manifest.permission.INTERNET, Manifest.permission.RECORD_AUDIO, Manifest.permission.MODIFY_AUDIO_SETTINGS, Manifest.permission.WRITE_EXTERNAL_STORAGE)
@@ -67,7 +64,8 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             override fun onDrawerClosed(drawerView: View?) {
             }
             override fun onDrawerOpened(drawerView: View?) {
-                if (right_drawer_recyclerview?.adapter == null && drawer_layout?.isDrawerOpen(GravityCompat.END) == true) {
+                if (right_drawer_recyclerview == null && drawer_layout?.isDrawerOpen(GravityCompat.END) == true) {
+                    viewstub_right_drawlayout?.inflate()
                     recorder?.getRecordFile()?.parentFile?.listFiles()?.filter { it.absolutePath != recorder?.getRecordFile()?.absolutePath }?.run {
                         right_drawer_recyclerview?.adapter = RightDrawerAdap(this, this@MainActivity)//init recyclerview only once, if adapter != null do nothing
 //                        right_drawer_recyclerview?.postDelayed({
@@ -76,17 +74,18 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 //                            Toast.makeText(this@MainActivity, "${(right_drawer_recyclerview?.adapter as? RightDrawerAdap)?.mDatas?.size}", Toast.LENGTH_SHORT).show()
 //                        }, 3300)
                     }
+                    open_file_directory?.setOnClickListener {
+                        Intent(Intent.ACTION_GET_CONTENT).apply {
+                            setDataAndType(Uri.parse(recorder?.getRecordFile()?.parentFile?.absolutePath), "file/*")
+                            if (resolveActivityInfo(packageManager, 0) != null) {
+                                startActivityForResult(this, REQUEST_CODE_SELECT_AUDIO_FILE)
+                            }
+                        }
+                    }
+
                 }
             }
         })
-        open_file_directory.setOnClickListener {
-            Intent(Intent.ACTION_GET_CONTENT).apply {
-                setDataAndType(Uri.parse(recorder?.getRecordFile()?.parentFile?.absolutePath), "file/*")
-                if (resolveActivityInfo(packageManager, 0) != null) {
-                    startActivityForResult(this, REQUEST_CODE_SELECT_AUDIO_FILE)
-                }
-            }
-        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

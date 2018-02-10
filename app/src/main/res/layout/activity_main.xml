@@ -26,9 +26,14 @@
         android:id="@+id/nav_view_right"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:background="@color/colorPrimary"
         android:layout_gravity="end"
         android:fitsSystemWindows="false">
-        <include layout="@layout/nav_header_right"/>
+        <ViewStub
+            android:id="@+id/viewstub_right_drawlayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout="@layout/nav_header_right"/>
     </android.support.design.widget.NavigationView>
 
 </android.support.v4.widget.DrawerLayout>
