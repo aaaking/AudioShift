@@ -34,6 +34,10 @@ fun getRecordedFileNum(tempFile: File?): String = tempFile?.parentFile?.listFile
     "$size"
 } ?: "0"
 
+fun getLatestModifiedFileName(tempFile: File?): String = tempFile?.parentFile?.listFiles()?.filter { it.absolutePath != tempFile.absolutePath }?.run {
+    if (size > 0) sortedByDescending { it.lastModified() }[0]?.name else ""
+} ?: ""
+
 /**
  * 从一个文件列表中找出后缀是数字的最大的数字，比如文件列表：音频文件_000121、音频文件_289、音频文件、音频文件_111，那么返回结果是289
  */

@@ -227,7 +227,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                         override fun onClick(v: View?) {
                             super.onClick(v)
                             saveRecordFile(recorder?.getRecordFile(), mSaveRecordFileDialog?.mRootView?.findViewById<CoolEditText>(R.id.et_audio_file_name)?.text?.toString())
-                            tv_match_voice_count.text = getRecordedFileNum(recorder?.getRecordFile())
+                            tv_match_voice_count.text = getLatestModifiedFileName(recorder?.getRecordFile())
                         }
                     })
                     ?.withDuration(300)
@@ -269,7 +269,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     private fun setAudioTakeButton() {
         iv_player.setOnClickListener { (iv_player.drawable as? Animatable)?.apply { if (isRunning) stop() else start() } }
         tv_voice_timer?.text = "00:00:000"
-        tv_match_voice_count.text = getRecordedFileNum(recorder?.getRecordFile())
+        tv_match_voice_count.text = getLatestModifiedFileName(recorder?.getRecordFile())
         autio_take_circle.setOnTouchListener(View.OnTouchListener { v, event ->
             if (event.action == MotionEvent.ACTION_DOWN) {
                 bigger(v, 50)
