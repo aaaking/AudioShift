@@ -62,7 +62,7 @@ class RightDrawerVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
         tv_file_time.text = SimpleDateFormat("YYYY/MM/dd aa hh:mm").format(file?.lastModified() ?: 0)
         if (adapterPosition > adapter.curMaxPos) {
             Log.i(TAG, "bind ${adapterPosition} ${layoutPosition}")
-            itemView.startAnimation(AnimationUtils.loadAnimation(itemView.context, R.anim.item_animation_fall_down))
+            itemView.startAnimation(AnimationUtils.loadAnimation(itemView.context, R.anim.item_animation_push_up))
             adapter.curMaxPos = adapterPosition
         }
     }

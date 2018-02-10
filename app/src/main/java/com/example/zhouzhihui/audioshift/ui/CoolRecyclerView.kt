@@ -61,7 +61,7 @@ class CoolRecyclerView : RecyclerView {
             addItemDecoration(decorationThin)
         }
 //        setHasFixedSize(true)
-        LayoutAnimationController(AnimationUtils.loadAnimation(context, R.anim.item_animation_fall_down)).apply {
+        LayoutAnimationController(AnimationUtils.loadAnimation(context, R.anim.item_animation_push_up)).apply {
             delay = 0.15f
             order = LayoutAnimationController.ORDER_NORMAL
             this@CoolRecyclerView.layoutAnimation = this
