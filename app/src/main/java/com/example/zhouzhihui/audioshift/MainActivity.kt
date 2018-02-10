@@ -85,15 +85,17 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                             }
                         }
                     } else if (recordedFilesBeforeShowRightDrawer.size > 0) {
-                        (right_drawer_recyclerview?.adapter as? RightDrawerAdap)?.apply {
-                            mDatas.addAll(recordedFilesBeforeShowRightDrawer)
-                            notifyItemRangeInserted(mDatas.size, recordedFilesBeforeShowRightDrawer.size)
-                        }
-                        recordedFilesBeforeShowRightDrawer.clear()
+                        notifyRightDrawerListData()
                     }
                 }
             }
         })
+    }
+
+    fun notifyRightDrawerListData() = (right_drawer_recyclerview?.adapter as? RightDrawerAdap)?.apply {
+        mDatas.addAll(recordedFilesBeforeShowRightDrawer)
+        notifyItemRangeInserted(mDatas.size, recordedFilesBeforeShowRightDrawer.size)
+        recordedFilesBeforeShowRightDrawer.clear()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -272,6 +274,9 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         tv_match_voice_count.text = fileName
         recorder?.getRecordFile()?.parentFile?.absolutePath?.apply {
             recordedFilesBeforeShowRightDrawer.add(File(this, fileName))
+        }
+        if (drawer_layout?.isDrawerOpen(GravityCompat.END) == true && recordedFilesBeforeShowRightDrawer.size > 0) {
+            notifyRightDrawerListData()
         }
     }
 
