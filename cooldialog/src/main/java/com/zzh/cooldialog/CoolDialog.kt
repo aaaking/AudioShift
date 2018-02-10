@@ -62,6 +62,7 @@ class CoolDialog : Dialog, DialogInterface {
     }
 
     init {
+        mPadding = context.resources.getDimensionPixelOffset(R.dimen.dialog_margin)
         var radius = context.resources.getDimension(R.dimen.btn_common_radius)
         var colorDark = context.resources.getColor(R.color.colorPrimaryDark)
         (mBg as? GradientDrawable)?.cornerRadius = radius
@@ -92,7 +93,6 @@ class CoolDialog : Dialog, DialogInterface {
         val params = window?.attributes
         params?.width = ViewGroup.LayoutParams.MATCH_PARENT
         params?.height = ViewGroup.LayoutParams.WRAP_CONTENT
-        mPadding = context.resources.getDimensionPixelOffset(R.dimen.dialog_margin)
         window?.decorView?.setPadding(mPadding, mPadding, mPadding, mPadding)
     }
 
