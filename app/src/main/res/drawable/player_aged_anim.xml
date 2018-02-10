@@ -1,5 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:drawable="@drawable/player_aged">
+                 xmlns:aapt="http://schemas.android.com/aapt"
+                 android:drawable="@drawable/player_aged">
 
+    <target
+        android:name="beard_up_group">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator
+                    android:duration="200"
+                    android:propertyName="translateY"
+                    android:valueType="floatType"
+                    android:repeatCount="infinite"
+                    android:repeatMode="reverse"
+                    android:valueTo="0"
+                    android:valueFrom="-10"/>
+            </set>
+        </aapt:attr>
+    </target>
+
+    <target
+        android:name="mouth_group">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator
+                    android:duration="200"
+                    android:propertyName="scaleY"
+                    android:valueType="floatType"
+                    android:repeatCount="infinite"
+                    android:repeatMode="reverse"
+                    android:valueTo="1"
+                    android:valueFrom="3"/>
+                <objectAnimator
+                    android:duration="200"
+                    android:propertyName="scaleX"
+                    android:valueType="floatType"
+                    android:repeatCount="infinite"
+                    android:repeatMode="reverse"
+                    android:valueTo="1"
+                    android:valueFrom="4"/>
+            </set>
+        </aapt:attr>
+    </target>
+
+    <target
+        android:name="beard_down_group">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator
+                    android:duration="200"
+                    android:propertyName="translateY"
+                    android:valueType="floatType"
+                    android:repeatCount="infinite"
+                    android:repeatMode="reverse"
+                    android:valueTo="0"
+                    android:valueFrom="10"/>
+            </set>
+        </aapt:attr>
+    </target>
 </animated-vector>
