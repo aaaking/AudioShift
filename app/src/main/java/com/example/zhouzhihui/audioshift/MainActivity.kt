@@ -235,8 +235,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                         override fun onClick(v: View?) {
                             super.onClick(v)
                             val fileName = mSaveRecordFileDialog?.mRootView?.findViewById<CoolEditText>(R.id.et_audio_file_name)?.text?.toString() ?: ""
-                            saveRecordFile(recorder?.getRecordFile(), fileName)
-                            afterSaveRecordFile(fileName)
+                            afterSaveRecordFile(fileName, saveRecordFile(recorder?.getRecordFile(), fileName))
                         }
                     })
                     ?.withDuration(300)
@@ -269,7 +268,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         }
     }
 
-    fun afterSaveRecordFile(fileName: String?) = fileName?.takeIf { fileName.trim().isNotEmpty() }?.run {
+    fun afterSaveRecordFile(fileName: String?, saveSuccess: Boolean) = fileName?.takeIf { saveSuccess && fileName.trim().isNotEmpty() }?.run {
         tv_match_voice_count.text = fileName
         recorder?.getRecordFile()?.parentFile?.absolutePath?.apply {
             recordedFilesBeforeShowRightDrawer.add(File(this, fileName))

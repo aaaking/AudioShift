@@ -18,9 +18,10 @@ fun startBtnPlayAnimation(imageView: ImageView?, startAnim: Boolean) = imageView
     (drawable as? Animatable)?.start()
 }
 
-fun saveRecordFile(tempFile: File?, saveFileName: String?) = tempFile?.takeIf { tempFile.length() > 0 && (saveFileName?.trim()?.length ?: -1) > 0 }?.run {
+fun saveRecordFile(tempFile: File?, saveFileName: String?) : Boolean = tempFile?.takeIf { tempFile.length() > 0 && (saveFileName?.trim()?.length ?: -1) > 0 }?.run {
     tempFile.renameTo(File(tempFile.parentFile.absolutePath + File.separator + saveFileName))
-}
+    true
+} ?: false
 
 fun getSaveFileName(tempFile: File?): String = tempFile?.parentFile?.listFiles()?.filter { it.absolutePath != tempFile.absolutePath }?.run {
     Log.i(TAG, "$size   ${getMaxNum(this)}")
