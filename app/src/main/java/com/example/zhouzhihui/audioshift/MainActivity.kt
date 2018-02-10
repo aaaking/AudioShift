@@ -18,7 +18,6 @@ import android.support.v4.view.GravityCompat
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.widget.Toolbar
 import android.text.Html
-import android.text.TextUtils
 import android.util.Log
 import android.view.*
 import android.widget.*
@@ -45,6 +44,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     var mAboutDialog: CoolDialog? = null
     var mCountDownTimer: CountDownTimer? = null
     var mSaveRecordFileDialog: CoolDialog? = null
+    var recordedFilesBeforeShowRightDrawer: ArrayList<File> = ArrayList<File>()
     private fun hasRequiredPermissions(): Boolean = PERMISSIONS.none { ActivityCompat.checkSelfPermission(this, it) != PackageManager.PERMISSION_GRANTED }
     fun requestRequiredPermissions(view: View?) = ActivityCompat.requestPermissions(this, PERMISSIONS, PERMISSIONS_CODE)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,25 +65,32 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             override fun onDrawerClosed(drawerView: View?) {
             }
             override fun onDrawerOpened(drawerView: View?) {
-                if (right_drawer_recyclerview == null && drawer_layout?.isDrawerOpen(GravityCompat.END) == true) {
-                    viewstub_right_drawlayout?.inflate()
-                    recorder?.getRecordFile()?.parentFile?.listFiles()?.filter { it.absolutePath != recorder?.getRecordFile()?.absolutePath }?.run {
-                        right_drawer_recyclerview?.adapter = RightDrawerAdap(this, this@MainActivity)//init recyclerview only once, if adapter != null do nothing
+                if (drawer_layout?.isDrawerOpen(GravityCompat.END) == true) {
+                    if (right_drawer_recyclerview == null) {
+                        viewstub_right_drawlayout?.inflate()
+                        recorder?.getRecordFile()?.parentFile?.listFiles()?.filter { it.absolutePath != recorder?.getRecordFile()?.absolutePath }?.run {
+                            right_drawer_recyclerview?.adapter = RightDrawerAdap(this, this@MainActivity)//init recyclerview only once, if adapter != null do nothing
 //                        right_drawer_recyclerview?.postDelayed({
 //                            (right_drawer_recyclerview?.adapter as? RightDrawerAdap)?.mDatas?.add(recorder!!.getRecordFile()!!)
 //                            right_drawer_recyclerview?.notifyItemInserted((right_drawer_recyclerview?.adapter as RightDrawerAdap)?.mDatas.size, true)
 //                            Toast.makeText(this@MainActivity, "${(right_drawer_recyclerview?.adapter as? RightDrawerAdap)?.mDatas?.size}", Toast.LENGTH_SHORT).show()
 //                        }, 3300)
-                    }
-                    open_file_directory?.setOnClickListener {
-                        Intent(Intent.ACTION_GET_CONTENT).apply {
-                            setDataAndType(Uri.parse(recorder?.getRecordFile()?.parentFile?.absolutePath), "file/*")
-                            if (resolveActivityInfo(packageManager, 0) != null) {
-                                startActivityForResult(this, REQUEST_CODE_SELECT_AUDIO_FILE)
+                        }
+                        open_file_directory?.setOnClickListener {
+                            Intent(Intent.ACTION_GET_CONTENT).apply {
+                                setDataAndType(Uri.parse(recorder?.getRecordFile()?.parentFile?.absolutePath), "file/*")
+                                if (resolveActivityInfo(packageManager, 0) != null) {
+                                    startActivityForResult(this, REQUEST_CODE_SELECT_AUDIO_FILE)
+                                }
                             }
                         }
+                    } else if (recordedFilesBeforeShowRightDrawer.size > 0) {
+                        (right_drawer_recyclerview?.adapter as? RightDrawerAdap)?.apply {
+                            mDatas.addAll(recordedFilesBeforeShowRightDrawer)
+                            notifyItemRangeInserted(mDatas.size, recordedFilesBeforeShowRightDrawer.size)
+                        }
+                        recordedFilesBeforeShowRightDrawer.clear()
                     }
-
                 }
             }
         })
@@ -262,8 +269,11 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         }
     }
 
-    fun afterSaveRecordFile(fileName: String?) = fileName?.takeIf { fileName?.trim()?.isNotEmpty() }?.run {
+    fun afterSaveRecordFile(fileName: String?) = fileName?.takeIf { fileName.trim().isNotEmpty() }?.run {
         tv_match_voice_count.text = fileName
+        recorder?.getRecordFile()?.parentFile?.absolutePath?.apply {
+            recordedFilesBeforeShowRightDrawer.add(File(this, fileName))
+        }
     }
 
     fun onDialogDismiss() {
