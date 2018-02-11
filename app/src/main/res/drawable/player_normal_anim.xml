@@ -33,20 +33,12 @@
             <set>
                 <objectAnimator
                     android:duration="200"
-                    android:propertyName="scaleY"
+                    android:propertyName="trimPathStart"
                     android:valueType="floatType"
                     android:repeatCount="infinite"
                     android:repeatMode="reverse"
-                    android:valueTo="1"
-                    android:valueFrom="3"/>
-                <objectAnimator
-                    android:duration="200"
-                    android:propertyName="scaleX"
-                    android:valueType="floatType"
-                    android:repeatCount="infinite"
-                    android:repeatMode="reverse"
-                    android:valueTo="1"
-                    android:valueFrom="4"/>
+                    android:valueTo="0"
+                    android:valueFrom="1"/>
             </set>
         </aapt:attr>
     </target>
@@ -57,12 +49,12 @@
             <set>
                 <objectAnimator
                     android:duration="200"
-                    android:propertyName="translateY"
+                    android:propertyName="trimPathStart"
                     android:valueType="floatType"
                     android:repeatCount="infinite"
                     android:repeatMode="reverse"
                     android:valueTo="0"
-                    android:valueFrom="10"/>
+                    android:valueFrom="1"/>
             </set>
         </aapt:attr>
     </target>
@@ -73,12 +65,12 @@
             <set>
                 <objectAnimator
                     android:duration="200"
-                    android:propertyName="translateY"
+                    android:propertyName="trimPathStart"
                     android:valueType="floatType"
                     android:repeatCount="infinite"
                     android:repeatMode="reverse"
                     android:valueTo="0"
-                    android:valueFrom="10"/>
+                    android:valueFrom="1"/>
             </set>
         </aapt:attr>
     </target>
