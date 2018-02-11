@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+                 xmlns:aapt="http://schemas.android.com/aapt"
+                 android:drawable="@drawable/player_normal">
+
+    <target
+        android:name="group_player_normal_base">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator
+                    android:duration="200"
+                    android:propertyName="scaleY"
+                    android:valueType="floatType"
+                    android:repeatCount="infinite"
+                    android:repeatMode="reverse"
+                    android:valueTo="0.9"
+                    android:valueFrom="1"/>
+                <objectAnimator
+                    android:duration="200"
+                    android:propertyName="scaleX"
+                    android:valueType="floatType"
+                    android:repeatCount="infinite"
+                    android:repeatMode="reverse"
+                    android:valueTo="1.0"
+                    android:valueFrom="1.2"/>
+            </set>
+        </aapt:attr>
+    </target>
+
+    <target
+        android:name="wave_left">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator
+                    android:duration="200"
+                    android:propertyName="scaleY"
+                    android:valueType="floatType"
+                    android:repeatCount="infinite"
+                    android:repeatMode="reverse"
+                    android:valueTo="1"
+                    android:valueFrom="3"/>
+                <objectAnimator
+                    android:duration="200"
+                    android:propertyName="scaleX"
+                    android:valueType="floatType"
+                    android:repeatCount="infinite"
+                    android:repeatMode="reverse"
+                    android:valueTo="1"
+                    android:valueFrom="4"/>
+            </set>
+        </aapt:attr>
+    </target>
+
+    <target
+        android:name="wave_middle">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator
+                    android:duration="200"
+                    android:propertyName="translateY"
+                    android:valueType="floatType"
+                    android:repeatCount="infinite"
+                    android:repeatMode="reverse"
+                    android:valueTo="0"
+                    android:valueFrom="10"/>
+            </set>
+        </aapt:attr>
+    </target>
+
+    <target
+        android:name="wave_right">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator
+                    android:duration="200"
+                    android:propertyName="translateY"
+                    android:valueType="floatType"
+                    android:repeatCount="infinite"
+                    android:repeatMode="reverse"
+                    android:valueTo="0"
+                    android:valueFrom="10"/>
+            </set>
+        </aapt:attr>
+    </target>
+</animated-vector>
