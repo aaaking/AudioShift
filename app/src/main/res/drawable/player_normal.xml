@@ -1,4 +1,5 @@
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:width="150dp"
         android:height="150dp"
         android:viewportHeight="400.0"
@@ -32,10 +33,4 @@
         android:strokeColor="#11982A"
         android:strokeLineCap="round"
         android:strokeWidth="18"/>
-
-    <path
-        android:name="wave_right"
-        android:pathData="M165 58 v285"
-        android:strokeColor="#11982A"
-        android:strokeWidth="2"/>
 </vector>
