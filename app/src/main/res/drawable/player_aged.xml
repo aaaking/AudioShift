@@ -35,7 +35,7 @@
     </group>
 
     <group android:name="mouth_group" android:pivotY="287.436" android:pivotX="255.936">
-        <path android:fillColor="#FFFFFF" android:pathData="M252.936 284.936 a 2.5 2.5 0 0 0 0 5 h6 a 2.5 2.5 0 0 0 0 -5 h-6 z"/>
+        <path android:fillColor="#FFC25F" android:pathData="M252.936 284.936 a 2.5 2.5 0 0 0 0 5 h6 a 2.5 2.5 0 0 0 0 -5 h-6 z"/>
     </group>
 
     <group android:name="beard_down_group">
