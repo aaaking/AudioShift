@@ -82,6 +82,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                             tv_match_voice_count?.text = getLatestModifiedFileName(recorder?.getRecordFile())
                             recordedFilesBeforeShowRightDrawer.clear()
                         }
+                        recordedFilesBeforeShowRightDrawer.clear()
                     } else if (recordedFilesBeforeShowRightDrawer.size > 0) {
                         notifyRightDrawerListData()
                     }
