@@ -44,12 +44,12 @@
     </target>
 
     <target
-        android:name="group_wave_middle">
+        android:name="wave_middle">
         <aapt:attr name="android:animation">
             <set>
                 <objectAnimator
-                    android:duration="200"
-                    android:propertyName="scaleX"
+                    android:duration="260"
+                    android:propertyName="strokeAlpha"
                     android:valueType="floatType"
                     android:repeatCount="infinite"
                     android:repeatMode="reverse"
@@ -60,12 +60,12 @@
     </target>
 
     <target
-        android:name="group_wave_right">
+        android:name="wave_right">
         <aapt:attr name="android:animation">
             <set>
                 <objectAnimator
-                    android:duration="200"
-                    android:propertyName="scaleX"
+                    android:duration="310"
+                    android:propertyName="strokeAlpha"
                     android:valueType="floatType"
                     android:repeatCount="infinite"
                     android:repeatMode="reverse"
