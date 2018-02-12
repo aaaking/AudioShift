@@ -286,7 +286,18 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     }
 
     private fun setAudioTakeButton() {
-        iv_player.setOnClickListener { (iv_player.drawable as? Animatable)?.apply { if (isRunning) stop() else start() } }
+        iv_player.setOnClickListener {
+            mIsPlaying = !mIsPlaying
+            (iv_player.drawable as? Animatable)?.apply { if (isRunning) stop() else start() }
+            startVoiceStateAnimation(state_animation, mIsPlaying)
+            audio_take_container?.isEnabled = !mIsPlaying
+            autio_take_circle?.isEnabled = !mIsPlaying
+            if (isPlaying()) {
+                startPlaying()
+            } else {
+                stopPlaying()
+            }
+        }
         tv_voice_timer?.text = "00:00:000"
         tv_match_voice_count?.text = getLatestModifiedFileName(recorder?.getRecordFile())
         autio_take_circle.setOnTouchListener(View.OnTouchListener { v, event ->
@@ -334,9 +345,8 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     private fun hasRecording(): Boolean = !isRecording() && recorder?.hasRecording() ?: false
 
     fun startRecording() =
-//        elf.setEnabled(false)
-//        santa.setEnabled(false)
             takeIf { mAboutDialog?.isShowing != true && mSaveRecordFileDialog?.isShowing != true }?.run {
+                iv_player?.isEnabled = false
                 recorder?.startRecording()
                 startTime = System.currentTimeMillis()
                 probar_voice_timer?.max = durationInMillis.toInt()
@@ -366,8 +376,14 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             showSaveRecordFileDialog()
             recorder?.stopRecording()
             audioAnim(isRecording())
-//        elf.setEnabled(true)
-//        santa.setEnabled(true)
+            iv_player?.isEnabled = true
         }
+    }
+
+    var mIsPlaying = false
+    private fun isPlaying(): Boolean = mIsPlaying
+    fun startPlaying() {
+    }
+    fun stopPlaying() {
     }
 }
