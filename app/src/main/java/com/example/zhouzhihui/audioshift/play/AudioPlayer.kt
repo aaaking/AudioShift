@@ -7,6 +7,7 @@ import java.io.File
 
 
 public class AudioPlayer(val audioTrack: AudioTrack, val file: File) : Player {
+    override fun getPlaybackrate(): Int = audioTrack.playbackRate
 
     var mSpeed = 1f
 
@@ -20,7 +21,6 @@ public class AudioPlayer(val audioTrack: AudioTrack, val file: File) : Player {
         }
 
         override fun onPeriodicNotification(track: AudioTrack) {
-            //NO-OP
         }
     }
 
@@ -28,16 +28,17 @@ public class AudioPlayer(val audioTrack: AudioTrack, val file: File) : Player {
         return audioTrack.playState == AudioTrack.PLAYSTATE_PLAYING
     }
 
-    override fun startPlaying() {
+    override fun startPlaying(fileP: File) {
         if (isPlaying()) {
             audioTrack.stop()
         }
         val playbackParams = audioTrack.playbackParams
         playbackParams.pitch = mSpeed
         audioTrack.playbackParams = playbackParams
+        Log.e(TAG, "startPlaying  ${audioTrack.playbackRate}  ${audioTrack.sampleRate}")
         audioTrack.setPlaybackPositionUpdateListener(positionListener)
         audioTrack.play()
-        val playerTask = AudioPlayerTask(audioTrack, file)
+        val playerTask = AudioPlayerTask(audioTrack, fileP)
         playerThread = Thread(playerTask)
         playerThread!!.start()
     }

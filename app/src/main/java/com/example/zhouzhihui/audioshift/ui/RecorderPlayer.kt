@@ -8,6 +8,7 @@ import com.example.zhouzhihui.audioshift.record.fileHasContent
 import java.io.File
 
 class RecorderPlayer(val mediaManager: MediaManager, val file: File) : Recorder, Player {
+    override fun getPlaybackrate(): Int = audioPlayer?.getPlaybackrate() ?: 48000
 
     var audioRecorder: AudioRecorder? = null
     var audioPlayer: AudioPlayer? = null
@@ -33,18 +34,18 @@ class RecorderPlayer(val mediaManager: MediaManager, val file: File) : Recorder,
 
     override fun isPlaying(): Boolean = audioPlayer?.isPlaying() ?: false
 
-    override fun startPlaying() {
-        val fileSize = file.length()
-        if (fileSize <= 0) {
+    override fun startPlaying(fileP: File) {
+        val fileSize = fileP.length()
+        if (fileSize <= 0 || fileP.isDirectory) {
             return
         }
         if (audioPlayer != null && audioPlayer!!.isPlaying()) {
             audioPlayer!!.stopPlaying()
         }
         val audioTrack = mediaManager.getAudioTrack(fileSize)
-        audioPlayer = AudioPlayer(audioTrack, file)
+        audioPlayer = AudioPlayer(audioTrack, fileP)
         audioPlayer!!.setSpeed(mSpeed)
-        audioPlayer!!.startPlaying()
+        audioPlayer!!.startPlaying(fileP)
     }
 
     override fun stopPlaying() {

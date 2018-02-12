@@ -21,6 +21,7 @@ import android.text.Html
 import android.util.Log
 import android.view.*
 import android.widget.*
+import com.example.zhouzhihui.audioshift.play.Player
 import com.example.zhouzhihui.audioshift.record.Recorder
 import com.example.zhouzhihui.audioshift.ui.*
 import com.example.zhouzhihui.audioshift.util.ScreenUtil
@@ -287,15 +288,10 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 
     private fun setAudioTakeButton() {
         iv_player.setOnClickListener {
-            mIsPlaying = !mIsPlaying
-            (iv_player.drawable as? Animatable)?.apply { if (isRunning) stop() else start() }
-            startVoiceStateAnimation(state_animation, mIsPlaying)
-            audio_take_container?.isEnabled = !mIsPlaying
-            autio_take_circle?.isEnabled = !mIsPlaying
             if (isPlaying()) {
-                startPlaying()
-            } else {
                 stopPlaying()
+            } else {
+                startPlaying(SPEED_BABY)
             }
         }
         tv_voice_timer?.text = "00:00:000"
@@ -340,6 +336,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 
     private var startTime: Long = -1
     var recorder: Recorder? = null @Inject set
+    var player: Player? = null @Inject set
     var durationInMillis: Long = 0L @Inject set
     private fun isRecording(): Boolean = recorder?.isRecording() ?: false
     private fun hasRecording(): Boolean = !isRecording() && recorder?.hasRecording() ?: false
@@ -381,9 +378,46 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     }
 
     var mIsPlaying = false
-    private fun isPlaying(): Boolean = mIsPlaying
-    fun startPlaying() {
+    private fun isPlaying(): Boolean = mIsPlaying//player?.isPlaying() ?: false
+    fun startPlaying(speed: Float) {
+        val curFile = File(recorder?.getRecordFile()?.parentFile?.absolutePath, tv_match_voice_count?.text?.toString())
+        if (curFile.exists() && curFile.isFile && curFile.length() > 0) {
+            mIsPlaying = true
+            updatePlayingState()
+            player?.setSpeed(speed)
+            player?.startPlaying(curFile)
+            val audioLengthSeconds = curFile.length() / (player?.getPlaybackrate() ?: 48000) / 2f
+            val audioLengthMillis: Long = (audioLengthSeconds * 1000 + 280).toLong()
+            Log.i(TAG, "long: ${curFile.length()}  ${audioLengthMillis} int: ${audioLengthSeconds} ")
+            probar_voice_timer?.max = audioLengthMillis.toInt()
+            mCountDownTimer?.cancel()
+            mCountDownTimer = object : CountDownTimer(audioLengthMillis, 10) {
+                override fun onFinish() {
+                    probar_voice_timer?.progress = audioLengthMillis.toInt()
+                    stopPlaying()
+                }
+                override fun onTick(millisUntilFinished: Long) {
+                    probar_voice_timer?.progress = (audioLengthMillis - millisUntilFinished).toInt()
+                    tv_voice_timer?.text = SimpleDateFormat("mm:ss:SSS").format(audioLengthMillis - millisUntilFinished)
+                }
+            }
+            mCountDownTimer?.start()
+        }
     }
-    fun stopPlaying() {
+    fun stopPlaying() = takeIf { isPlaying() }?.run {
+        mCountDownTimer?.cancel()
+        mCountDownTimer = null
+        mIsPlaying = false
+        runOnUiThread { updatePlayingState() }
+    }
+
+    fun updatePlayingState() {
+        (iv_player.drawable as? Animatable)?.apply { if (isRunning) stop() else start() }
+        startVoiceStateAnimation(state_animation, isPlaying())
+        audio_take_container?.isEnabled = !isPlaying()
+        autio_take_circle?.isEnabled = !isPlaying()
     }
 }
+val SPEED_NORMAL = 1f
+val SPEED_BABY = 2f
+val SPEED_AGED = 0.75f
