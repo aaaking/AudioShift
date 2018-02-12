@@ -22,17 +22,21 @@
             android:pathData="M255 137 a38 65 0 0 1 0 130"/>
     </group>
 
-    <path
-        android:name="wave_middle"
-        android:pathData="M290 110 a60 95 0 0 1 0 180"
-        android:strokeColor="#11982A"
-        android:strokeLineCap="round"
-        android:strokeWidth="18"/>
+    <group android:name="group_wave_middle" android:pivotX="290" android:scaleX="1">
+        <path
+            android:name="wave_middle"
+            android:pathData="M290 110 a60 95 0 0 1 0 180"
+            android:strokeColor="#11982A"
+            android:strokeLineCap="round"
+            android:strokeWidth="18"/>
+    </group>
 
-    <path
-        android:name="wave_right"
-        android:pathData="M295 58 a78 143 0 0 1 0 286"
-        android:strokeColor="#11982A"
-        android:strokeLineCap="round"
-        android:strokeWidth="18"/>
+    <group android:name="group_wave_right" android:pivotX="295" android:scaleX="1">
+        <path
+            android:name="wave_right"
+            android:pathData="M295 58 a78 143 0 0 1 0 286"
+            android:strokeColor="#11982A"
+            android:strokeLineCap="round"
+            android:strokeWidth="18"/>
+    </group>
 </vector>

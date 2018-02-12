@@ -44,33 +44,33 @@
     </target>
 
     <target
-        android:name="wave_middle">
+        android:name="group_wave_middle">
         <aapt:attr name="android:animation">
             <set>
                 <objectAnimator
                     android:duration="200"
-                    android:propertyName="trimPathStart"
+                    android:propertyName="scaleX"
                     android:valueType="floatType"
                     android:repeatCount="infinite"
                     android:repeatMode="reverse"
-                    android:valueTo="0"
-                    android:valueFrom="1"/>
+                    android:valueTo="1"
+                    android:valueFrom="0"/>
             </set>
         </aapt:attr>
     </target>
 
     <target
-        android:name="wave_right">
+        android:name="group_wave_right">
         <aapt:attr name="android:animation">
             <set>
                 <objectAnimator
                     android:duration="200"
-                    android:propertyName="trimPathStart"
+                    android:propertyName="scaleX"
                     android:valueType="floatType"
                     android:repeatCount="infinite"
                     android:repeatMode="reverse"
-                    android:valueTo="0"
-                    android:valueFrom="1"/>
+                    android:valueTo="1"
+                    android:valueFrom="0"/>
             </set>
         </aapt:attr>
     </target>
