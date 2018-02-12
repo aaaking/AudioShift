@@ -28,6 +28,7 @@
             android:pathData="M290 110 a60 95 0 0 1 0 180"
             android:strokeColor="#11982A"
             android:strokeLineCap="round"
+            android:strokeAlpha="1"
             android:strokeWidth="18"/>
     </group>
 
