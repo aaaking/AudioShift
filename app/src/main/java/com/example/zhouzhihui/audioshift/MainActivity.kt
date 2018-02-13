@@ -291,7 +291,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             if (isPlaying()) {
                 stopPlaying()
             } else {
-                startPlaying(SPEED_BABY)
+                startPlaying()
             }
         }
         tv_voice_timer?.text = "00:00:000"
@@ -377,14 +377,15 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         }
     }
 
+    var mPlayType: Pair<Int, Float> = SPEED_NORMAL
     var mIsPlaying = false
     private fun isPlaying(): Boolean = mIsPlaying//player?.isPlaying() ?: false
-    fun startPlaying(speed: Float) {
+    fun startPlaying() {
         val curFile = File(recorder?.getRecordFile()?.parentFile?.absolutePath, tv_match_voice_count?.text?.toString())
         if (curFile.exists() && curFile.isFile && curFile.length() > 0) {
             mIsPlaying = true
             updatePlayingState()
-            player?.setSpeed(speed)
+            player?.setSpeed(mPlayType.second)
             player?.startPlaying(curFile)
             val audioLengthSeconds = curFile.length() / (player?.getPlaybackrate() ?: 48000) / 2f
             val audioLengthMillis: Long = (audioLengthSeconds * 1000 + 280).toLong()
@@ -417,7 +418,9 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         audio_take_container?.isEnabled = !isPlaying()
         autio_take_circle?.isEnabled = !isPlaying()
     }
+
+    fun changePlayType(playType: Pair<Int, Float>) { mPlayType = playType }
 }
-val SPEED_NORMAL = 1f
-val SPEED_BABY = 2f
-val SPEED_AGED = 0.75f
+val SPEED_NORMAL = Pair(0, 1f)
+val SPEED_BABY = Pair(1, 2f)
+val SPEED_AGED = Pair(2, 0.75f)
