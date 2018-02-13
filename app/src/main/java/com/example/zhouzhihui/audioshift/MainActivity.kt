@@ -41,7 +41,7 @@ import javax.inject.Inject
 val PERMISSIONS = arrayOf(Manifest.permission.INTERNET, Manifest.permission.RECORD_AUDIO, Manifest.permission.MODIFY_AUDIO_SETTINGS, Manifest.permission.WRITE_EXTERNAL_STORAGE)
 val PERMISSIONS_CODE = 1
 val REQUEST_CODE_SELECT_AUDIO_FILE = 6
-class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
+class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener, IClick {
     var mAboutDialog: CoolDialog? = null
     var mCountDownTimer: CountDownTimer? = null
     var mSaveRecordFileDialog: CoolDialog? = null
@@ -420,6 +420,33 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     }
 
     fun changePlayType(playType: Pair<Int, Float>) { mPlayType = playType }
+
+    override fun onClick(position: Int, payload: Any?) {
+        var validFile = payload is File && payload.isFile && payload.length() > 0
+        if (validFile) {
+            tv_match_voice_count?.text = (payload as? File)?.name
+            drawer_layout?.closeDrawer(GravityCompat.END)
+        } else {
+            (right_drawer_recyclerview?.adapter as? RightDrawerAdap)?.mDatas?.removeAt(position)
+            right_drawer_recyclerview?.adapter?.notifyItemRemoved(position)
+        }
+        Log.i(TAG, "onClick $position $payload $validFile")
+        super.onClick(position, payload)
+    }
+    override fun onLongPress(position: Int, payload: Any?): Boolean {
+        var validFile = payload is File && payload.isFile && payload.length() > 0
+        if (validFile) {
+
+        } else {
+            (right_drawer_recyclerview?.adapter as? RightDrawerAdap)?.mDatas?.removeAt(position)
+            right_drawer_recyclerview?.adapter?.notifyItemRemoved(position)
+        }
+        Log.i(TAG, "onLongPress $position $payload $validFile")
+        return super.onLongPress(position, payload)
+    }
+    override fun onDelete(position: Int, payload: Any?) {
+        super.onDelete(position, payload)
+    }
 }
 val SPEED_NORMAL = Pair(0, 1f)
 val SPEED_BABY = Pair(1, 2f)

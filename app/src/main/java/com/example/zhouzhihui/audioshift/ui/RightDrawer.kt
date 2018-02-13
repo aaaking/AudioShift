@@ -21,18 +21,16 @@ import java.util.*
 
 class RightDrawerAdap : RecyclerView.Adapter<RecyclerView.ViewHolder> {
     var curMaxPos = -1
-    var shouldUpdateData = false
     var mDatas = ArrayList<Any>()
     var mActivity: Activity? = null
+    var mIClick: IClick? = null
     constructor(datas: List<Any>?, listeners: Any) {
         mDatas.clear()
         if (datas != null) {
             mDatas.addAll(datas)
         }
-//        mDatas.addAll(mDatas)
-//        mDatas.addAll(mDatas)
-//        mDatas.addAll(mDatas)
         mActivity = listeners as? Activity
+        mIClick = listeners as? IClick
     }
     override fun getItemCount(): Int = mDatas.size
 
@@ -75,5 +73,7 @@ class RightDrawerVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
             itemView.startAnimation(AnimationUtils.loadAnimation(itemView.context, R.anim.item_animation_push_up))
             adapter.curMaxPos = adapterPosition
         }
+        itemView.setOnClickListener { adapter.mIClick?.onClick(adapterPosition, file) }
+        itemView.setOnLongClickListener { adapter.mIClick?.onLongPress(adapterPosition, file) ?: false }
     }
 }
