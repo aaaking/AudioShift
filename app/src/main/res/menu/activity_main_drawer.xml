@@ -7,10 +7,6 @@
             android:icon="@mipmap/ic_launcher"
             android:title="Import" />
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/leak_canary_icon"
-            android:title="Gallery" />
-        <item
             android:id="@+id/nav_slideshow"
             android:icon="@drawable/icon"
             android:title="Slideshow" />
