@@ -18,27 +18,64 @@
         android:layout_marginBottom="70dp"
         app:dividerHeight="8dp"/>
 
-    <TextView
-        android:id="@+id/open_file_directory"
-        android:layout_width="wrap_content"
-        android:layout_gravity="bottom|left"
-        android:textColor="@android:color/white"
+    <FrameLayout
+        android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:textStyle="bold"
-        android:paddingRight="70dp"
-        android:paddingLeft="20dp"
-        android:paddingTop="20dp"
-        android:text="打开文件目录"/>
+        android:layout_gravity="bottom">
+        <RadioGroup
+            android:id="@+id/main_radiogroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <RadioButton
+                android:id="@+id/main_radiobutton_weixing"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:text="normal"
+                android:buttonTint="@android:color/holo_blue_bright"
+                android:gravity="center"
+                android:checked="true"/>
+            <RadioButton
+                android:id="@+id/main_radiobutton_contacts"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:text="baby"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:buttonTint="@android:color/holo_blue_bright"
+                android:gravity="center"/>
+            <RadioButton
+                android:id="@+id/main_radiobutton_find"
+                android:buttonTint="@android:color/holo_blue_bright"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:text="aged"
+                android:gravity="center"/>
+        </RadioGroup>
+        <TextView
+            android:id="@+id/open_file_directory"
+            android:layout_width="wrap_content"
+            android:layout_gravity="bottom|left"
+            android:textColor="@android:color/white"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:paddingRight="70dp"
+            android:paddingLeft="20dp"
+            android:paddingBottom="10dp"
+            android:text="打开文件目录"/>
 
-    <TextView
-        android:id="@+id/refresh_file_directory"
-        android:layout_width="70dp"
-        android:layout_gravity="bottom|right"
-        android:textColor="@android:color/white"
-        android:layout_height="70dp"
-        android:textStyle="bold"
-        android:paddingRight="20dp"
-        android:paddingLeft="20dp"
-        android:paddingTop="20dp"
-        android:text="刷新"/>
+        <TextView
+            android:id="@+id/refresh_file_directory"
+            android:layout_width="70dp"
+            android:layout_gravity="bottom|right"
+            android:textColor="@android:color/white"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:paddingRight="20dp"
+            android:paddingLeft="20dp"
+            android:paddingBottom="10dp"
+            android:text="刷新"/>
+    </FrameLayout>
+
 </FrameLayout>

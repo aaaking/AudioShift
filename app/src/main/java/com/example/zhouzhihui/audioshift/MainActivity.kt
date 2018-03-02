@@ -84,6 +84,24 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                             recordedFilesBeforeShowRightDrawer.clear()
                         }
                         recordedFilesBeforeShowRightDrawer.clear()
+                        main_radiogroup?.setOnCheckedChangeListener(object : RadioGroup.OnCheckedChangeListener {
+                            override fun onCheckedChanged(group: RadioGroup, checkedId: Int) {
+                                when (checkedId) {
+                                    R.id.main_radiobutton_weixing -> {
+                                        iv_player?.setImageResource(R.drawable.player_normal_anim)
+                                        mPlayType = SPEED_NORMAL
+                                    }
+                                    R.id.main_radiobutton_contacts -> {
+                                        iv_player?.setImageResource(R.drawable.player_baby_anim)
+                                        mPlayType = SPEED_BABY
+                                    }
+                                    R.id.main_radiobutton_find -> {
+                                        iv_player?.setImageResource(R.drawable.player_aged_anim)
+                                        mPlayType = SPEED_AGED
+                                    }
+                                }
+                            }
+                        })
                     } else if (recordedFilesBeforeShowRightDrawer.size > 0) {
                         notifyRightDrawerListData()
                     }
