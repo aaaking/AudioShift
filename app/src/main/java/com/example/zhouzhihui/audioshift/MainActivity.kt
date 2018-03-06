@@ -68,6 +68,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 //                content.translationX = (drawerView?.width ?: 0) * slideOffset
 //                content.scaleX = 1 - (slideOffset / scaleFactor)
 //                content.scaleY = 1 - (slideOffset / scaleFactor)
+//                Log.i("zzh", "${drawer_layout.isDrawerVisible(GravityCompat.START)}")
             }
             override fun onDrawerClosed(drawerView: View?) {
             }
