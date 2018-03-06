@@ -58,10 +58,16 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         }
         (toolbar as? Toolbar)?.apply { setToolbar(this,  R.drawable.icon, drawer_layout) }
         nav_view.setNavigationItemSelectedListener(this)
+//        drawer_layout.setScrimColor(Color.TRANSPARENT)//Removing the Scrim then the main content will not darken
+//        drawer_layout.drawerElevation = 0f//Sometimes the drawer comes with a shadow, which can be removed by adding the following line.
         drawer_layout.addDrawerListener(object : DrawerLayout.DrawerListener {
+//            private val scaleFactor = 6f
             override fun onDrawerStateChanged(newState: Int) {
             }
             override fun onDrawerSlide(drawerView: View?, slideOffset: Float) {
+//                content.translationX = (drawerView?.width ?: 0) * slideOffset
+//                content.scaleX = 1 - (slideOffset / scaleFactor)
+//                content.scaleY = 1 - (slideOffset / scaleFactor)
             }
             override fun onDrawerClosed(drawerView: View?) {
             }
