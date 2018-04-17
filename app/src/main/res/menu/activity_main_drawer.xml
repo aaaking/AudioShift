@@ -17,7 +17,7 @@
         <item
             android:id="@+id/nav_sgs"
             android:icon="@drawable/icon"
-            android:title="Sgs"/>
+            android:title="@string/nav_sgs"/>
     </group>
 
     <item android:title="Communicate">

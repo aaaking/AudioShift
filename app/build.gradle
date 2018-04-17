@@ -5,6 +5,9 @@ apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion compileSdk
+    sourceSets.main{
+        jniLibs.srcDir 'libs'
+    }
     defaultConfig {
         applicationId "com.example.zhouzhihui.audioshift"
         minSdkVersion 23
@@ -42,6 +45,7 @@ android {
     aaptOptions {
         additionalParameters "--no-version-vectors"
     }
+    useLibrary 'org.apache.http.legacy'
 }
 
 def dependencyGroup(Closure closure) {
