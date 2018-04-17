@@ -14,6 +14,10 @@
             android:id="@+id/nav_manage"
             android:icon="@drawable/icon"
             android:title="Tools" />
+        <item
+            android:id="@+id/nav_sgs"
+            android:icon="@drawable/icon"
+            android:title="Sgs"/>
     </group>
 
     <item android:title="Communicate">

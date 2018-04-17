@@ -23,6 +23,7 @@ import android.view.*
 import android.widget.*
 import com.example.zhouzhihui.audioshift.play.Player
 import com.example.zhouzhihui.audioshift.record.Recorder
+import com.example.zhouzhihui.audioshift.sgs.startSgsAC
 import com.example.zhouzhihui.audioshift.ui.*
 import com.example.zhouzhihui.audioshift.util.ScreenUtil
 import com.example.zhouzhihui.audioshift.util.isCancelled
@@ -210,6 +211,9 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             }
             R.id.nav_send -> {
 
+            }
+            R.id.nav_sgs -> {
+                startSgsAC(this)
             }
         }
         val drawer = findViewById<View>(R.id.drawer_layout) as DrawerLayout
