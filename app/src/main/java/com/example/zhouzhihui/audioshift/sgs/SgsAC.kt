@@ -55,7 +55,7 @@ class SgsAC : BaseActivity() {
         mPlugin = GameEngine(this)
         mPlugin.game_plugin_set_runtime_proxy(mProxy)
         mPlugin.game_plugin_set_option("localize", "false")
-        mPlugin.game_plugin_set_option("gameUrl", "http://10.225.23.240:8900/bin/index.html")
+        mPlugin.game_plugin_set_option("gameUrl", "http://10.30.20.118:8903/bin/index.html")
         mPlugin.game_plugin_init(3)
         val gameView = mPlugin.game_plugin_get_view()
         this.setContentView(gameView)
