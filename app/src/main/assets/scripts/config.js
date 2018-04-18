@@ -28,3 +28,29 @@ NET_UNKNOWN=5
 //        alert(type)
 //    });
 //}
+
+//if( window.conch )//可以通过该函数把所有画面都设置成半透明
+//{
+//    window.conch.config.setTransparentMode();
+//}
+
+function openWebview() {
+    conch && conch.showAssistantTouch(true);
+            var ctx = document.createElement('canvas').getContext('2d');
+            function render() {
+                ctx.fillStyle = '#99d9ea';
+                ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);
+                window.requestAnimationFrame(render);
+            }
+            window.requestAnimationFrame(render);
+            document.addEventListener('touchstart', () => {
+                if (conch) {
+                    var l = 50;
+                    var t = 50;
+                    var w = window.innerWidth - l * 2;
+                    var h = window.innerHeight - t * 2;
+                    conch.setExternalLinkEx('http://www.layabox.com', l, t, w, h, true);
+                    //conch.setExternalLink('http://www.baidu.com');
+                }
+            });
+}

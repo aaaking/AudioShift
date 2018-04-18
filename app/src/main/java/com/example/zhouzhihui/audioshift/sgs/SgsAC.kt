@@ -9,10 +9,12 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.KeyEvent
+import android.view.View
 import android.view.Window
 import android.view.WindowManager
 import android.webkit.ValueCallback
 import android.widget.TextView
+import android.widget.Toast
 import com.example.zhouzhihui.audioshift.R
 import com.example.zhouzhihui.audioshift.sgs.layaair.autoupdateversion.AutoUpdateAPK
 import com.example.zhouzhihui.audioshift.sgs.layaair.game.IMarket.IPlugin
@@ -20,6 +22,8 @@ import com.example.zhouzhihui.audioshift.sgs.layaair.game.IMarket.IPluginRuntime
 import com.example.zhouzhihui.audioshift.sgs.layaair.game.Market.GameEngine
 import com.example.zhouzhihui.audioshift.ui.BaseActivity
 import com.example.zhouzhihui.audioshift.util.isOpenNetwork
+import layaair.game.browser.ConchJNI
+import layaair.game.browser.ExportJavaFunction
 import layaair.game.config.config
 
 /**
@@ -43,11 +47,40 @@ class SgsAC : BaseActivity() {
         super.onCreate(savedInstanceState)
         window.requestFeature(Window.FEATURE_NO_TITLE)
         window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
+        if (true) {
+            var dddd = TextView(this)
+            dddd.text = "clickMe"
+            dddd.x = 100f
+            dddd.y = 300f
+            dddd.setOnClickListener {
+                Toast.makeText(this@SgsAC, "gaegaw", Toast.LENGTH_SHORT).show()
+                ConchJNI.RunJS("alert('hello world')");
+                ConchJNI.RunJS("conch && conch.showAssistantTouch(true);\n" +
+                        "            var ctx = document.createElement('canvas').getContext('2d');\n" +
+                        "            function render() {\n" +
+                        "                ctx.fillStyle = '#99d9ea';\n" +
+                        "                ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);\n" +
+                        "                window.requestAnimationFrame(render);\n" +
+                        "            }\n" +
+                        "            window.requestAnimationFrame(render);\n" +
+                        "            document.addEventListener('touchstart', () => {\n" +
+                        "                if (conch) {\n" +
+                        "                    var l = 50;\n" +
+                        "                    var t = 50;\n" +
+                        "                    var w = window.innerWidth - l * 2;\n" +
+                        "                    var h = window.innerHeight - t * 2;\n" +
+                        "                    conch.setExternalLinkEx('http://www.layabox.com', l, t, w, h, true);\n" +
+                        "                    //conch.setExternalLink('http://www.baidu.com');\n" +
+                        "                }\n" +
+                        "            });");
+            }
+//            setContentView(dddd)
+        }
         /*
          * 如果不想使用更新流程，可以屏蔽checkApkUpdate函数，直接打开initEngine函数
          */
         checkApkUpdate(this)
-        //initEngine();
+//        initEngine();
     }
 
     fun initEngine() {
