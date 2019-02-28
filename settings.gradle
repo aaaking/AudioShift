@@ -1,1 +1,1 @@
-include ':app', ':cooldialog', ':cooledittext'
+include ':app', ':cooldialog', ':cooledittext', ':aspectj'

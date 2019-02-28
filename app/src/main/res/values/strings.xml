@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">爱音频</string>
+    <string name="app_name">爱嗨录音机</string>
     <string name="about">关于</string>
-    <string name="about_app">关于“爱音频”</string>
+    <string name="about_app">关于“爱嗨录音机”</string>
     <string name="about_msg">app制作人：黑山\n邮箱: <a href="mailto:1059084407@qq.com">1059084407@qq.com</a>\n图标制作人<a href="http://www.flaticon.com/authors/freepik">Freepik</a>\n来自<a href="http://www.flaticon.com">www.flaticon.com</a></string>
     <string name="about_app_public_wx">欢迎关注公众号：</string>
     <string name="set_permission">申请权限</string>
