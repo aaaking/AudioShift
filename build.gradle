@@ -5,15 +5,21 @@ ext {
     compileSdk = 26
     supportLib = "26.1.0"
     supportDependencies = [
-            design       : "com.android.support:design:${supportLib}",
-            recyclerview : "com.android.support:recyclerview-v7:${supportLib}",
-            appcompat    : "com.android.support:appcompat-v7:${supportLib}",
-            cardview     : "com.android.support:cardview-v7:${supportLib}",
+            design      : "com.android.support:design:${supportLib}",
+            recyclerview: "com.android.support:recyclerview-v7:${supportLib}",
+            appcompat   : "com.android.support:appcompat-v7:${supportLib}",
+            cardview    : "com.android.support:cardview-v7:${supportLib}",
+
+            testRunner  : 'com.android.support.test:runner:1.0.2',
+            espressoCore: 'com.android.support.test.espresso:espresso-core:3.0.2',
+
+            constraint  : 'com.android.support.constraint:constraint-layout:1.1.3',
     ]
 }
 
 buildscript {
     ext.kotlin_version = '1.3.20'
+    ext.espressoCore = "3.0.2"
     repositories {
         google()
         jcenter()

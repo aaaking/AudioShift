@@ -67,7 +67,7 @@ class RightDrawerVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
     fun bind(file: File?, adapter: RightDrawerAdap) {
         tv_file_name.text = file?.name
         tv_file_size.text = "${DecimalFormat("#.##").format(((file?.length() ?: 0) / 1000f))}KB"
-        tv_file_time.text = SimpleDateFormat("YYYY/MM/dd aa hh:mm").format(file?.lastModified() ?: 0)
+        tv_file_time.text = SimpleDateFormat("yyyy/MM/dd aa hh:mm").format(file?.lastModified() ?: 0)
         if (adapterPosition > adapter.curMaxPos) {
             Log.i(TAG, "bind ${adapterPosition} ${layoutPosition}")
             itemView.startAnimation(AnimationUtils.loadAnimation(itemView.context, R.anim.item_animation_push_up))
