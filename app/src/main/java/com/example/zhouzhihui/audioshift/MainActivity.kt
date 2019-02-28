@@ -246,7 +246,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                     ?.withDuration(300)
                     ?.withCoolStyle(CoolStyle(mAboutDialog?.mRootView))
         }
-        if (!isDestroyed && !isFinishing) {
+        if (!isACDestroyed() && !isFinishing) {
             mAboutDialog?.show()
         }
     }
@@ -284,7 +284,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                 ((edit?.parent as? View)?.layoutParams as? LinearLayout.LayoutParams)?.setMargins(0, ScreenUtil.dp2px(this@MainActivity, 20f), 0, 0)
             }
         }
-        if (!isDestroyed && !isFinishing) {
+        if (!isACDestroyed() && !isFinishing) {
             if (recorder?.getRecordFile()?.length() ?: 0 > 0) {
                 mSaveRecordFileDialog?.mRootView?.findViewById<CoolEditText>(R.id.et_audio_file_name)?.setText(getSaveFileName(recorder?.getRecordFile()))
                 mSaveRecordFileDialog?.show()

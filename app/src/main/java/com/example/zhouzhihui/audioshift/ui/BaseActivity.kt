@@ -89,4 +89,12 @@ open class BaseActivity : AppCompatActivity() {
             }
         })
     }
+
+    fun isACDestroyed(): Boolean {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            isDestroyed
+        } else {
+            false
+        }
+    }
 }
