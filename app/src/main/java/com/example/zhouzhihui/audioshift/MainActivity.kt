@@ -158,7 +158,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         return true
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val id = item?.itemId
         when (id) {
             R.id.open_record_file -> {
@@ -348,13 +348,13 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         startBtnPlayAnimation(audio_take, startAnim)
     }
 
-    override fun onSaveInstanceState(outState: Bundle?) {
+    override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState?.putBoolean("aboutDialog", mAboutDialog?.isShowing ?: false)
         // todo 1 save state  2 record failed  3 night theme
     }
 
-    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
         takeIf { savedInstanceState?.getBoolean("aboutDialog") ?: false }?.run { showAboutDialog() }
     }
