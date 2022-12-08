@@ -11,5 +11,5 @@ fun isOpenNetwork(context: Context): Boolean {
     if (!config.GetInstance().m_bCheckNetwork)
         return true
     val connManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-    return connManager.activeNetworkInfo != null && connManager.activeNetworkInfo.isAvailable && connManager.activeNetworkInfo.isConnected
+    return connManager.activeNetworkInfo != null && connManager.activeNetworkInfo!!.isAvailable && connManager.activeNetworkInfo!!.isConnected
 }

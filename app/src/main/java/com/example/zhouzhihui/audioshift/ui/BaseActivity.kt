@@ -44,7 +44,7 @@ open class BaseActivity : AppCompatActivity() {
             }
         } else {
             if (currentFocus != null) {
-                hideSoftInputFromWindow(currentFocus.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
+                hideSoftInputFromWindow(currentFocus!!.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
             }
         }
     }

@@ -43,7 +43,7 @@ class MainModule(val application: AudioApp) {
     @Provides
     fun providesRootPath(context: Context): String =
             if (Environment.MEDIA_MOUNTED == Environment.getExternalStorageState() || !Environment.isExternalStorageRemovable()) {//sd卡能用
-                context.getExternalFilesDir(null).path
+                context.getExternalFilesDir(null)!!.path
             } else {//sd卡不能用
                 context.filesDir.path
             }
