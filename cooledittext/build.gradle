@@ -2,13 +2,13 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 android {
-    compileSdkVersion compileSdk
+    compileSdkVersion rootProject.compileSdk
 
 
 
     defaultConfig {
-        minSdkVersion minSdk
-        targetSdkVersion targetSdk
+        minSdkVersion rootProject.minSdk
+        targetSdkVersion rootProject.targetSdk
         versionCode 1
         versionName "1.0"
         vectorDrawables.useSupportLibrary = true //支持svg

@@ -4,14 +4,14 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion compileSdk
+    compileSdkVersion rootProject.compileSdk
     sourceSets.main{
         jniLibs.srcDir 'libs'
     }
     defaultConfig {
         applicationId "com.example.zhouzhihui.audioshift"
-        minSdkVersion minSdk
-        targetSdkVersion targetSdk
+        minSdkVersion rootProject.minSdk
+        targetSdkVersion rootProject.targetSdk
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
