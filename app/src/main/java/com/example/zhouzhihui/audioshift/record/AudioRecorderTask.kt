@@ -35,7 +35,7 @@ class AudioRecorderTask(val audioRecord: AudioRecord, val outputFile: File) : Ru
     override fun run() {
         val outputStream = outputStream ?: return
         val buffer = ByteArray(BUFFER_SIZE)
-        while (true) {
+        while (!Thread.currentThread().isInterrupted) {
             var read = audioRecord.read(buffer, 0, BUFFER_SIZE)
             while (read > 0) {
                 try {

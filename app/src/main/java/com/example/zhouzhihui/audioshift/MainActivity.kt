@@ -420,7 +420,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             }
 
             override fun onTick(millisUntilFinished: Long) {
-                probar_voice_timer?.progress = (System.currentTimeMillis() - startTime).toInt()
+                probar_voice_timer?.progress = (System.currentTimeMillis() - startTime + hasRecordedTime).toInt()
                 tv_voice_timer?.text = SimpleDateFormat("mm:ss:SSS").format(durationInMillis - hasRecordedTime - millisUntilFinished)
             }
         }
