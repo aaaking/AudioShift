@@ -24,7 +24,7 @@ import android.widget.TextView
 class CoolDialog : Dialog, DialogInterface {
     companion object {//single instance: double check
         private @Volatile var instance: CoolDialog? = null
-        fun getCoolDialogInstance(context: Context?): CoolDialog? {
+        fun getCoolDialogInstance(context: Context): CoolDialog? {
             if (instance == null) {
                 synchronized(this) {
                     if (instance == null) {
@@ -55,10 +55,10 @@ class CoolDialog : Dialog, DialogInterface {
     var btn_yes: Button? = null
     var btnNegativeBg: Drawable
     var btnPositiveBg: Drawable
-    constructor(context: Context?) : super(context, R.style.cool_dialog_dim) {
+    constructor(context: Context) : super(context, R.style.cool_dialog_dim) {
     }
 
-    constructor(context: Context?, theme: Int) : super(context, theme) {
+    constructor(context: Context, theme: Int) : super(context, theme) {
     }
 
     init {
