@@ -7,9 +7,15 @@ public interface Recorder {
 
     public fun isRecording(): Boolean
 
+    public fun isPausing(): Boolean
+
     public fun hasRecording(): Boolean
 
     public fun stopRecording()
 
     public fun startRecording()
+
+    fun pause()
+
+    fun resume()
 }

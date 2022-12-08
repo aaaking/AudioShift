@@ -16,7 +16,7 @@ class AudioRecorderTask(val audioRecord: AudioRecord, val outputFile: File) : Ru
         get() {
             val outputStream: OutputStream
             try {
-                outputStream = FileOutputStream(outputFile)
+                outputStream = FileOutputStream(outputFile, true)
             } catch (e: FileNotFoundException) {
                 Log.e(TAG, "Error opening audio file for writing")
                 return null
@@ -24,24 +24,30 @@ class AudioRecorderTask(val audioRecord: AudioRecord, val outputFile: File) : Ru
             return outputStream
         }
 
-    override fun run() {
-        val outputStream = outputStream ?: return
-        val buffer = ByteArray(BUFFER_SIZE)
-        var read = audioRecord.read(buffer, 0, BUFFER_SIZE)
-        while (read > 0) {
-            try {
-                outputStream.write(buffer, 0, read)
-            } catch (e: IOException) {
-                Log.e(TAG, "Error writing audio file")
-            }
-            read = audioRecord.read(buffer, 0, BUFFER_SIZE)
-            //Timber.d("Read");
-        }
+    fun stop() {
         try {
-            outputStream.close()
+            outputStream?.close()
         } catch (e: IOException) {
             Log.e(TAG, "Error closing audio file")
         }
+    }
+
+    override fun run() {
+        val outputStream = outputStream ?: return
+        val buffer = ByteArray(BUFFER_SIZE)
+        while (true) {
+            var read = audioRecord.read(buffer, 0, BUFFER_SIZE)
+            while (read > 0) {
+                try {
+                    outputStream.write(buffer, 0, read)
+                } catch (e: IOException) {
+                    Log.e(TAG, "Error writing audio file")
+                }
+                read = audioRecord.read(buffer, 0, BUFFER_SIZE)
+                //Timber.d("Read");
+            }
+        }
+
     }
 
     companion object {

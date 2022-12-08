@@ -19,7 +19,18 @@ class RecorderPlayer(val mediaManager: MediaManager, val file: File) : Recorder,
 
     override fun isRecording(): Boolean = audioRecorder?.isRecording() ?: false
 
-    override fun hasRecording(): Boolean = audioRecorder?.hasRecording() ?: fileHasContent(file.parentFile)
+    override fun hasRecording(): Boolean =
+        audioRecorder?.hasRecording() ?: fileHasContent(file.parentFile)
+
+    override fun isPausing(): Boolean = audioRecorder?.isPausing() ?: false
+
+    override fun pause() {
+        audioRecorder?.pause()
+    }
+
+    override fun resume() {
+        audioRecorder?.resume()
+    }
 
     override fun startRecording() {
         val audioRecord = mediaManager.audioRecord

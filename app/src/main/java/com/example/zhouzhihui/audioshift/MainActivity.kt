@@ -344,7 +344,9 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             true
         })
         audio_take_container.setOnClickListener {
-            if (isRecording()) {
+            if (isPausing()) {
+                resumeRecording()
+            } else if (isRecording()) {
                 pauseRecording()
             } else {
                 startRecording()
@@ -372,19 +374,21 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     var recorder: Recorder? = null @Inject set
     var player: Player? = null @Inject set
     var durationInMillis: Long = 0L @Inject set
+    var hasRecordedTime: Long = 0
     private fun isRecording(): Boolean = recorder?.isRecording() ?: false
-    private fun hasRecording(): Boolean = !isRecording() && recorder?.hasRecording() ?: false
+    private fun isPausing(): Boolean = recorder?.isPausing() ?: false
 
     fun startRecording() =
             takeIf { mAboutDialog?.isShowing != true && mSaveRecordFileDialog?.isShowing != true }?.run {
                 iv_player?.isEnabled = false
+                hasRecordedTime = 0
                 recorder?.startRecording()
                 startTime = System.currentTimeMillis()
                 probar_voice_timer?.max = durationInMillis.toInt()
                 audioAnim(isRecording())
                 mCountDownTimer?.cancel()
                 btn_stop.visibility = View.VISIBLE
-                mCountDownTimer = object : CountDownTimer(durationInMillis, 10) {
+                mCountDownTimer = object : CountDownTimer(durationInMillis - hasRecordedTime, 10) {
                     override fun onFinish() {
                         tv_voice_timer?.text = SimpleDateFormat("mm:ss:SSS").format(durationInMillis)
                         stopRecording() // onFinish
@@ -392,26 +396,46 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 
                     override fun onTick(millisUntilFinished: Long) {
                         probar_voice_timer?.progress = (System.currentTimeMillis() - startTime).toInt()
-                        tv_voice_timer?.text = SimpleDateFormat("mm:ss:SSS").format(durationInMillis - millisUntilFinished)
+                        tv_voice_timer?.text = SimpleDateFormat("mm:ss:SSS").format(durationInMillis - hasRecordedTime - millisUntilFinished)
                     }
                 }
                 mCountDownTimer?.start()
             }
 
     fun pauseRecording() {
+        hasRecordedTime = System.currentTimeMillis() - startTime
+        mCountDownTimer?.cancel()
+        recorder?.pause()
+        audioAnim(false) // pause
+    }
 
+    fun resumeRecording() {
+        mCountDownTimer?.cancel()
+        startTime = System.currentTimeMillis()
+        recorder?.resume()
+        mCountDownTimer = object : CountDownTimer(durationInMillis - hasRecordedTime, 10) {
+            override fun onFinish() {
+                tv_voice_timer?.text = SimpleDateFormat("mm:ss:SSS").format(durationInMillis)
+                stopRecording() // onFinish
+            }
+
+            override fun onTick(millisUntilFinished: Long) {
+                probar_voice_timer?.progress = (System.currentTimeMillis() - startTime).toInt()
+                tv_voice_timer?.text = SimpleDateFormat("mm:ss:SSS").format(durationInMillis - hasRecordedTime - millisUntilFinished)
+            }
+        }
+        mCountDownTimer?.start()
+        audioAnim(true) // resume
     }
 
     fun stopRecording() {
         btn_stop.visibility = View.GONE
         mCountDownTimer?.cancel()
-        mCountDownTimer = null
         takeIf { isRecording() }?.run {
-            probar_voice_timer?.progress = (System.currentTimeMillis() - startTime).toInt()
             startTime = -1
             showSaveRecordFileDialog()
             recorder?.stopRecording()
-            audioAnim(isRecording())
+            audioAnim(false)
             iv_player?.isEnabled = true
         }
     }

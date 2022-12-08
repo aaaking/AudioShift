@@ -7,6 +7,7 @@ import java.io.File
 class AudioRecorder(val audioRecord: AudioRecord, val file: File) : Recorder {
     override fun getRecordFile(): File? = file
 
+    var pause: Boolean = false
     var recorderThread: Thread? = null
     var recorderTask: AudioRecorderTask? = null
 
@@ -15,22 +16,34 @@ class AudioRecorder(val audioRecord: AudioRecord, val file: File) : Recorder {
     override fun hasRecording(): Boolean = fileHasContent(file.parentFile)
 
     override fun startRecording() {
+        file?.delete()
         recorderTask = AudioRecorderTask(audioRecord, file)
         recorderThread = Thread(recorderTask)
         audioRecord.startRecording()
         recorderThread!!.start()
     }
 
-    fun pause() {
+    override fun pause() {
+        pause = true
+        audioRecord.stop()
+    }
 
+    override fun resume() {
+        pause = false
+        audioRecord.startRecording()
     }
 
     override fun stopRecording() {
+        pause = false
         audioRecord.stop()
         audioRecord.release()
-        recorderThread = null
+        recorderTask?.stop()
         recorderTask = null
+        recorderThread?.interrupt()
+        recorderThread = null
     }
+
+    override fun isPausing(): Boolean = pause
 
 }
 
