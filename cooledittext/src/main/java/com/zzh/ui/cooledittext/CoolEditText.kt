@@ -25,7 +25,7 @@ class CoolEditText : TextInputEditText, View.OnTouchListener, TextWatcher,View.O
             return false
         if (event?.action != MotionEvent.ACTION_UP)
             return false
-        if (event?.x > width - paddingRight - rightImage.intrinsicWidth) {
+        if (event.x > width - paddingRight - rightImage.intrinsicWidth) {
             clickRightBtn()
             return true//点击右边的icon消耗掉此次事件
         }
