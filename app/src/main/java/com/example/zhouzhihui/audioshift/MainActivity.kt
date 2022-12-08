@@ -257,7 +257,12 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             mSaveRecordFileDialog?.withIcon(R.drawable.icon)
                     ?.withTitle(resources.getString(R.string.save_record_file_title))
                     ?.withMsg(resources.getString(R.string.save_record_file_msg))
-                    ?.withNegativeBtn(resources.getString(android.R.string.no))
+                    ?.withNegativeBtn(resources.getString(android.R.string.cancel), mSaveRecordFileDialog?.btnNegativeBg, object : CoolDialog.CoolDialogClickListener(mSaveRecordFileDialog) {
+                        override fun onClick(v: View?) {
+                            recorder?.getRecordFile()?.delete()
+                            super.onClick(v)
+                        }
+                    })
                     ?.withPositiveBtn(resources.getString(R.string.save), mSaveRecordFileDialog?.btnPositiveBg, object : CoolDialog.CoolDialogClickListener(mSaveRecordFileDialog) {
                         override fun onClick(v: View?) {
                             super.onClick(v)
