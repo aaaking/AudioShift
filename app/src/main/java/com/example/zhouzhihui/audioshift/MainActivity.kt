@@ -9,6 +9,7 @@ import android.graphics.Color
 import android.graphics.drawable.Animatable
 import android.graphics.drawable.GradientDrawable
 import android.net.Uri
+import android.opengl.Visibility
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.provider.Settings
@@ -52,6 +53,9 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        btn_stop.setOnClickListener {
+            stopRecording() // 停止
+        }
         AudioApp.getComponent(this)?.inject(this)
         setAudioTakeButton()
         if (!hasRequiredPermissions()) {
@@ -341,7 +345,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         })
         audio_take_container.setOnClickListener {
             if (isRecording()) {
-                stopRecording()
+                pauseRecording()
             } else {
                 startRecording()
             }
@@ -379,10 +383,11 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                 probar_voice_timer?.max = durationInMillis.toInt()
                 audioAnim(isRecording())
                 mCountDownTimer?.cancel()
+                btn_stop.visibility = View.VISIBLE
                 mCountDownTimer = object : CountDownTimer(durationInMillis, 10) {
                     override fun onFinish() {
                         tv_voice_timer?.text = SimpleDateFormat("mm:ss:SSS").format(durationInMillis)
-                        stopRecording()// onFinish
+                        stopRecording() // onFinish
                     }
 
                     override fun onTick(millisUntilFinished: Long) {
@@ -393,8 +398,12 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                 mCountDownTimer?.start()
             }
 
+    fun pauseRecording() {
+
+    }
 
     fun stopRecording() {
+        btn_stop.visibility = View.GONE
         mCountDownTimer?.cancel()
         mCountDownTimer = null
         takeIf { isRecording() }?.run {

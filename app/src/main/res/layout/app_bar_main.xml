@@ -68,8 +68,8 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/rl_match_voice_state"
         app:layout_constraintVertical_bias="1"
-        android:background="@drawable/audio_take"
-        android:layout_marginBottom="40dp">
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/audio_take">
         <View
             android:id="@+id/autio_take_circle"
             android:layout_width="50dp"
@@ -84,6 +84,23 @@
             android:lineSpacingExtra="10dp"
             app:srcCompat="@drawable/audio_take_animate2start"/>
     </FrameLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:id="@+id/btn_stop"
+        android:visibility="gone"
+        tools:visibility="visible"
+        android:background="@drawable/bg_positive_btn"
+        android:onClick="requestRequiredPermissions"
+        app:layout_constraintVertical_bias="1"
+        android:layout_marginBottom="48dp"
+        android:textColor="@android:color/white"
+        android:text="停止"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.9"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
 
     <android.support.v7.widget.AppCompatImageView
         android:id="@+id/iv_player"
