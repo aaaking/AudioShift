@@ -12,6 +12,10 @@ import java.io.OutputStream
 
 class AudioRecorderTask(val audioRecord: AudioRecord, val outputFile: File) : Runnable {
 
+    init {
+        outputFile.delete()
+    }
+
     val outputStream: OutputStream?
         get() {
             val outputStream: OutputStream

@@ -18,7 +18,9 @@ class AudioRecorder(val audioRecord: AudioRecord, val file: File) : Recorder {
     override fun hasRecording(): Boolean = fileHasContent(file.parentFile)
 
     override fun startRecording() {
-        file?.delete()
+        if (isRecording()) {
+            throw java.lang.Exception("you are recording")
+        }
         recorderTask = AudioRecorderTask(audioRecord, file)
         recorderThread = Thread(recorderTask)
         audioRecord.startRecording()
