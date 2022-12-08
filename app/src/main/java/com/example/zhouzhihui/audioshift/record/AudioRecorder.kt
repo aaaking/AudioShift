@@ -13,6 +13,8 @@ class AudioRecorder(val audioRecord: AudioRecord, val file: File) : Recorder {
 
     override fun isRecording(): Boolean = recorderThread != null
 
+    override fun isPausing(): Boolean = pause
+
     override fun hasRecording(): Boolean = fileHasContent(file.parentFile)
 
     override fun startRecording() {
@@ -42,8 +44,6 @@ class AudioRecorder(val audioRecord: AudioRecord, val file: File) : Recorder {
         recorderThread?.interrupt()
         recorderThread = null
     }
-
-    override fun isPausing(): Boolean = pause
 
 }
 
