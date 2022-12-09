@@ -39,8 +39,8 @@ class AudioRecorder(val audioRecord: AudioRecord, val file: File) : Recorder {
 
     override fun stopRecording() {
         pause = false
-        audioRecord.stop()
-        audioRecord.release()
+        audioRecord?.stop()
+        audioRecord?.release()
         recorderThread?.interrupt()
         recorderThread = null
         recorderTask = null
