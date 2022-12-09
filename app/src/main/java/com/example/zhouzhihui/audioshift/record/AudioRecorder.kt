@@ -41,10 +41,9 @@ class AudioRecorder(val audioRecord: AudioRecord, val file: File) : Recorder {
         pause = false
         audioRecord.stop()
         audioRecord.release()
-        recorderTask?.stop()
-        recorderTask = null
         recorderThread?.interrupt()
         recorderThread = null
+        recorderTask = null
     }
 
 }

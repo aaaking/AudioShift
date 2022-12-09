@@ -28,14 +28,6 @@ class AudioRecorderTask(val audioRecord: AudioRecord, val outputFile: File) : Ru
             return outputStream
         }
 
-    fun stop() {
-        try {
-            outputStream?.close()
-        } catch (e: IOException) {
-            Log.e(TAG, "Error closing audio file")
-        }
-    }
-
     override fun run() {
         val outputStream = outputStream ?: return
         val buffer = ByteArray(BUFFER_SIZE)
@@ -50,6 +42,11 @@ class AudioRecorderTask(val audioRecord: AudioRecord, val outputFile: File) : Ru
                 read = audioRecord.read(buffer, 0, BUFFER_SIZE)
                 //Timber.d("Read");
             }
+        }
+        try {
+            outputStream.close()
+        } catch (e: IOException) {
+            Log.e(TAG, "Error closing audio file")
         }
 
     }
